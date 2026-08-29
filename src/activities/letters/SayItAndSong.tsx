@@ -213,7 +213,7 @@ export function AlphabetSong() {
   const ld = LETTERS_DATA.find(l => l.letter === letter?.toUpperCase())!;
   const songs = LETTER_SONGS[ld.letter] || [];
   
-  const [activeSong, setActiveSong] = useState<LetterSong | null>(null);
+  const [activeSong, setActiveSong] = useState<any | null>(null);
   const [showCelebration, setShowCelebration] = useState(false);
   const [showFact, setShowFact] = useState(false);
 

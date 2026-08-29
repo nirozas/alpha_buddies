@@ -26,12 +26,12 @@ export function StarRating({ stars, size = 36 }: StarRatingProps) {
 // ── ConfettiCannon ──────────────────────────────────────────────────────────
 interface ConfettiProps { active: boolean; duration?: number }
 export function ConfettiCannon({ active, duration = 3000 }: ConfettiProps) {
-  const timerRef = useRef<ReturnType<typeof setTimeout>>();
+  const timerRef = useRef<any>(null);
   useEffect(() => {
     if (active) {
-      timerRef.current = setTimeout(() => { }, duration);
+      timerRef.current = setTimeout(() => { }, duration) as any;
     }
-    return () => clearTimeout(timerRef.current);
+    return () => clearTimeout(timerRef.current as any);
   }, [active, duration]);
 
   return (

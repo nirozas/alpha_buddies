@@ -200,11 +200,9 @@ export function PopTheBubble() {
                 key={bubble.id}
                 initial={{ y: '110vh', opacity: 0 }}
                 animate={{ y: '-20vh', opacity: 1 }}
-                exit={{ scale: 2, opacity: 0, filter: 'blur(10px)' }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ 
-                  y: { duration: bubble.speed, ease: "linear" },
-                  exit: { duration: 0.2 }
+                  y: { duration: bubble.speed, ease: "linear" }
                 }}
                 onPointerDown={(e) => { e.stopPropagation(); handlePop(bubble); }}
                 className="absolute pointer-events-auto flex items-center justify-center rounded-full border-4 shadow-xl cursor-pointer"

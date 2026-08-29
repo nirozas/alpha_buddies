@@ -203,7 +203,7 @@ export function NumberMatch() {
               style={{ width: 140, minHeight: 160, border: `3px solid ${isChosen && isCorrect ? nd.color : '#E7E5E4'}`, background: isChosen && isCorrect ? nd.color + '15' : 'white' }}
             >
               <div className="flex flex-wrap gap-1 justify-center">
-                {opt.objects.slice(0, opt.digit).map((o, j) => <span key={j} style={{ fontSize: '1.8rem' }}>{o}</span>)}
+                {opt.objects.slice(0, opt.digit).map((o, j) => <span key={j} style={{ fontSize: '1.8rem' }}><img src={(o as any).image} style={{width: '1.8rem', display: 'inline'}}/></span>)}
                 {opt.digit === 0 && <span style={{ fontSize: '2rem' }}>🥚</span>}
               </div>
               <span style={{ fontFamily: 'Nunito', fontWeight: 900, fontSize: '2rem', color: nd.color }}>{opt.digit}</span>

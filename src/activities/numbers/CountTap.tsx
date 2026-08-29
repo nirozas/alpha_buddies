@@ -99,14 +99,14 @@ export function CountTap() {
               boxShadow: tapped.includes(i) ? `0 0 0 4px ${nd.color}40` : '0 2px 8px rgba(0,0,0,0.08)',
             }}
           >
-            {obj}
+            <img src={(obj as any).image} alt={(obj as any).name} style={{width: '2rem'}}/>
           </motion.button>
         ))}
       </motion.div>
 
       {/* Answer buttons */}
       <p className="mt-5 text-center" style={{ fontFamily: 'Nunito', fontWeight: 700, fontSize: '1.1rem', color: '#1C1917' }}>
-        How many {objects[0]}?
+        How many {(objects[0] as any).name}?
       </p>
       <div className="flex gap-4 mt-3">
         {answerOptions.map(ans => (

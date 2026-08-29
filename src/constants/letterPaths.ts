@@ -1,3 +1,4 @@
+export interface PathPoint { x: number; y: number; }
 export interface StrokeSegment {
   points: PathPoint[];
   label?: string; // e.g. "1", "2"

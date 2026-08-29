@@ -108,6 +108,9 @@ export function useAudio() {
     setTimeout(() => playTone(800, 'triangle', 0.8, settings.volume), 300);
   }, [settings.volume]);
 
+  const playFanfare = useCallback(() => { playCheer(); }, [playCheer]);
+  const playSwoosh = useCallback(() => { playPop(); }, [playPop]);
+
   const playBoing = useCallback(() => {
     playTone(200, 'square', 0.4, settings.volume * 0.5);
   }, [settings.volume]);
@@ -117,6 +120,8 @@ export function useAudio() {
     playPop,
     playCheer,
     playBoing,
+    playFanfare,
+    playSwoosh,
     speak,
   };
 }

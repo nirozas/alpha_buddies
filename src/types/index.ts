@@ -84,7 +84,7 @@ export interface ChildProgress {
   lastPlayDate: string;
 }
 
-export type BuddyMood = 'happy' | 'excited' | 'thinking' | 'celebrating' | 'idle';
+export type BuddyMood = 'happy' | 'excited' | 'thinking' | 'celebrating' | 'idle' | 'sad' | 'neutral';
 
 export interface AppSettings {
   volume: number;
@@ -127,6 +127,8 @@ export interface GameSession {
   cellStates: Record<string, { revealed: boolean; correct: boolean; userInput: string }>;
 }
 
+export interface PathPoint { x: number; y: number; }
+export interface LetterSong { letter: string; url: string; }
 export interface CrosswordWord {
   id: string;
   number: number;
@@ -145,6 +147,7 @@ export interface CrosswordWord {
     category: string;
     difficulty: string;
     criticalThinking?: string;
+    formula?: string;
     deepDiveUrl?: string;
   };
 }

@@ -17,6 +17,8 @@ const moodFaces: Record<BuddyMood, { eyes: string; mouth: string; ears: string }
   excited:     { eyes: '🤩', mouth: '', ears: '' },
   thinking:    { eyes: '🤔', mouth: '', ears: '' },
   celebrating: { eyes: '🥳', mouth: '', ears: '' },
+  sad: { eyes: '😢', mouth: '', ears: '' },
+  neutral: { eyes: '😐', mouth: '', ears: '' },
 };
 
 // Buddy the Bear — pure CSS/SVG bear face with mood variants
@@ -31,12 +33,12 @@ export function BuddyBear({ mood = 'idle', speech, size = 120, className = '', o
     }
   }, [speech, speak]);
 
-  const idle = {
+  const idle: any = {
     y: [0, -6, 0],
     transition: { repeat: Infinity, duration: 2.5, ease: 'easeInOut' },
   };
 
-  const celebrating = {
+  const celebrating: any = {
     rotate: [-5, 5, -5, 5, 0],
     scale: [1, 1.1, 1, 1.1, 1],
     transition: { duration: 0.6, repeat: 2 },

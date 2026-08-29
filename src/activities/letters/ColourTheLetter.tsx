@@ -150,16 +150,16 @@ export function ColourTheLetter() {
             });
           } else if (style.type === 'sheet') {
             const img = new Image();
-            img.src = style.file!;
+            img.src = (style as any).file!;
             img.onload = () => {
-              const { l, t, r, b } = style.crop!;
+              const { l, t, r, b } = (style as any).crop!;
               const sheetW = r - l;
               const sheetH = b - t;
-              const letterW = sheetW / style.cols!;
-              const letterH = sheetH / style.rows!;
+              const letterW = sheetW / (style as any).cols!;
+              const letterH = sheetH / (style as any).rows!;
               const letterIndex = ld.letter.charCodeAt(0) - 65;
-              const col = letterIndex % style.cols!;
-              const row = Math.floor(letterIndex / style.cols!);
+              const col = letterIndex % (style as any).cols!;
+              const row = Math.floor(letterIndex / (style as any).cols!);
               ctx.drawImage(img, l + col * letterW, t + row * letterH, letterW, letterH, 10, 10, 280, 280);
               try { resolve(tempCanvas.toDataURL()); } catch(e) { resolve(''); }
             };
@@ -231,16 +231,16 @@ export function ColourTheLetter() {
       });
     } else if (currentStyle.type === 'sheet') {
       const img = new Image();
-      img.src = currentStyle.file!;
+      img.src = (currentStyle as any).file!;
       img.onload = () => {
-        const { l, t, r, b } = currentStyle.crop!;
+        const { l, t, r, b } = (currentStyle as any).crop!;
         const sheetW = r - l;
         const sheetH = b - t;
-        const letterW = sheetW / currentStyle.cols!;
-        const letterH = sheetH / currentStyle.rows!;
+        const letterW = sheetW / (currentStyle as any).cols!;
+        const letterH = sheetH / (currentStyle as any).rows!;
         const letterIndex = ld.letter.charCodeAt(0) - 65;
-        const col = letterIndex % currentStyle.cols!;
-        const row = Math.floor(letterIndex / currentStyle.cols!);
+        const col = letterIndex % (currentStyle as any).cols!;
+        const row = Math.floor(letterIndex / (currentStyle as any).cols!);
         ctx.drawImage(img, l + col * letterW, t + row * letterH, letterW, letterH, 100, 100, 1000, 1000);
         try { setCroppedImage(tempCanvas.toDataURL()); } catch(e) { console.error(e); }
       };
@@ -565,7 +565,7 @@ export function ColourTheLetter() {
       {/* Top Header */}
       <div className="h-16 flex items-center justify-between px-4 bg-[#1a1a1a] border-b border-white/5 z-50">
         <div className="flex items-center gap-3">
-          <BackButton onClick={() => setSelectedStyleIndex(null)} color="white" smaller={true} />
+          <BackButton onClick={() => setSelectedStyleIndex(null)} color="white"  />
           <div className="w-px h-6 bg-white/10 mx-1" />
           <h2 className="text-lg font-black tracking-tight hidden md:block">Letter {ld.letter} Studio</h2>
         </div>
@@ -593,7 +593,7 @@ export function ColourTheLetter() {
             <LucideTrash2 size={22} />
           </button>
           <div className="w-px h-6 bg-white/10 mx-2" />
-          <button onClick={() => awardStars('color', 3) || setShowCelebration(true)} className="bg-emerald-500 hover:bg-emerald-600 px-6 py-2 rounded-xl font-black text-sm flex items-center gap-2 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
+          <button onClick={() => { awardStars('color', 3); setShowCelebration(true); }} className="bg-emerald-500 hover:bg-emerald-600 px-6 py-2 rounded-xl font-black text-sm flex items-center gap-2 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
             <LucideCheck size={20} /> Finish
           </button>
         </div>

@@ -56,7 +56,7 @@ export function FillTheJar() {
       {/* Target */}
       <div className="flex items-center gap-2 my-2 px-4 py-2 rounded-full shadow"
         style={{ background: nd.color, fontFamily: 'Nunito', fontWeight: 800, fontSize: '1.2rem', color: 'white' }}>
-        Fill with <span style={{ fontSize: '1.5rem', margin: '0 4px' }}>{target}</span> {cookieEmoji}
+        Fill with <span style={{ fontSize: '1.5rem', margin: '0 4px' }}>{target}</span> <img src={(cookieEmoji as any).image} style={{width: '2rem', display: 'inline'}}/>
       </div>
 
       {/* Jar */}
@@ -76,7 +76,7 @@ export function FillTheJar() {
             <AnimatePresence>
               {items.map((id) => (
                 <motion.span key={id} initial={{ scale: 0 }} animate={{ scale: 1 }} style={{ fontSize: '1.4rem' }}>
-                  {cookieEmoji}
+                  <img src={(cookieEmoji as any).image} style={{width: '2rem', display: 'inline'}}/>
                 </motion.span>
               ))}
             </AnimatePresence>
@@ -89,7 +89,7 @@ export function FillTheJar() {
           {overflow && (
             <motion.div initial={{ opacity: 0, y: 0 }} animate={{ opacity: 1, y: 20 }} exit={{ opacity: 0 }}
               style={{ position: 'absolute', bottom: -30, left: '10%', fontSize: '1.5rem' }}>
-              {cookieEmoji}{cookieEmoji}
+              <img src={(cookieEmoji as any).image} style={{width: '2rem', display: 'inline'}}/><img src={(cookieEmoji as any).image} style={{width: '2rem', display: 'inline'}}/>
             </motion.div>
           )}
         </AnimatePresence>
@@ -107,7 +107,7 @@ export function FillTheJar() {
         className="mt-5 rounded-3xl shadow-xl flex items-center gap-3 px-8 py-4"
         style={{ background: nd.color, fontFamily: 'Nunito', fontWeight: 900, fontSize: '1.4rem', color: 'white', border: 'none', cursor: 'pointer', minHeight: 72 }}
       >
-        <span style={{ fontSize: '2.2rem' }}>{cookieEmoji}</span>
+        <span style={{ fontSize: '2.2rem' }}><img src={(cookieEmoji as any).image} style={{width: '2rem', display: 'inline'}}/></span>
         Add one!
       </motion.button>
 

@@ -1,7 +1,8 @@
 import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { LETTERS_DATA, type LetterData } from '../../constants/letters';
+import { LETTERS_DATA } from '../../constants/letters';
+import type { LetterData } from '../../types';
 import { BackButton, CelebrationScreen } from '../../components/SharedComponents';
 import { BuddyBear } from '../../components/BuddyBear';
 import { useStore } from '../../store';
@@ -120,7 +121,7 @@ export function ColorByCode() {
             >
               <div className="w-full aspect-square bg-slate-50 rounded-[1.5rem] overflow-hidden border-2 border-slate-200">
                 <svg viewBox="0 0 400 400" className="w-full h-full pointer-events-none">
-                  {t.regions.map(r => (
+                  {t.regions.map((r: any) => (
                     <path key={r.id} d={r.d} fill={t.palette[r.colorId]} stroke="#1E293B" strokeWidth="4" strokeLinejoin="round" />
                   ))}
                 </svg>

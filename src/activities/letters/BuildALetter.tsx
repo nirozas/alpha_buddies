@@ -158,7 +158,7 @@ export function BuildALetter() {
           {recipe.pieces.map((p) => (
             <motion.div 
               key={`blueprint-${p.id}`}
-              ref={el => targetRefs.current[p.id] = el}
+              ref={el => { targetRefs.current[p.id] = el; }}
               className="absolute flex items-center justify-center opacity-30 grayscale"
               style={{ x: p.x, y: p.y, rotate: p.rotate }}
             >

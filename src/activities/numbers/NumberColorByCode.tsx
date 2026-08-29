@@ -113,7 +113,7 @@ export function NumberColorByCode() {
             >
               <div className="w-full aspect-square bg-slate-50 rounded-[1.5rem] overflow-hidden border-2 border-slate-200">
                 <svg viewBox="0 0 400 400" className="w-full h-full pointer-events-none">
-                  {t.regions.map(r => (
+                  {t.regions.map((r: any) => (
                     <path key={r.id} d={r.d} fill={t.palette[r.colorId]} stroke="#1E293B" strokeWidth="4" strokeLinejoin="round" />
                   ))}
                 </svg>
