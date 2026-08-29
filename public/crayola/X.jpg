@@ -1,0 +1,1618 @@
+
+
+<!DOCTYPE html>
+<html id="html" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
+
+<title>404</title><meta property='og:title' content='404'><link rel='canonical' href='https://www.crayola.com/404' /><meta name="robots" content="noindex" />                <link rel="alternate" hreflang="x-default" href="/404" />
+            <link rel="alternate" hreflang="en-US" href="/404" />
+            <link rel="alternate" hreflang="en-AU" href="/en-au/404" />
+            <link rel="alternate" hreflang="en-CA" href="/en-ca/404" />
+            <link rel="alternate" hreflang="en-GB" href="/en-gb/404" />
+            <link rel="alternate" hreflang="es-MX" href="/es-mx/404" />
+            <link rel="alternate" hreflang="it-IT" href="/it-it/404" />
+            <link rel="alternate" hreflang="fr-FR" href="/fr-fr/404" />
+            <link rel="alternate" hreflang="ko-KR" href="/ko-kr/404" />
+            <link rel="alternate" hreflang="hi-IN" href="/hi-in/404" />
+        <!-- Google Tag Manager -->
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            dataLayer.push({ 'country':'en' });
+        </script>
+        <script>
+            (function (w, d, s, l, i) {
+              w[l] = w[l] || [];
+              w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+              var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+              j.async = true;
+              j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+              f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-5XDDK388');
+        </script>
+        <!-- End Google Tag Manager -->
+    <link rel="stylesheet" href="/css/dist/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/dist/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/css/dist/style.min.css" />
+
+    <!--BE IXF: JavaScript begin-->
+    <script src="//cdn.bc0a.com/autopilot/f00000000046685/autopilot_sdk.js"></script>
+    <!--BE IXF: JavaScript end-->
+
+    <script type="text/javascript">var monetateT = new Date().getTime();</script>
+    <script type="text/javascript" src="//se.monetate.net/js/2/a-dc4b4650/p/crayola.com/entry.js"></script>
+    <script type="text/javascript">
+        window.monetateQ = window.monetateQ || [];
+        window.monetateQ.push(['trackData']);
+    </script>
+
+
+
+
+<script type="text/javascript">!function(T,l,y){var S=T.location,k="script",D="instrumentationKey",C="ingestionendpoint",I="disableExceptionTracking",E="ai.device.",b="toLowerCase",w="crossOrigin",N="POST",e="appInsightsSDK",t=y.name||"appInsights";(y.name||T[e])&&(T[e]=t);var n=T[t]||function(d){var g=!1,f=!1,m={initialize:!0,queue:[],sv:"5",version:2,config:d};function v(e,t){var n={},a="Browser";return n[E+"id"]=a[b](),n[E+"type"]=a,n["ai.operation.name"]=S&&S.pathname||"_unknown_",n["ai.internal.sdkVersion"]="javascript:snippet_"+(m.sv||m.version),{time:function(){var e=new Date;function t(e){var t=""+e;return 1===t.length&&(t="0"+t),t}return e.getUTCFullYear()+"-"+t(1+e.getUTCMonth())+"-"+t(e.getUTCDate())+"T"+t(e.getUTCHours())+":"+t(e.getUTCMinutes())+":"+t(e.getUTCSeconds())+"."+((e.getUTCMilliseconds()/1e3).toFixed(3)+"").slice(2,5)+"Z"}(),iKey:e,name:"Microsoft.ApplicationInsights."+e.replace(/-/g,"")+"."+t,sampleRate:100,tags:n,data:{baseData:{ver:2}}}}var h=d.url||y.src;if(h){function a(e){var t,n,a,i,r,o,s,c,u,p,l;g=!0,m.queue=[],f||(f=!0,t=h,s=function(){var e={},t=d.connectionString;if(t)for(var n=t.split(";"),a=0;a<n.length;a++){var i=n[a].split("=");2===i.length&&(e[i[0][b]()]=i[1])}if(!e[C]){var r=e.endpointsuffix,o=r?e.location:null;e[C]="https://"+(o?o+".":"")+"dc."+(r||"services.visualstudio.com")}return e}(),c=s[D]||d[D]||"",u=s[C],p=u?u+"/v2/track":d.endpointUrl,(l=[]).push((n="SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)",a=t,i=p,(o=(r=v(c,"Exception")).data).baseType="ExceptionData",o.baseData.exceptions=[{typeName:"SDKLoadFailed",message:n.replace(/\./g,"-"),hasFullStack:!1,stack:n+"\nSnippet failed to load ["+a+"] -- Telemetry is disabled\nHelp Link: https://go.microsoft.com/fwlink/?linkid=2128109\nHost: "+(S&&S.pathname||"_unknown_")+"\nEndpoint: "+i,parsedStack:[]}],r)),l.push(function(e,t,n,a){var i=v(c,"Message"),r=i.data;r.baseType="MessageData";var o=r.baseData;return o.message='AI (Internal): 99 message:"'+("SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details) ("+n+")").replace(/\"/g,"")+'"',o.properties={endpoint:a},i}(0,0,t,p)),function(e,t){if(JSON){var n=T.fetch;if(n&&!y.useXhr)n(t,{method:N,body:JSON.stringify(e),mode:"cors"});else if(XMLHttpRequest){var a=new XMLHttpRequest;a.open(N,t),a.setRequestHeader("Content-type","application/json"),a.send(JSON.stringify(e))}}}(l,p))}function i(e,t){f||setTimeout(function(){!t&&m.core||a()},500)}var e=function(){var n=l.createElement(k);n.src=h;var e=y[w];return!e&&""!==e||"undefined"==n[w]||(n[w]=e),n.onload=i,n.onerror=a,n.onreadystatechange=function(e,t){"loaded"!==n.readyState&&"complete"!==n.readyState||i(0,t)},n}();y.ld<0?l.getElementsByTagName("head")[0].appendChild(e):setTimeout(function(){l.getElementsByTagName(k)[0].parentNode.appendChild(e)},y.ld||0)}try{m.cookie=l.cookie}catch(p){}function t(e){for(;e.length;)!function(t){m[t]=function(){var e=arguments;g||m.queue.push(function(){m[t].apply(m,e)})}}(e.pop())}var n="track",r="TrackPage",o="TrackEvent";t([n+"Event",n+"PageView",n+"Exception",n+"Trace",n+"DependencyData",n+"Metric",n+"PageViewPerformance","start"+r,"stop"+r,"start"+o,"stop"+o,"addTelemetryInitializer","setAuthenticatedUserContext","clearAuthenticatedUserContext","flush"]),m.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4};var s=(d.extensionConfig||{}).ApplicationInsightsAnalytics||{};if(!0!==d[I]&&!0!==s[I]){var c="onerror";t(["_"+c]);var u=T[c];T[c]=function(e,t,n,a,i){var r=u&&u(e,t,n,a,i);return!0!==r&&m["_"+c]({message:e,url:t,lineNumber:n,columnNumber:a,error:i}),r},d.autoExceptionInstrumented=!0}return m}(y.cfg);function a(){y.onInit&&y.onInit(n)}(T[t]=n).queue&&0===n.queue.length?(n.queue.push(a),n.trackPageView({})):a()}(window,document,{
+src: "https://js.monitor.azure.com/scripts/b/ai.2.min.js", // The SDK URL Source
+crossOrigin: "anonymous", 
+cfg: { // Application Insights Configuration
+    connectionString: 'InstrumentationKey=d7299644-fe98-4ca3-bebf-4e0c057bb4dc'
+}});</script></head>
+<body data-template="views.main.layout" id="top">
+    <a href="#main" class="skip-to-main">Skip to Main Content</a>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.js"></script>
+    <script id="likebtn_wjs" src="https://w.likebtn.com/js/w/widget.js"></script>
+
+    <header id="header">
+
+
+    <div id="geoPopup" class="popup" role="dialog" aria-labelledby="popup-title" aria-hidden="false" style="visibility:hidden;">
+        <div class="popup-content" tabindex="-1">
+            <p id="popup-title">You're currently visiting the United States site. Would you like to visit your local site?</p>
+            <div class="btn-row">
+                <a id="lnkGeoLocal" href="" class="btn large-primary" aria-label="Navigate to your local site" target="_self" role="button"></a>
+                <a id="geoclose" class="btn large-secondary geo-close" aria-label="Close popup" role="button">United States</a>
+            </div>
+        </div>
+    </div>
+    <div id="geoPopupCA" class="popup" role="dialog" aria-labelledby="popup1-title" aria-hidden="false" style="visibility:hidden;">
+        <div class="popup-content" tabindex="-1">
+            <p id="popup1-title">You're currently visiting the Crayola site. Please confirm your location to proceed.</p>
+            <div class="btn-row">
+                <a id="lnkGeoLocal1" href="" class="btn large-primary" target="_self" role="button"></a>
+                <a id="lnkGeoLocal2" href="" class="btn large-secondary" target="_self" role="button" style="visibility:hidden;"></a>
+            </div>
+        </div>
+    </div>
+    <script src="/js/geolocation.js?v=wb4Pvmgqtl6GcO39nRyyCLKeyG3iPUUP8gRPVr3gbPU"></script>
+
+
+<div id="aux-header">
+
+
+
+<div class="">
+<p style="text-align: center"><img src="/images/default-source/about-us/yellow-crayon.png?sfvrsn=ffa99b32_1" height="10" style="max-width: 100%; height: auto; display: block; margin-left: auto; margin-right: auto" title="yellow-crayon" width="50" alt="" class="-sf-font-align-center"><em>From crayons to screen—explore creative play in the Crayola Create and Play app. <a href="https://rgco.link/capcrayolaweb" target="_blank" data-sf-ec-immutable=""><span style="text-decoration: underline">Learn More</span></a></em></p></div>
+</div>
+<div id="main-header">
+    <div class="container">
+        <div class="inner-wrap">
+            <div class="logo-wrap">
+
+            <a href="/home" class="d-inline-block" >
+            <picture class="d-inline-block ">
+                <img  loading="lazy" class=img-fluid src="/images/default-source/default-album/crayola.png?sfvrsn=f66d9163_4" title="Crayola" alt="Crayola">
+            </picture>
+            </a>
+</div>
+            <div class="primary-nav">
+<ul class="navbar-nav">
+            <li class="nav-item dropdown" data-template="sitefinity-navigation.desktop-mega-menu">
+                <a class="nav-link  dropdown-toggle" href="javascript:void(0);" id="navbarDropdownMenuLink-CA38DD0E-F97C-41EB-8B0F-E39CD50537750ac7" role="button" aria-expanded="false">
+                    <span>Products</span>
+                </a>
+                <div class="dropdown-menu mega-menu " role="menu" aria-labelledby="navbarDropdownMenuLink-CA38DD0E-F97C-41EB-8B0F-E39CD50537750ac7">
+                        <div class="dropdown-menu-image left">
+                            <img loading="lazy" src="/images/default-source/default-album/green-mascot.png?sfvrsn=1180e295_17" alt="" />
+                        </div>
+
+                    <div class="dropdown-menu-inner-wrap">
+                        <div class="container">
+                            <div class="row d-flex">
+                                <div class="col-3">
+                                        <div class="dropdown-cta">
+                                            <h3 style=color:#00892D;>Creativity Starts Here</h3>
+                                            <p>Explore Crayola products, created to encourage creative expression, foster learning, and fuel imaginative fun.</p>
+                                                <a tabindex="0" class="link" aria-label="Browse All Products" href="https://www.crayola.com/products"><span>Browse All Products</span></a>
+                                        </div>
+                                </div>
+                                    <div class="col-auto flex-fill">
+        <ul class="links-list">
+                    <li>
+                        <a class="hover-link" href="/menu/products/product-types" target="_self">Product Types</a>
+                        <ul>
+
+            <li>
+                <a href="/menu/products/product-types/crayons" class="hover-link" target="_self">Crayons</a>
+            </li>
+            <li>
+                <a href="/menu/products/product-types/markers" class="hover-link" target="_self">Markers</a>
+            </li>
+            <li>
+                <a href="/menu/products/product-types/colored-pencils" class="hover-link" target="_self">Colored Pencils</a>
+            </li>
+            <li>
+                <a href="/menu/products/product-types/paints---brushes" class="hover-link" target="_self">Paints &amp; Brushes</a>
+            </li>
+            <li>
+                <a href="/menu/products/product-types/coloring-books-paper" class="hover-link" target="_self">Coloring Books &amp; Paper</a>
+            </li>
+            <li>
+                <a href="/menu/products/product-types/outdoor-chalk" class="hover-link" target="_self">Outdoor Chalk</a>
+            </li>
+            <li>
+                <a href="/menu/products/product-types/art-kits-easels" class="hover-link" target="_self">Art Kits &amp; Easels</a>
+            </li>
+            <li>
+                <a href="/menu/products/product-types/toys" class="hover-link" target="_self">Toys</a>
+            </li>
+            <li>
+                <a href="/menu/products/product-types/clay-and-modeling" class="hover-link" target="_self">Clay &amp; Modeling Compounds</a>
+            </li>
+            <li>
+                <a href="/menu/products/product-types/writing-tools" class="hover-link" target="_self">Writing Tools</a>
+            </li>
+            <li>
+                <a href="/menu/products/product-types/classpack-bulk-supplies" class="hover-link" target="_self">Classpack &amp; Bulk Supplies</a>
+            </li>
+                        </ul>
+                    </li>
+                    <li><a class="hover-link" href="/menu/products/new-arrivals-1">New Arrivals</a></li>
+                    <li><a class="hover-link" href="/menu/products/where-to-buy">Where to Buy</a></li>
+                    <li>
+                        <a class="hover-link" href="/menu/products/brands" target="_self">Browse by Brand</a>
+                        <ul>
+
+            <li>
+                <a href="/menu/products/brands/art-with-edge" class="hover-link" target="_self">Art With Edge</a>
+            </li>
+            <li>
+                <a href="/menu/products/brands/clicks" class="hover-link" target="_self">Clicks</a>
+            </li>
+            <li>
+                <a href="/menu/products/brands/color-wonder" class="hover-link" target="_self">Color Wonder</a>
+            </li>
+            <li>
+                <a href="/menu/products/brands/goo" class="hover-link" target="_self">Goo</a>
+            </li>
+            <li>
+                <a href="/menu/products/brands/project" class="hover-link" target="_self">Project</a>
+            </li>
+            <li>
+                <a href="/menu/products/brands/scribble-scrubbie" class="hover-link" target="_self">Scribble Scrubbie</a>
+            </li>
+            <li>
+                <a href="/menu/products/brands/silly-putty" class="hover-link" target="_self">Silly Putty</a>
+            </li>
+            <li>
+                <a href="/menu/products/brands/silly-scents" class="hover-link" target="_self">Silly Scents</a>
+            </li>
+            <li>
+                <a href="/menu/products/brands/signature" class="hover-link" target="_self">Signature</a>
+            </li>
+            <li>
+                <a href="/menu/products/brands/twistables" class="hover-link" target="_self">Twistables</a>
+            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="hover-link" href="/menu/products/featured" target="_self">Featured</a>
+                        <ul>
+
+            <li>
+                <a href="/menu/products/featured/essential-art-supplies-for-kids" class="hover-link" target="_self">Essential Art Supplies for Kids</a>
+            </li>
+            <li>
+                <a href="/menu/products/featured/world&#x27;s-favorite-color" class="hover-link" target="_self">World&#x27;s Favorite Colors</a>
+            </li>
+            <li>
+                <a href="/menu/products/featured/characters" class="hover-link" target="_self">Characters</a>
+            </li>
+            <li>
+                <a href="/menu/products/featured/adaptive-art-supplies" class="hover-link" target="_self">Adaptive Art Supplies</a>
+            </li>
+            <li>
+                <a href="/menu/products/featured/travel-friendly-toys" class="hover-link" target="_self">Travel Friendly Toys</a>
+            </li>
+            <li>
+                <a href="/menu/products/featured/colorful-collaborations" class="hover-link" target="_self">Colorful Collaborations</a>
+            </li>
+                        </ul>
+                    </li>
+                    <li><a class="hover-link" href="/menu/products/all-products">All Products</a></li>
+        </ul>
+                                    </div>
+                                        <div class="col-4 ms-auto">
+                                                <div class="dropdown-card" style=background-color:#003C8C;>
+                                                    <a href="https://www.crayola.com/feature/color-vote/color-vote-results" tabindex="0" aria-label="Learn More about Crayola&#x27;s world favorite colors">
+                                                            <div class="image-wrap">
+                                                                <img loading="lazy" src="/images/default-source/main-navigation/2026/jan-2026/wolrd-fav-nav.jpg?sfvrsn=32a6f60e_11" alt="" />
+                                                            </div>
+                                                        <div class="inner-wrap">
+                                                            <h3>World&#x27;s Favorite Colors</h3>
+                                                            <p class="description">Products inspired by the most loved shades.</p>
+                                                            <p class="link alternative">
+                                                                <span>Learn More</span>
+                                                            </p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div class="dropdown-card" style=background-color:#592E87;>
+                                                    <a href="https://www.crayola.com/feature/scribble-scrubbie" tabindex="0" aria-label="Learn More about Crayola Scribble Scrubbie pets">
+                                                            <div class="image-wrap">
+                                                                <img loading="lazy" src="/images/default-source/main-navigation/2026/jan-2026/scribble-scrubbie-nav.png?sfvrsn=14464fce_9" alt="" />
+                                                            </div>
+                                                        <div class="inner-wrap">
+                                                            <h3>Your Pets, Your Designs</h3>
+                                                            <p class="description">Scribble, scrub, and style washable pets.</p>
+                                                            <p class="link alternative">
+                                                                <span>Learn More</span>
+                                                            </p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="dropdown-menu-image right">
+                            <img loading="lazy" src="/images/default-source/default-album/dropdown-accent.png?sfvrsn=bc1abc47_16" alt="" />
+                        </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown" data-template="sitefinity-navigation.desktop-mega-menu">
+                <a class="nav-link  dropdown-toggle" href="javascript:void(0);" id="navbarDropdownMenuLink-5DCAAB0F-B84C-440C-A9F8-AA501859C5840ac7" role="button" aria-expanded="false">
+                    <span>Coloring</span>
+                </a>
+                <div class="dropdown-menu mega-menu " role="menu" aria-labelledby="navbarDropdownMenuLink-5DCAAB0F-B84C-440C-A9F8-AA501859C5840ac7">
+
+                    <div class="dropdown-menu-inner-wrap">
+                        <div class="container">
+                            <div class="row d-flex">
+                                <div class="col-3">
+                                        <div class="dropdown-cta">
+                                            <h3 style=color:#792E88;>Explore Free Coloring Pages!</h3>
+                                            <p>Inspire imagination and fun for kids of all ages.</p>
+                                                <a tabindex="0" class="link" aria-label="Browse All Free Coloring Pages " href="https://www.crayola.com/free-coloring-pages"><span>Browse All Free Coloring Pages</span></a>
+                                        </div>
+                                </div>
+                                    <div class="col-9">
+                                        <ul class="dropdown-tiles">
+            <li class="dropdown-tile regular-red">
+                <a href="/menu/coloring/new" target="_self">
+                    <img src="/images/default-source/main-navigation/2026/jan-2026/cp-new-nav180.jpg?sfvrsn=8a415492_10" alt="" />
+                    <p>New!</p>
+                </a>
+            </li>
+            <li class="dropdown-tile dark-orange">
+                <a href="/menu/coloring/seasons" target="_self">
+                    <img src="/images/default-source/main-navigation/2026/jan-2026/cp-seasons-nav180.jpg?sfvrsn=3ae286_9" alt="" />
+                    <p>Seasons</p>
+                </a>
+            </li>
+            <li class="dropdown-tile dark-med-green">
+                <a href="/menu/coloring/adult-coloring" target="_self">
+                    <img src="/images/default-source/main-navigation/2026/jan-2026/cp-adult-nav180sq.jpg?sfvrsn=e97bee44_9" alt="" />
+                    <p>Adult Coloring</p>
+                </a>
+            </li>
+            <li class="dropdown-tile regular-blue">
+                <a href="/menu/coloring/characters" target="_self">
+                    <img src="/images/default-source/main-navigation/dec-2025/characters-cp-nav_180afbe7fa4b26b44c48175feedc0e524c5.jpg?sfvrsn=ca7e6b6b_12" alt="" />
+                    <p>Characters</p>
+                </a>
+            </li>
+            <li class="dropdown-tile regular-violet">
+                <a href="/menu/coloring/holidays" target="_self">
+                    <img src="/images/default-source/main-navigation/2026/jan-2026/cp-holiday-nav180.jpg?sfvrsn=f83839f7_9" alt="" />
+                    <p>Holidays</p>
+                </a>
+            </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown" data-template="sitefinity-navigation.desktop-mega-menu">
+                <a class="nav-link  dropdown-toggle" href="javascript:void(0);" id="navbarDropdownMenuLink-7FDC4ADA-CD31-4D90-8645-4C91C93A1E9E0ac7" role="button" aria-expanded="false">
+                    <span>Create</span>
+                </a>
+                <div class="dropdown-menu mega-menu " role="menu" aria-labelledby="navbarDropdownMenuLink-7FDC4ADA-CD31-4D90-8645-4C91C93A1E9E0ac7">
+
+                    <div class="dropdown-menu-inner-wrap">
+                        <div class="container">
+                            <div class="row d-flex">
+                                <div class="col-3">
+                                        <div class="dropdown-cta">
+                                            <h3 style=color:#792E88;>Fresh Ideas &amp; Activities</h3>
+                                            <p>Have a creative moment today with free activity sheets, ideas, and more.</p>
+                                                <a tabindex="0" class="link" aria-label="Browse All Ideas &amp; Activities" href="https://www.crayola.com/create"><span>Browse All Ideas &amp; Activities</span></a>
+                                        </div>
+                                </div>
+                                    <div class="col-9">
+                                        <ul class="dropdown-tiles">
+            <li class="dropdown-tile regular-red">
+                <a href="/menu/create/crafts" target="_self">
+                    <img src="/images/default-source/main-navigation/june-2025/craft-image_nav.jpg?sfvrsn=7c13ff63_9" alt="" />
+                    <p>Crafts</p>
+                </a>
+            </li>
+            <li class="dropdown-tile dark-orange">
+                <a href="/menu/create/creative-moment-ideas" target="_self">
+                    <img src="/images/default-source/main-navigation/june-2025/creative-moments_nav.jpg?sfvrsn=2636a48f_5" alt="" />
+                    <p>Creative Moment Ideas</p>
+                </a>
+            </li>
+            <li class="dropdown-tile dark-med-green">
+                <a href="/menu/create/activity-pages" target="_self">
+                    <img src="/images/default-source/main-navigation/june-2025/activity-sheet_nav.jpg?sfvrsn=5d136d32_5" alt="" />
+                    <p>Activity Pages</p>
+                </a>
+            </li>
+            <li class="dropdown-tile regular-blue">
+                <a href="/menu/create/custom-coloring-pages" target="_self">
+                    <img src="/images/default-source/main-navigation/june-2025/custom-coloring_nav.jpg?sfvrsn=428740c2_5" alt="" />
+                    <p>Custom Coloring Pages</p>
+                </a>
+            </li>
+            <li class="dropdown-tile regular-violet">
+                <a href="/menu/create/spring-creativity" target="_self">
+                    <img src="/images/default-source/home-page-images/creativity-buttons/spring-nav-button.jpg?sfvrsn=ea816c2_2" alt="" />
+                    <p>Spring Creativity</p>
+                </a>
+            </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown" data-template="sitefinity-navigation.desktop-mega-menu">
+                <a class="nav-link  dropdown-toggle" href="javascript:void(0);" id="navbarDropdownMenuLink-32CB7D70-842F-4ED2-8FDF-34B93CF137900ac7" role="button" aria-expanded="false">
+                    <span>Learning</span>
+                </a>
+                <div class="dropdown-menu mega-menu " role="menu" aria-labelledby="navbarDropdownMenuLink-32CB7D70-842F-4ED2-8FDF-34B93CF137900ac7">
+
+                    <div class="dropdown-menu-inner-wrap">
+                        <div class="container">
+                            <div class="row d-flex">
+                                <div class="col-3">
+                                        <div class="dropdown-cta">
+                                            <h3 style=color:#0078C2;>Resources for Students, Educators, &amp; Families</h3>
+                                            <p>Transform learning with engagement, collaboration, and creativity.</p>
+                                                <a tabindex="0" class="link" aria-label="Browse All Learning Content" href="https://www.crayola.com/learning"><span>Browse All Learning Content</span></a>
+                                        </div>
+                                </div>
+                                    <div class="col-auto flex-fill">
+        <ul class="links-list">
+                    <li>
+                        <a class="hover-link" href="/menu/learning/creativity-week" target="_self">Creativity Week</a>
+                        <ul>
+
+            <li>
+                <a href="/menu/learning/creativity-week/2025-resources" class="hover-link" target="_self">2026 Resources</a>
+            </li>
+            <li>
+                <a href="/menu/learning/creativity-week/standards-alignments" class="hover-link" target="_self">Global Standards Alignments</a>
+            </li>
+            <li>
+                <a href="/menu/learning/creativity-week/creativity-self-assessment" class="hover-link" target="_self">Creativity Self-Assessment</a>
+            </li>
+            <li>
+                <a href="/menu/learning/creativity-week/events-calendar" class="hover-link" target="_self">Events Calendar</a>
+            </li>
+            <li>
+                <a href="/menu/learning/creativity-week/sweepstakes" class="hover-link" target="_self">Sweepstakes</a>
+            </li>
+                        </ul>
+                    </li>
+                    <li><a class="hover-link" href="/menu/learning/lesson-plans">Lesson Plans</a></li>
+                    <li><a class="hover-link" href="/menu/learning/thinking-sheets">Thinking Sheets</a></li>
+                    <li><a class="hover-link" href="/menu/learning/project-plans">Project Plans</a></li>
+                    <li><a class="hover-link" href="/menu/learning/all-learning-content">All Learning Content</a></li>
+        </ul>
+                                    </div>
+                                        <div class="col-4 ms-auto">
+                                                <div class="dropdown-card" style=background-color:#003C8C;>
+                                                    <a href="https://www.crayola.com/learning/creativity-week" tabindex="0" aria-label="Learn More">
+                                                            <div class="image-wrap">
+                                                                <img loading="lazy" src="/images/default-source/main-navigation/sept-2025/creativity-week-09112025nav_115.png?sfvrsn=82ac7f85_13" alt="" />
+                                                            </div>
+                                                        <div class="inner-wrap">
+                                                            <h3>Creativity Week</h3>
+                                                            <p class="description">A free program for schools, libraries, and homes.</p>
+                                                            <p class="link alternative">
+                                                                <span>Learn More</span>
+                                                            </p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown" data-template="sitefinity-navigation.desktop-mega-menu">
+                <a class="nav-link  dropdown-toggle" href="javascript:void(0);" id="navbarDropdownMenuLink-45C9AC38-56A1-4669-8030-AFFF6B6A2F910ac7" role="button" aria-expanded="false">
+                    <span>Discover</span>
+                </a>
+                <div class="dropdown-menu mega-menu " role="menu" aria-labelledby="navbarDropdownMenuLink-45C9AC38-56A1-4669-8030-AFFF6B6A2F910ac7">
+
+                    <div class="dropdown-menu-inner-wrap">
+                        <div class="container">
+                            <div class="row d-flex">
+                                <div class="col-3">
+                                        <div class="dropdown-cta">
+                                            <h3 style=color:#00892D;>Explore More from Crayola</h3>
+                                            <p>Stay inspired with our latest creative campaigns, get the support you need, and discover the story behind the brand that brings color to life.</p>
+                                                <a tabindex="0" class="link" aria-label="Explore Colors" href="https://www.crayola.com/explore-colors"><span>Explore Colors</span></a>
+                                        </div>
+                                </div>
+                                    <div class="col-auto flex-fill">
+        <ul class="links-list">
+                    <li><a class="hover-link" href="/menu/discover/explore-colors">Explore Colors</a></li>
+                    <li><a class="hover-link" href="/menu/discover/campaign-for-creativity">Campaign For Creativity</a></li>
+                    <li>
+                        <a class="hover-link" href="/menu/discover/company" target="_self">Company</a>
+                        <ul>
+
+            <li>
+                <a href="/menu/discover/company/about-us" class="hover-link" target="_self">About Us</a>
+            </li>
+            <li>
+                <a href="/menu/discover/company/colorful-careers" class="hover-link" target="_self">Colorful Careers</a>
+            </li>
+            <li>
+                <a href="/menu/discover/company/crayola-culture" class="hover-link" target="_self">Crayola Culture</a>
+            </li>
+            <li>
+                <a href="/menu/discover/company/crayola-experience" class="hover-link" target="_self">Crayola Experience</a>
+            </li>
+            <li>
+                <a href="/menu/discover/company/media-center" class="hover-link" target="_self">Media Center</a>
+            </li>
+            <li>
+                <a href="/menu/discover/company/sustainability" class="hover-link" target="_self">Sustainability</a>
+            </li>
+                        </ul>
+                    </li>
+                    <li><a class="hover-link" href="/menu/discover/mobile-apps">Mobile Apps</a></li>
+                    <li>
+                        <a class="hover-link" href="/menu/discover/support" target="_self">Support</a>
+                        <ul>
+
+            <li>
+                <a href="/menu/discover/support/faq" class="hover-link" target="_self">FAQ</a>
+            </li>
+            <li>
+                <a href="/menu/discover/support/stain-tips" class="hover-link" target="_self">Stain Tips</a>
+            </li>
+            <li>
+                <a href="/menu/discover/support/contact-us" class="hover-link" target="_self">Contact Us</a>
+            </li>
+            <li>
+                <a href="/menu/discover/support/instructions-demo-videos" class="hover-link" target="_self">Instructions &amp; Demo Videos</a>
+            </li>
+            <li>
+                <a href="/menu/discover/support/preference-center" class="hover-link" target="_self">Preference Center</a>
+            </li>
+                        </ul>
+                    </li>
+                    <li><a class="hover-link" href="/menu/discover/partnerships">Partnerships</a></li>
+        </ul>
+                                    </div>
+                                        <div class="col-4 ms-auto">
+                                                <div class="dropdown-card" style=background-color:#003C8C;>
+                                                    <a href="https://www.crayola.com/feature/campaign/campaign-for-creativity" tabindex="0" aria-label="Learn More">
+                                                            <div class="image-wrap">
+                                                                <img loading="lazy" src="/images/default-source/main-navigation/june-2025/c4c_discover-nav.jpg?sfvrsn=f8f556fe_15" alt="" />
+                                                            </div>
+                                                        <div class="inner-wrap">
+                                                            <h3>Campaign for Creativity</h3>
+                                                            <p class="description">Our mission is to spark creative moments.</p>
+                                                            <p class="link alternative">
+                                                                <span>Learn More</span>
+                                                            </p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+</ul>
+
+
+
+
+</div>
+            <div class="secondary-nav">
+                <nav aria-label="Additional Links">
+                    <ul>
+                        <li class="dropdown">
+                            <div>
+
+
+
+    
+
+
+    <a id="search" class="dropdown-toggle" href="javascript:void(0);" role="button" aria-expanded="false" data-template="search-box.navigation-search"  aria-label="Search Dropdown Button">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 44C34.1503 44 44 34.1503 44 22C44 9.84974 34.1503 0 22 0C9.84974 0 0 9.84974 0 22C0 34.1503 9.84974 44 22 44Z" fill="#FFCC33" />
+            <path d="M21.2001 13.48C23.1501 13.48 24.9801 14.24 26.3601 15.62C29.2001 18.46 29.2001 23.09 26.3601 25.94C24.9801 27.32 23.1501 28.08 21.2001 28.08C19.2501 28.08 17.4201 27.32 16.0401 25.94C13.2001 23.1 13.2001 18.47 16.0401 15.62C17.4201 14.24 19.2501 13.48 21.2001 13.48ZM21.2001 9.47998C18.3101 9.47998 15.4201 10.58 13.2101 12.79C8.80009 17.2 8.80009 24.35 13.2101 28.76C15.4201 30.97 18.3101 32.07 21.2001 32.07C24.0901 32.07 26.9801 30.97 29.1901 28.76C33.6001 24.35 33.6001 17.2 29.1901 12.79C26.9801 10.58 24.0901 9.47998 21.2001 9.47998Z" fill="#00502E" />
+            <path d="M27.99 27.5601L33.17 32.7401" stroke="#00502E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+    </a>
+    <div class="dropdown-menu search position-relative"
+    role="menu" 
+    aria-labelledby="search"
+    data-sf-search-autocomplete-item-class="dropdown-item text-truncate"
+    data-sf-visibility-hidden="d-none"
+    data-sf-active-class="active">
+        <div class="dropdown-menu-inner-wrap">
+            <div class="container">
+                <div class="row d-flex align-items-end">
+                    <div class="col-lg-12">
+                        <div class="search-input">
+                                <label for="search-input" class="sr-only form-label" id="search-label">Search Site</label>
+                                <input value=""
+                                       id="search-input"
+                                       class="form-control nav-search" data-sf-role="search-box" data-sf-results-url="/search"
+                                       data-sf-search-catalogue="fullsite" data-sf-scoring-setting=""
+                                       data-sf-suggestions-length="0" data-sf-site-id="b39f2a55-0e40-4027-8c37-71d0fb801954"
+                                       data-sf-culture="en" data-sf-sort=""
+                                       data-sf-suggestions-fields="Title,Content"
+                                       data-sf-results-all="0"
+                                       data-sf-service-path="/api/default" type="text"
+                                       placeholder="Search Site..."
+                                       aria-label="Search Site"
+                                       autocomplete="off"
+                                 />
+                                <button class="close-search" aria-label="Close Search Bar">
+                                    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="44" height="44" rx="22" fill="#00502E" />
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M24.8194 21.8859L29.5674 26.6339C30.3328 27.3994 30.3328 28.6404 29.5674 29.4058C28.802 30.1712 27.561 30.1712 26.7955 29.4058L22.0475 24.6578L17.2053 29.5C16.4399 30.2654 15.1989 30.2654 14.4334 29.5C13.668 28.7345 13.668 27.4935 14.4334 26.7281L19.2757 21.8859L14.6616 17.2718C13.8962 16.5064 13.8962 15.2654 14.6616 14.5C15.427 13.7345 16.668 13.7345 17.4334 14.5L22.0475 19.114L26.5674 14.5942C27.3328 13.8287 28.5738 13.8287 29.3393 14.5942C30.1047 15.3596 30.1047 16.6006 29.3393 17.366L24.8194 21.8859Z" fill="#FFCC33" />
+                                    </svg>
+                                </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                        </li>
+                        <li class="dropdown">
+                            <div>
+
+<a id="language" class="dropdown-toggle" href="javascript:void(0);" role="button" aria-expanded="false" data-template="language-selector.default" aria-label="Language Selector Dropdown">
+    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="22" cy="22" r="22" fill="#FFCC33" />
+        <path d="M33.5 22C33.5 27.0216 28.5959 31.5 22 31.5C15.4041 31.5 10.5 27.0216 10.5 22C10.5 16.9784 15.4041 12.5 22 12.5C28.5959 12.5 33.5 16.9784 33.5 22Z" stroke="#00502E" stroke-width="3" />
+        <path d="M27 22C27 24.6113 26.3629 26.9271 25.3851 28.5566C24.3955 30.206 23.1676 31 22 31C20.8324 31 19.6045 30.206 18.6149 28.5566C17.6371 26.9271 17 24.6113 17 22C17 19.3887 17.6371 17.0729 18.6149 15.4434C19.6045 13.794 20.8324 13 22 13C23.1676 13 24.3955 13.794 25.3851 15.4434C26.3629 17.0729 27 19.3887 27 22Z" stroke="#00502E" stroke-width="2" />
+        <path d="M12.4629 17.5H32.2036" stroke="#00502E" stroke-width="2" />
+        <path d="M12.4629 26.5H32.2036" stroke="#00502E" stroke-width="2" />
+        <path d="M11.5 22L33.6481 22" stroke="#00502E" stroke-width="2" />
+    </svg>
+</a>
+
+<div class="dropdown-menu language" role="menu" aria-labelledby="language">
+    <div class="dropdown-menu-inner-wrap">
+        <div>
+            <p>
+                Select a Language (Region)
+            </p>
+        </div>
+
+        <div>
+            <ul>
+                                <li>
+                                    <span class="region-selected">US - English</span>
+                                </li>
+                                <li>
+                                    <a href="/en-au/404" target="_self" hreflang="en-AU" class="hover-link">Australia - English </a>
+                                </li>
+                                <li>
+                                    <a href="/en-ca/404" target="_self" hreflang="en-CA" class="hover-link">Canada - English </a>
+                                </li>
+                                <li>
+                                    <a href="/en-gb/404" target="_self" hreflang="en-GB" class="hover-link">United Kingdom - English </a>
+                                </li>
+                                <li>
+                                    <a href="/es-mx/404" target="_self" hreflang="es-MX" class="hover-link">M&#xE9;xico - Espa&#xF1;ol </a>
+                                </li>
+                                <li>
+                                    <a href="/it-it/404" target="_self" hreflang="it-IT" class="hover-link">Italia - Italiano </a>
+                                </li>
+                                <li>
+                                    <a href="/fr-fr/404" target="_self" hreflang="fr-FR" class="hover-link">France - Fran&#xE7;ais </a>
+                                </li>
+                                <li>
+                                    <a href="/ko-kr/404" target="_self" hreflang="ko-KR" class="hover-link">&#xB300;&#xD55C;&#xBBFC;&#xAD6D; - &#xD55C;&#xAD6D;&#xC5B4;</a>
+                                </li>
+                                <li>
+                                    <a href="/hi-in/404" target="_self" hreflang="hi-IN" class="hover-link">&#x92D;&#x93E;&#x930;&#x924; - &#x939;&#x93F;&#x928;&#x94D;&#x926;&#x940; </a>
+                                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+</div>
+                        </li>
+                        <li>
+                            <div>
+        <a href="/support" id="contact-us" tabindex="0" target="_self" aria-label="Support">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="44" height="44" rx="22" fill="#FFCC33" />
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M25.0052 10.3701C25.0052 9.69014 25.5552 9.14014 26.2352 9.14014C30.9952 9.14014 34.8652 13.0001 34.8652 17.7701C34.8652 18.4501 34.3152 19.0001 33.6352 19.0001C32.9552 19.0001 32.4052 18.4501 32.4052 17.7701C32.4052 14.3701 29.6452 11.6101 26.2452 11.6101C25.5652 11.6101 25.0152 11.0601 25.0152 10.3801L25.0052 10.3701ZM25.0052 15.3003C25.0052 14.6203 25.5552 14.0703 26.2352 14.0703C28.2752 14.0703 29.9352 15.7303 29.9352 17.7703C29.9352 18.4503 29.3853 19.0003 28.7052 19.0003C28.0252 19.0003 27.4753 18.4503 27.4753 17.7703C27.4753 17.0903 26.9252 16.5403 26.2452 16.5403C25.5652 16.5403 25.0152 15.9903 25.0152 15.3103L25.0052 15.3003ZM31.1752 34.8499C31.2452 34.8599 31.3152 34.8599 31.3852 34.8599H31.3952C31.9252 34.8599 32.4452 34.6599 32.8452 34.2999C33.3352 33.8599 33.6052 33.2399 33.6052 32.5499V28.1599C33.6052 27.1199 32.9352 26.1899 31.9452 25.8599L27.6852 24.4399C26.8052 24.1599 25.8552 24.3799 25.2052 25.0299L24.5252 25.7099C24.0952 26.1399 23.4252 26.2099 22.9352 25.8699C20.7252 24.3599 19.4652 23.1099 18.1152 21.0699C17.7952 20.5799 17.8652 19.9199 18.2852 19.4999L18.9852 18.7999C19.6352 18.1499 19.8552 17.1899 19.5652 16.3199L18.1452 12.0599C17.8152 11.0699 16.8952 10.3999 15.8452 10.3999H11.4552C10.7652 10.3999 10.1452 10.6699 9.70521 11.1599C9.28521 11.6199 9.08521 12.2199 9.14521 12.8199C10.2952 24.4399 19.5652 33.6999 31.1752 34.8499Z" fill="#00502E" />
+            </svg>
+        </a>
+
+
+</div>
+                        </li>
+                        <li>
+                            <button id="mobile-nav-toggle" role="button" aria-label="Toggle Navigation Menu">
+                                <p class="sr-only">Toggle Navigation Menu</p>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="mobile-nav-flyout" aria-labelledby="mobile-nav-toggle">
+    <div class="inner-flyout-wrap">
+        <nav class="mobile-nav">
+            <div>
+<ul>
+            <li class="nav-item" data-template="sitefinity-navigation.mobile-mega-menu">
+                <a class="nav-link has-child" href="javascript:void(0);" id="navbarDropdownMenuLink-CA38DD0E-F97C-41EB-8B0F-E39CD5053775d523" role="button" aria-expanded="false">
+                    Products
+                </a>
+                <div class="child-menu" role="menu" aria-labelledby="navbarDropdownMenuLink-CA38DD0E-F97C-41EB-8B0F-E39CD5053775d523">
+                    <div class="child-menu-inner-wrap">
+                        <div class="back-flyout">
+                            <button>
+                                <span>
+                                    <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 9H18.03" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M2 9L8.58 15.58" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M8.58 2.41992L2 8.99992" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                Back
+                            </button>
+                        </div>
+                        <h2> Products</h2>
+
+
+                            <ul>
+                <li class="nav-item">
+                    <a class="nav-link has-child second-tier" href="javascript:void(0);" id="products" role="button" aria-expanded="false">Product Types</a>
+                    <div class="second-child-menu">
+                        <div class="back-flyout-second">
+                            <button>
+                                <span>
+                                    <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 9H18.03" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M2 9L8.58 15.58" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M8.58 2.41992L2 8.99992" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                Products
+                            </button>
+                        </div>
+                        <a href="/menu/products/product-types" class="nav-link"><h2>Product Types</h2></a>
+                        <ul>
+            <li class="nav-item">
+                <a href="/menu/products/product-types/crayons" class="nav-link hover-link" target="_self">Crayons</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/product-types/markers" class="nav-link hover-link" target="_self">Markers</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/product-types/colored-pencils" class="nav-link hover-link" target="_self">Colored Pencils</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/product-types/paints---brushes" class="nav-link hover-link" target="_self">Paints &amp; Brushes</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/product-types/coloring-books-paper" class="nav-link hover-link" target="_self">Coloring Books &amp; Paper</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/product-types/outdoor-chalk" class="nav-link hover-link" target="_self">Outdoor Chalk</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/product-types/art-kits-easels" class="nav-link hover-link" target="_self">Art Kits &amp; Easels</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/product-types/toys" class="nav-link hover-link" target="_self">Toys</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/product-types/clay-and-modeling" class="nav-link hover-link" target="_self">Clay &amp; Modeling Compounds</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/product-types/writing-tools" class="nav-link hover-link" target="_self">Writing Tools</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/product-types/classpack-bulk-supplies" class="nav-link hover-link" target="_self">Classpack &amp; Bulk Supplies</a>
+            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="/menu/products/new-arrivals-1">New Arrivals</a></li>
+                <li class="nav-item"><a class="nav-link" href="/menu/products/where-to-buy">Where to Buy</a></li>
+                <li class="nav-item">
+                    <a class="nav-link has-child second-tier" href="javascript:void(0);" id="products" role="button" aria-expanded="false">Browse by Brand</a>
+                    <div class="second-child-menu">
+                        <div class="back-flyout-second">
+                            <button>
+                                <span>
+                                    <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 9H18.03" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M2 9L8.58 15.58" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M8.58 2.41992L2 8.99992" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                Products
+                            </button>
+                        </div>
+                        <a href="/menu/products/brands" class="nav-link"><h2>Browse by Brand</h2></a>
+                        <ul>
+            <li class="nav-item">
+                <a href="/menu/products/brands/art-with-edge" class="nav-link hover-link" target="_self">Art With Edge</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/brands/clicks" class="nav-link hover-link" target="_self">Clicks</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/brands/color-wonder" class="nav-link hover-link" target="_self">Color Wonder</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/brands/goo" class="nav-link hover-link" target="_self">Goo</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/brands/project" class="nav-link hover-link" target="_self">Project</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/brands/scribble-scrubbie" class="nav-link hover-link" target="_self">Scribble Scrubbie</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/brands/silly-putty" class="nav-link hover-link" target="_self">Silly Putty</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/brands/silly-scents" class="nav-link hover-link" target="_self">Silly Scents</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/brands/signature" class="nav-link hover-link" target="_self">Signature</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/brands/twistables" class="nav-link hover-link" target="_self">Twistables</a>
+            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-child second-tier" href="javascript:void(0);" id="products" role="button" aria-expanded="false">Featured</a>
+                    <div class="second-child-menu">
+                        <div class="back-flyout-second">
+                            <button>
+                                <span>
+                                    <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 9H18.03" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M2 9L8.58 15.58" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M8.58 2.41992L2 8.99992" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                Products
+                            </button>
+                        </div>
+                        <a href="/menu/products/featured" class="nav-link"><h2>Featured</h2></a>
+                        <ul>
+            <li class="nav-item">
+                <a href="/menu/products/featured/essential-art-supplies-for-kids" class="nav-link hover-link" target="_self">Essential Art Supplies for Kids</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/featured/world&#x27;s-favorite-color" class="nav-link hover-link" target="_self">World&#x27;s Favorite Colors</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/featured/characters" class="nav-link hover-link" target="_self">Characters</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/featured/adaptive-art-supplies" class="nav-link hover-link" target="_self">Adaptive Art Supplies</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/featured/travel-friendly-toys" class="nav-link hover-link" target="_self">Travel Friendly Toys</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/products/featured/colorful-collaborations" class="nav-link hover-link" target="_self">Colorful Collaborations</a>
+            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="/menu/products/all-products">All Products</a></li>
+                            </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item" data-template="sitefinity-navigation.mobile-mega-menu">
+                <a class="nav-link has-child" href="javascript:void(0);" id="navbarDropdownMenuLink-5DCAAB0F-B84C-440C-A9F8-AA501859C584d523" role="button" aria-expanded="false">
+                    Coloring
+                </a>
+                <div class="child-menu" role="menu" aria-labelledby="navbarDropdownMenuLink-5DCAAB0F-B84C-440C-A9F8-AA501859C584d523">
+                    <div class="child-menu-inner-wrap">
+                        <div class="back-flyout">
+                            <button>
+                                <span>
+                                    <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 9H18.03" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M2 9L8.58 15.58" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M8.58 2.41992L2 8.99992" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                Back
+                            </button>
+                        </div>
+                        <h2> Coloring</h2>
+
+
+                            <ul>
+                <li class="nav-item"><a class="nav-link" href="/menu/coloring/new">New!</a></li>
+                <li class="nav-item"><a class="nav-link" href="/menu/coloring/seasons">Seasons</a></li>
+                <li class="nav-item"><a class="nav-link" href="/menu/coloring/adult-coloring">Adult Coloring</a></li>
+                <li class="nav-item"><a class="nav-link" href="/menu/coloring/characters">Characters</a></li>
+                <li class="nav-item"><a class="nav-link" href="/menu/coloring/holidays">Holidays</a></li>
+                            </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item" data-template="sitefinity-navigation.mobile-mega-menu">
+                <a class="nav-link has-child" href="javascript:void(0);" id="navbarDropdownMenuLink-7FDC4ADA-CD31-4D90-8645-4C91C93A1E9Ed523" role="button" aria-expanded="false">
+                    Create
+                </a>
+                <div class="child-menu" role="menu" aria-labelledby="navbarDropdownMenuLink-7FDC4ADA-CD31-4D90-8645-4C91C93A1E9Ed523">
+                    <div class="child-menu-inner-wrap">
+                        <div class="back-flyout">
+                            <button>
+                                <span>
+                                    <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 9H18.03" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M2 9L8.58 15.58" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M8.58 2.41992L2 8.99992" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                Back
+                            </button>
+                        </div>
+                        <h2> Create</h2>
+
+
+                            <ul>
+                <li class="nav-item"><a class="nav-link" href="/menu/create/crafts">Crafts</a></li>
+                <li class="nav-item"><a class="nav-link" href="/menu/create/creative-moment-ideas">Creative Moment Ideas</a></li>
+                <li class="nav-item"><a class="nav-link" href="/menu/create/activity-pages">Activity Pages</a></li>
+                <li class="nav-item"><a class="nav-link" href="/menu/create/custom-coloring-pages">Custom Coloring Pages</a></li>
+                <li class="nav-item"><a class="nav-link" href="/menu/create/spring-creativity">Spring Creativity</a></li>
+                            </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item" data-template="sitefinity-navigation.mobile-mega-menu">
+                <a class="nav-link has-child" href="javascript:void(0);" id="navbarDropdownMenuLink-32CB7D70-842F-4ED2-8FDF-34B93CF13790d523" role="button" aria-expanded="false">
+                    Learning
+                </a>
+                <div class="child-menu" role="menu" aria-labelledby="navbarDropdownMenuLink-32CB7D70-842F-4ED2-8FDF-34B93CF13790d523">
+                    <div class="child-menu-inner-wrap">
+                        <div class="back-flyout">
+                            <button>
+                                <span>
+                                    <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 9H18.03" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M2 9L8.58 15.58" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M8.58 2.41992L2 8.99992" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                Back
+                            </button>
+                        </div>
+                        <h2> Learning</h2>
+
+
+                            <ul>
+                <li class="nav-item">
+                    <a class="nav-link has-child second-tier" href="javascript:void(0);" id="products" role="button" aria-expanded="false">Creativity Week</a>
+                    <div class="second-child-menu">
+                        <div class="back-flyout-second">
+                            <button>
+                                <span>
+                                    <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 9H18.03" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M2 9L8.58 15.58" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M8.58 2.41992L2 8.99992" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                Learning
+                            </button>
+                        </div>
+                        <a href="/menu/learning/creativity-week" class="nav-link"><h2>Creativity Week</h2></a>
+                        <ul>
+            <li class="nav-item">
+                <a href="/menu/learning/creativity-week/2025-resources" class="nav-link hover-link" target="_self">2026 Resources</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/learning/creativity-week/standards-alignments" class="nav-link hover-link" target="_self">Global Standards Alignments</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/learning/creativity-week/creativity-self-assessment" class="nav-link hover-link" target="_self">Creativity Self-Assessment</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/learning/creativity-week/events-calendar" class="nav-link hover-link" target="_self">Events Calendar</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/learning/creativity-week/sweepstakes" class="nav-link hover-link" target="_self">Sweepstakes</a>
+            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="/menu/learning/lesson-plans">Lesson Plans</a></li>
+                <li class="nav-item"><a class="nav-link" href="/menu/learning/thinking-sheets">Thinking Sheets</a></li>
+                <li class="nav-item"><a class="nav-link" href="/menu/learning/project-plans">Project Plans</a></li>
+                <li class="nav-item"><a class="nav-link" href="/menu/learning/all-learning-content">All Learning Content</a></li>
+                            </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item" data-template="sitefinity-navigation.mobile-mega-menu">
+                <a class="nav-link has-child" href="javascript:void(0);" id="navbarDropdownMenuLink-45C9AC38-56A1-4669-8030-AFFF6B6A2F91d523" role="button" aria-expanded="false">
+                    Discover
+                </a>
+                <div class="child-menu" role="menu" aria-labelledby="navbarDropdownMenuLink-45C9AC38-56A1-4669-8030-AFFF6B6A2F91d523">
+                    <div class="child-menu-inner-wrap">
+                        <div class="back-flyout">
+                            <button>
+                                <span>
+                                    <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 9H18.03" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M2 9L8.58 15.58" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M8.58 2.41992L2 8.99992" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                Back
+                            </button>
+                        </div>
+                        <h2> Discover</h2>
+
+
+                            <ul>
+                <li class="nav-item"><a class="nav-link" href="/menu/discover/explore-colors">Explore Colors</a></li>
+                <li class="nav-item"><a class="nav-link" href="/menu/discover/campaign-for-creativity">Campaign For Creativity</a></li>
+                <li class="nav-item">
+                    <a class="nav-link has-child second-tier" href="javascript:void(0);" id="products" role="button" aria-expanded="false">Company</a>
+                    <div class="second-child-menu">
+                        <div class="back-flyout-second">
+                            <button>
+                                <span>
+                                    <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 9H18.03" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M2 9L8.58 15.58" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M8.58 2.41992L2 8.99992" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                Discover
+                            </button>
+                        </div>
+                        <a href="/menu/discover/company" class="nav-link"><h2>Company</h2></a>
+                        <ul>
+            <li class="nav-item">
+                <a href="/menu/discover/company/about-us" class="nav-link hover-link" target="_self">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/discover/company/colorful-careers" class="nav-link hover-link" target="_self">Colorful Careers</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/discover/company/crayola-culture" class="nav-link hover-link" target="_self">Crayola Culture</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/discover/company/crayola-experience" class="nav-link hover-link" target="_self">Crayola Experience</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/discover/company/media-center" class="nav-link hover-link" target="_self">Media Center</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/discover/company/sustainability" class="nav-link hover-link" target="_self">Sustainability</a>
+            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="/menu/discover/mobile-apps">Mobile Apps</a></li>
+                <li class="nav-item">
+                    <a class="nav-link has-child second-tier" href="javascript:void(0);" id="products" role="button" aria-expanded="false">Support</a>
+                    <div class="second-child-menu">
+                        <div class="back-flyout-second">
+                            <button>
+                                <span>
+                                    <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 9H18.03" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M2 9L8.58 15.58" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M8.58 2.41992L2 8.99992" stroke="#00892D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                Discover
+                            </button>
+                        </div>
+                        <a href="/menu/discover/support" class="nav-link"><h2>Support</h2></a>
+                        <ul>
+            <li class="nav-item">
+                <a href="/menu/discover/support/faq" class="nav-link hover-link" target="_self">FAQ</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/discover/support/stain-tips" class="nav-link hover-link" target="_self">Stain Tips</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/discover/support/contact-us" class="nav-link hover-link" target="_self">Contact Us</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/discover/support/instructions-demo-videos" class="nav-link hover-link" target="_self">Instructions &amp; Demo Videos</a>
+            </li>
+            <li class="nav-item">
+                <a href="/menu/discover/support/preference-center" class="nav-link hover-link" target="_self">Preference Center</a>
+            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="/menu/discover/partnerships">Partnerships</a></li>
+                            </ul>
+                    </div>
+                </div>
+            </li>
+</ul>
+
+
+
+
+</div>
+            <div class="nav-break"></div>
+            <div>
+            </div>
+        </nav>
+    </div>
+</div>
+<div id="nav-underlay">
+</div>
+<div id="nav-underlay-mobile">
+</div></header>
+    <main id="main">
+
+
+<section class="">
+
+            <div class="container">
+                <div class="inner-section-wrap padding-lg-top padding-md-bottom">
+                    <div class="row">
+                            <div style="" class="col ">
+
+        <div class="row d-flex justify-content-center">
+            <picture class="d-block " style="width:fit-content;">
+                        <source media="(max-width: 555px)" srcset="/images/default-source/default-album/404.tmb-0.jpg?Culture=en&amp;sfvrsn=7dffd294_3" type="image/jpeg" width=555 height=160>
+                <img  loading="lazy" class=img-fluid src="/images/default-source/default-album/404.jpg?sfvrsn=7dffd294_3" title="404">
+            </picture>
+        </div>
+</div>
+                    </div>
+                </div>
+            </div>
+
+</section>
+
+
+
+<section class="">
+
+            <div class="container">
+                <div class="inner-section-wrap padding-sm-top padding-md-bottom">
+                    <div class="row">
+                            <div style="" class="col ">
+
+
+
+<div class="container section-header padding-md-bottom">
+    <div class="row d-flex justify-content-center text-center">
+        <div class="col-lg-8 col-12 d-flex flex-column">
+            <h1 style=color:#00892D;>Sorry, but we couldn&#x2019;t find the page you were looking for.</h1>
+            <p class="padding-xs-top" style=color:#2D2E2F;></p>
+
+        </div>
+    </div>
+</div></div>
+                    </div>
+                </div>
+            </div>
+
+</section>
+</main>
+    <footer id="footer" class="footer">
+
+
+<section class="">
+
+            <div class="container">
+                <div class="inner-section-wrap ">
+                    <div class="row row d-flex justify-content-center text-center">
+                            <div style="" class="col col-lg-10 col-12">
+
+
+
+    
+
+
+    <div class="container system-page-search padding-xl-bottom">
+        <div class="bg-dark-med-green text-center support-search">
+            <h2 class="text-dark-yellow padding-md-bottom">Search Crayola</h2>
+            <div class="col-lg-6 mx-auto">
+                <div class="input-group position-relative"
+                     data-sf-search-autocomplete-item-class="dropdown-item text-truncate"
+                     data-sf-visibility-hidden="d-none"
+                     data-sf-active-class="active">
+                            <input type="text"
+                                   class="form-control rounded-pill"
+                                   placeholder="Search Site..."
+                                   aria-label="Search Site..."
+                                   value=""
+                                   data-sf-role="search-box" data-sf-results-url="/search"
+                                   data-sf-search-catalogue="fullsite" data-sf-scoring-setting=""
+                                   data-sf-suggestions-length="0" data-sf-site-id="b39f2a55-0e40-4027-8c37-71d0fb801954"
+                                   data-sf-culture="en" data-sf-sort=""
+                                   data-sf-suggestions-fields="Title,Content"
+                                   data-sf-results-all="0"
+                                   data-sf-service-path="/api/default"
+                                   autocomplete="off"
+                             />
+                            <span class="input-group-text">
+                                <svg width="45" height="44" viewBox="0 0 45 44"
+                                     fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="0.5" width="44" height="44" rx="22" fill="#FFCC33" />
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                          d="M26.3237 15.51C24.9437 14.13 23.1137 13.37 21.1637 13.37C19.2137 13.37 17.3837 14.13 16.0037 15.51C13.1637 18.36 13.1637 22.99 16.0037 25.83C17.3837 27.21 19.2137 27.97 21.1637 27.97C23.1137 27.97 24.9437 27.21 26.3237 25.83C29.1637 22.98 29.1637 18.35 26.3237 15.51ZM13.1737 12.68C15.3837 10.47 18.2737 9.36996 21.1637 9.36996C24.0537 9.36996 26.9437 10.47 29.1537 12.68C33.0812 16.6074 33.5109 22.7079 30.4431 27.1109L34.548 31.2158C35.329 31.9969 35.329 33.2632 34.548 34.0443C33.7669 34.8253 32.5006 34.8253 31.7196 34.0443L27.6149 29.9396C25.6809 31.2881 23.4223 31.96 21.1637 31.96C18.2737 31.96 15.3837 30.86 13.1737 28.65C8.76374 24.24 8.76374 17.09 13.1737 12.68Z"
+                                          fill="#00502E" />
+                                </svg>
+                            </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+
+</section>
+
+
+
+<div class="footer-top">
+    <div class="desktop">
+        <img loading="lazy" src="/img/footer/footer-top.png" alt="" />
+    </div>
+    <div class="mobile">
+        <img loading="lazy" src="/img/footer/footer-top-mobile.png" alt="" />
+    </div>
+
+</div>
+<div class="be-ix-link-block"><!--Link Block Target Div--></div>
+<div class="footer-main">
+    <div class="container">
+        <div class="row d-flex">
+            <div class="col-8 p-0 d-flex mx-auto align-items-center justify-content-center">
+                <div class="divider"></div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-lg-4 contact-column">
+
+                <div class="signup-form">
+                    <div>
+
+
+
+<div class="">
+<h2>Join the community for all deals and offers</h2></div>
+</div>
+                    <div>
+
+
+
+    
+
+
+        <div data-sf-role='form-visibility-wrapper' style='display: none'>
+        <form action="/forms/submit/sf_footer_signup_form_/en?sf_site=b39f2a55-0e40-4027-8c37-71d0fb801954&sf_site_temp=true" method="post"  id="footersignupform" novalidate>
+            <div class=""
+            data-sf-role="form-container"
+            data-sf-invalid="is-invalid"
+            data-sf-visibility-inline-visible="d-inline-block"
+            data-sf-visibility-hidden="d-none"
+            data-sf-visibility-visible="d-block">
+
+                <input type="hidden" data-sf-role="redirect-url" />
+                <input type="hidden" data-sf-role="custom-submit-action" value="False" />
+                <div data-sf-role="success-message" class="valid-feedback" role="alert" aria-live="assertive"></div>
+                <div data-sf-role="error-message" class="invalid-feedback" role="alert" aria-live="assertive"></div>
+                <div data-sf-role="loading" style="display: none;">
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                <div data-sf-role="fields-container">
+
+
+
+<div class="footer-form-section" data-template="form-section.footer-form">
+    <fieldset class="input-group">
+        <div class="footer-input-wrap">
+
+
+<script data-sf-role='start_field_FooterEmail' data-sf-role-field-name='FooterEmail'></script>
+
+
+<div data-sf-role="text-field-container" style="width:100%;">
+
+    <input data-sf-role="violation-restrictions" type="hidden" value='{&#xA;  &quot;maxLength&quot;: null,&#xA;  &quot;minLength&quot;: null&#xA;}' />
+    <input data-sf-role="violation-messages" type="hidden" value='{&#xA;  &quot;invalidLength&quot;: &quot;Email Address* field input is too long&quot;,&#xA;  &quot;required&quot;: &quot;Please enter your email in a valid format: user@example.com&quot;,&#xA;  &quot;invalid&quot;: &quot;Email Address* field is invalid&quot;,&#xA;  &quot;regularExpression&quot;: &quot;Please match the requested format&quot;&#xA;}' />
+    <label for="FooterEmail" class="visually-hidden form-label">Email Address*</label>
+    <input id='FooterEmail'
+           type="email"
+           class="form-control"
+           name="FooterEmail"
+           placeholder="Email Address*"
+           data-sf-role="text-field-input"
+           
+           aria-describedby="TextboxErrorMessaged09c"
+        required="required"  />
+
+    <div id='TextboxErrorMessaged09c' data-sf-role="error-message" role="alert" aria-live="assertive" class="invalid-feedback footer-input-error" style="display:none;"></div>
+</div>
+
+
+
+
+<script data-sf-role='end_field_FooterEmail'></script>
+
+<div data-sf-role="submit-button-container">
+    <button tabindex="0" id="submit" type="submit" class="submit-btn">Submit</button>
+</div>
+
+</div>
+    </fieldset>
+    <div class="input-error-copy"></div>
+
+    <div>
+
+<script data-sf-role='start_field_SitefinityCheckboxesFormControl' data-sf-role-field-name='SitefinityCheckboxesFormControl'></script>
+<fieldset data-sf-role="checkboxes-field-container" class="checkbox-fieldset" aria-labelledby="choice-field-label-SitefinityCheckboxesFormControl choice-field-description-SitefinityCheckboxesFormControl">
+    <input data-sf-role="violation-messages" type="hidden" value='{&#xA;  &quot;required&quot;: &quot;You need to agree to the Terms of Use and Privacy before you can sign up for emails.&quot;&#xA;}' />
+    <input type="hidden" data-sf-role="required-validator" value='True' />
+        <legend class="h6 sr-only" id="choice-field-label-SitefinityCheckboxesFormControl">I agree to the Crayola, LLC Terms of Use and Privacy Policy.</legend>
+        <p class="text-muted small sr-only" id="choice-field-description-SitefinityCheckboxesFormControl">I agree to the Crayola, LLC Terms of Use and Privacy Policy.</p>
+
+    <div class="">
+            <div class="">
+                <label class="custom-checkbox" for="choiceOption-0-SitefinityCheckboxesFormControle0f5">
+                    <input class="check-box-input" type="checkbox" name="SitefinityCheckboxesFormControl" id="choiceOption-0-SitefinityCheckboxesFormControle0f5" value="Agree" data-sf-role="checkboxes-field-input" required aria-label="I agree to the Crayola, LLC &lt;a href=&quot;/terms-of-use&quot; tabindex=0&gt;Terms of Use&lt;/a&gt; and &lt;a href=&quot;/privacy-policy&quot;&gt;Privacy Policy&lt;/a&gt;.">
+                    <span tabindex="0" class="checkbox-span"></span>
+                    <span class="checkbox-text">
+                        I agree to the Crayola, LLC <a href="/terms-of-use" tabindex="0">Terms of Use</a> and <a href="/privacy-policy">Privacy Policy</a>.
+                    </span>
+                </label>
+            </div>
+
+    </div>  
+    <div data-sf-role="error-message" role="alert" aria-live="assertive" class="invalid-feedback"></div>
+</fieldset>
+<script data-sf-role='end_field_SitefinityCheckboxesFormControl'></script>
+</div>
+</div>
+</div>
+            </div>
+        </form>
+        </div>
+
+<script>
+  document.getElementById('footersignupform').addEventListener('submit', function(event) {
+    const emailInput = document.getElementById('FooterEmail');
+    // If the input is invalid, prevent form submission and focus the field
+    if (!emailInput.checkValidity()) {
+      event.preventDefault(); // Stop form from submitting
+      emailInput.focus();     // Focus the invalid field
+    }
+  });
+</script></div>
+                </div>
+
+            </div>
+            <div class="offset-lg-1 col-lg-2 col-6 link-column">
+                <div>
+
+<style type="text/css">
+.footer h2 a {
+   color:#FCE828;
+   text-decoration:none;
+}
+.footer h2 a:hover{
+   color:#FCE828;
+   text-decoration:underline;
+}
+</style>
+
+
+
+
+
+
+<div class="">
+<h2><a href="https://www.crayola.com/company/about-us">About Us</a></h2></div>
+</div>
+                <div>
+<nav aria-label="Footer Support Links">
+    <ul>
+                    <li><a href="/menu/about-us/company" class="hover-link" target="_self">Company</a></li>
+                    <li><a href="/menu/about-us/crayola-experience" class="hover-link" target="_self">Crayola Experience</a></li>
+                    <li><a href="/menu/about-us/sustainability" class="hover-link" target="_self">Sustainability</a></li>
+                    <li><a href="/menu/about-us/media-center" class="hover-link" target="_self">Media Center</a></li>
+                    <li><a href="/menu/about-us/careers" class="hover-link" target="_self">Careers</a></li>
+                    <li><a href="/menu/about-us/where-to-buy" class="hover-link" target="_self">Where to Buy</a></li>
+    </ul>
+</nav>
+
+
+
+
+
+</div>
+            </div>
+            <div class="col-lg-2 col-6 link-column">
+                <div>
+
+
+
+<div class="">
+<h2><a href="https://www.crayola.com/support">Support</a></h2></div>
+</div>
+                <div>
+<nav aria-label="Footer Support Links">
+    <ul>
+                    <li><a href="/menu/support/preference-center" class="hover-link" target="_self">Preference Center</a></li>
+                    <li><a href="/menu/support/stain-tips" class="hover-link" target="_self">Stain Tips</a></li>
+                    <li><a href="/menu/support/faqs" class="hover-link" target="_self">FAQs</a></li>
+                    <li><a href="/menu/support/donations" class="hover-link" target="_self">Donations</a></li>
+                    <li><a href="/menu/support/instructions-demo-videos" class="hover-link" target="_self">Instructions &amp; Demo Videos</a></li>
+    </ul>
+</nav>
+
+
+
+
+
+</div>
+            </div>
+            <div class="offset-xl-1 col-xl-2 col-lg-3 col-12 social-column">
+                <div>
+
+
+
+<div class="">
+<h2>Stay Connected</h2></div>
+</div>
+                <div>
+
+
+<nav aria-label="Social Media Links">
+    <ul class="social-media">
+            <li>
+                <a tabindex="0" target="_blank" href="/menu/social-links/youtube">
+                    <span class="sr-only">YouTube</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="18" viewbox="0 0 25 18" fill="none"><path d="M23.845 3.2405C23.7084 2.73374 23.4415 2.27159 23.0708 1.90004C22.7001 1.5285 22.2386 1.26053 21.7321 1.12279C19.8542 0.607158 12.3416 0.598764 12.3416 0.598764C12.3416 0.598764 4.83007 0.59037 2.951 1.08322C2.44487 1.22729 1.98427 1.49906 1.61343 1.87242C1.24258 2.24579 0.973943 2.70822 0.8333 3.21531C0.338051 5.09318 0.333254 8.98803 0.333254 8.98803C0.333254 8.98803 0.328457 12.9021 0.820109 14.7607C1.09591 15.7884 1.90534 16.6002 2.93421 16.8773C4.83127 17.3929 12.3236 17.4013 12.3236 17.4013C12.3236 17.4013 19.8363 17.4097 21.7141 16.918C22.2208 16.7805 22.6827 16.5132 23.0544 16.1424C23.426 15.7716 23.6944 15.3102 23.833 14.8039C24.3295 12.9272 24.3331 9.0336 24.3331 9.0336C24.3331 9.0336 24.3571 5.11837 23.845 3.2405ZM9.93846 12.5963L9.94446 5.40137L16.1884 9.00482L9.93846 12.5963Z" fill="#FF0000"></path></svg>
+                </a>
+            </li>
+            <li>
+                <a tabindex="0" target="_blank" href="/menu/social-links/facebook">
+                    <span class="sr-only">Facebook</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewbox="0 0 25 24" fill="none"><path d="M24.3333 12.0733C24.3333 5.40541 18.9607 0 12.3333 0C5.70583 0 0.333252 5.40541 0.333252 12.0733C0.333252 18.0994 4.72146 23.0942 10.4583 24V15.5633H7.41138V12.0733H10.4583V9.41342C10.4583 6.38755 12.2499 4.71614 14.9908 4.71614C16.3038 4.71614 17.677 4.95196 17.677 4.95196V7.92313H16.1639C14.6733 7.92313 14.2083 8.85386 14.2083 9.80868V12.0733H17.5363L17.0044 15.5633H14.2083V24C19.9451 23.0942 24.3333 18.0996 24.3333 12.0733Z" fill="#1877F2"></path></svg>
+                </a>
+            </li>
+            <li>
+                <a tabindex="0" target="_blank" href="/menu/social-links/instagram">
+                    <span class="sr-only">Instagram</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewbox="0 0 25 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M17.6666 0H6.99992C3.31803 0 0.333252 2.98477 0.333252 6.66667V17.3333C0.333252 21.0152 3.31803 24 6.99992 24H17.6666C21.3485 24 24.3333 21.0152 24.3333 17.3333V6.66667C24.3333 2.98477 21.3485 0 17.6666 0ZM21.9999 17.3333C21.9926 19.7235 20.0567 21.6593 17.6666 21.6667H6.99992C4.60972 21.6593 2.67391 19.7235 2.66659 17.3333V6.66667C2.67391 4.27647 4.60972 2.34065 6.99992 2.33333H17.6666C20.0567 2.34065 21.9926 4.27647 21.9999 6.66667V17.3333ZM18.6666 7C19.403 7 19.9999 6.40304 19.9999 5.66667C19.9999 4.93029 19.403 4.33333 18.6666 4.33333C17.9302 4.33333 17.3333 4.93029 17.3333 5.66667C17.3333 6.40304 17.9302 7 18.6666 7ZM12.3333 6C9.01954 6 6.33325 8.68629 6.33325 12C6.33325 15.3137 9.01954 18 12.3333 18C15.647 18 18.3333 15.3137 18.3333 12C18.3369 10.4076 17.7058 8.87943 16.5798 7.75344C15.4538 6.62745 13.9257 5.99645 12.3333 6ZM8.66658 12C8.66658 14.0251 10.3082 15.6667 12.3333 15.6667C14.3583 15.6667 15.9999 14.0251 15.9999 12C15.9999 9.97493 14.3583 8.33333 12.3333 8.33333C10.3082 8.33333 8.66658 9.97493 8.66658 12Z" fill="url(#paint0_linear_3758_7856)"></path><defs>
+        <linearGradient id="paint0_linear_3758_7856" x1="12.3333" y1="0" x2="12.3333" y2="24" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#CF0075"></stop>
+            <stop offset="0.5" stop-color="#ED0117"></stop>
+            <stop offset="1" stop-color="#FC8314"></stop>
+        </linearGradient>
+    </defs></svg>
+                </a>
+            </li>
+            <li>
+                <a tabindex="0" target="_blank" href="/menu/social-links/pinterest">
+                    <span class="sr-only">Pinterest</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewbox="0 0 25 24" fill="none"><path d="M24.3333 12C24.3333 18.629 18.9623 24 12.3333 24C11.0945 24 9.90422 23.8113 8.78164 23.4629C9.27035 22.6645 10.001 21.3581 10.272 20.3177C10.4171 19.7565 11.0171 17.4629 11.0171 17.4629C11.4091 18.2081 12.551 18.8419 13.7655 18.8419C17.3849 18.8419 19.9929 15.5129 19.9929 11.3758C19.9929 7.4129 16.7558 4.44677 12.5945 4.44677C7.41712 4.44677 4.6639 7.92097 4.6639 11.7097C4.6639 13.471 5.60261 15.6629 7.09777 16.3597C7.32519 16.4661 7.44616 16.4177 7.49938 16.2C7.53809 16.0355 7.74132 15.2177 7.83325 14.8403C7.86228 14.7194 7.84777 14.6129 7.75099 14.4968C7.26228 13.8919 6.86551 12.7887 6.86551 11.7581C6.86551 9.11129 8.86874 6.55161 12.2849 6.55161C15.2316 6.55161 17.2978 8.55968 17.2978 11.4339C17.2978 14.6806 15.6574 16.9306 13.5236 16.9306C12.3478 16.9306 11.4623 15.9581 11.7478 14.7629C12.0865 13.3355 12.7397 11.7968 12.7397 10.7661C12.7397 9.84677 12.2462 9.07742 11.2203 9.07742C10.0155 9.07742 9.04777 10.321 9.04777 11.9903C9.04777 13.0548 9.40583 13.771 9.40583 13.771C9.40583 13.771 8.22035 18.7935 8.00261 19.7323C7.76067 20.7677 7.85745 22.229 7.95906 23.1774C3.49777 21.4306 0.333252 17.0855 0.333252 12C0.333252 5.37097 5.70422 0 12.3333 0C18.9623 0 24.3333 5.37097 24.3333 12Z" fill="#E70606"></path></svg>
+                </a>
+            </li>
+            <li>
+                <a tabindex="0" target="_blank" href="/menu/social-links/x">
+                    <span class="sr-only">X</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="22" viewbox="0 0 25 22" fill="none"><path d="M19.2347 0.333374H22.9149L14.8747 9.36991L24.3333 21.6667H16.9274L11.1267 14.2088L4.48956 21.6667H0.807172L9.40681 12.0011L0.333252 0.333374H7.92719L13.1705 7.1502L19.2347 0.333374ZM17.943 19.5006H19.9823L6.81913 2.38575H4.63085L17.943 19.5006Z" fill="black"></path></svg>
+                </a>
+            </li>
+            <li>
+                <a tabindex="0" target="_blank" href="/menu/social-links/tiktok">
+                    <span class="sr-only">TikTok</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewbox="0 0 25 24" fill="none"><path d="M24.3329 9.84202C21.9738 9.84696 19.6725 9.20321 17.7542 8.00171V16.3813C17.7536 17.9333 17.2114 19.4482 16.2003 20.7233C15.1892 21.9984 13.7572 22.973 12.096 23.5168C10.4347 24.0606 8.62329 24.1477 6.90395 23.7664C5.1846 23.3851 3.63928 22.5536 2.47461 21.383C1.30994 20.2125 0.581433 18.7587 0.386507 17.2161C0.19158 15.6735 0.539522 14.1156 1.38381 12.7507C2.2281 11.3858 3.52848 10.279 5.11109 9.57823C6.6937 8.87746 8.4831 8.61616 10.24 8.82927V13.0439C9.43604 12.8227 8.57273 12.8293 7.77335 13.063C6.97397 13.2966 6.27941 13.7453 5.78885 14.345C5.2983 14.9446 5.03683 15.6646 5.04179 16.402C5.04676 17.1395 5.3179 17.8567 5.81649 18.4512C6.31509 19.0458 7.01564 19.4873 7.81811 19.7127C8.62058 19.9381 9.48392 19.9359 10.2849 19.7063C11.0858 19.4768 11.7833 19.0316 12.2779 18.4345C12.7725 17.8374 13.0388 17.1188 13.0387 16.3813V0H17.7542C17.751 0.348435 17.7843 0.696395 17.8539 1.03948C18.0178 1.80537 18.3585 2.53396 18.8552 3.18068C19.3519 3.8274 19.9941 4.37867 20.7427 4.80075C21.8076 5.41688 23.0562 5.74528 24.3329 5.74505V9.84202Z" fill="black"></path></svg>
+                </a>
+            </li>
+            <li>
+                <a tabindex="0" target="_blank" href="/menu/social-links/linkedin">
+                    <span class="sr-only">LinkedIn</span>
+                    <svg width="24px" height="24px" viewbox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><title>
+//<![CDATA[
+LinkedIn icon
+//]]>//
+</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+                </a>
+            </li>
+
+
+    </ul>
+</nav>
+
+
+</div>
+                <div>
+                    <div>
+
+
+<div  class="d-flex align-items-center justify-content-start">
+            <a tabindex="0" aria-label="Go to Crayola&#x27;s Consumer Support page" sfdi-trigger="click" sfdi-predicate="Call to action" sfdi-object="Support" href="/support" class="btn large-secondary"  data-call-to-action >
+                Support
+            </a>
+</div></div>
+                </div>
+                <a tabindex="0" href="https://www.levelaccess.com/a/crayola/" target="_blank" class="levelaccess-link">
+                    <img loading="lazy" src="/img/icons/levelaccess-icon-white.svg" alt="Crayola partner with Level Access" style="padding:20px;max-height:100px;" />
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer-banner">
+        <div class="desktop">
+            <img loading="lazy" src="/img/footer/footer-banner.png" alt="Crayola" />
+        </div>
+        <div class="mobile">
+            <img loading="lazy" src="/img/footer/footer-banner-mobile.png" alt="Crayola" />
+        </div>
+    </div>
+</div>
+<div class="footer-aux">
+    <div class="container">
+        <div class="aux-inner-wrap">
+            <div class="aux-left">
+
+
+
+<div class="">
+<p>© <span id="copyrightYear"></span>&nbsp; Crayola® All Rights Reserved.</p></div>
+<script>
+  document.getElementById("copyrightYear").textContent = new Date().getFullYear();
+</script></div>
+            <div class="aux-right">
+                <div>
+
+
+<nav aria-label="Footer Aux Navigation">
+    <ul>
+            <li>
+                <a href="/menu/aux-footer/your-privacy-choices" target="_self">
+                        <img src="/img/footer/privacy-choices.svg" alt="Privacy Choices Icon" />
+                        <span>Your Privacy Choices</span>
+                </a>
+            </li>
+            <li>
+                <a href="/menu/aux-footer/privacy-policy" target="_self">
+                        <span>Privacy Policy</span>
+                </a>
+            </li>
+            <li>
+                <a href="/menu/aux-footer/sms-terms" target="_self">
+                        <span>SMS Terms</span>
+                </a>
+            </li>
+            <li>
+                <a href="/menu/aux-footer/gdpr" target="_self">
+                        <span>GDPR</span>
+                </a>
+            </li>
+            <li>
+                <a href="/menu/aux-footer/ca-privacy-notice" target="_self">
+                        <span>CA Privacy Notice</span>
+                </a>
+            </li>
+            <li>
+                <a class="ot-sdk-show-settings" href="/menu/aux-footer/cookie-policy" target="_self">
+                        <span>Cookie Preferences</span>
+                </a>
+            </li>
+            <li>
+                <a href="/menu/aux-footer/terms-of-use" target="_self">
+                        <span>Terms of Use</span>
+                </a>
+            </li>
+            <li>
+                <a href="/menu/aux-footer/web-accessibility" target="_self">
+                        <span>Web Accessibility</span>
+                </a>
+            </li>
+    </ul>
+</nav>
+
+
+
+
+
+</div>
+                <div class="back-to-top-container">
+                    <div class="back-to-top">
+                        <button class="back-to-top-anchor" aria-label="Back to top of the page">
+                            <span class="sr-only">Back to Top</span>
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 32C2 48.5685 15.4315 62 32 62C48.5685 62 62 48.5685 62 32C62 15.4315 48.5685 2 32 2C15.4315 2 2 15.4315 2 32Z" fill="#00502E" stroke="#FFCC33" stroke-width="3" />
+                                <path d="M31.9727 26.4404L22.9999 35.4132" stroke="#FFCC33" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M40.9453 35.4132L31.9726 26.4404" stroke="#FFCC33" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div></footer>
+    <script src="/js/GSAP/gsap.min.js"></script>
+    <script src="/js/GSAP/plugins/ScrollTrigger.min.js"></script>
+        <script src="/js/masonry.pkgd.min.js"></script>
+    <script src="/js/swiper-bundle.min.js"></script>
+    <script src="/js/navigation.js"></script>
+    <script src="/js/scroll-triggers.js"></script>
+    <script src="/js/fslightbox.js"></script>
+    <script src="/js/fslightbox-accessibility.js"></script>
+    <script src="/js/content-lightbox.js"></script>
+    <script src="/js/functions.js"></script>
+    <script src="/js/timeline-slider.js"></script>
+    
+
+
+<script id="2127779190" src="/sfrenderer/Scripts/SearchWidgets/search-box.min.js?assembly_name=Progress.Sitefinity.AspNetCore.Widgets&amp;version=-1744962191" type="text/javascript"></script><script defer="" id="-476068388" src="/sfrenderer/Scripts/form-all.min.js?assembly_name=Progress.Sitefinity.AspNetCore.FormWidgets&amp;version=-1846535055" type="text/javascript"></script></body>
+</html>
