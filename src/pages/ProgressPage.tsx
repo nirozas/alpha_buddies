@@ -9,6 +9,7 @@ import { BADGES_CATALOG, AVATARS_CATALOG } from '../constants/badges';
 import { BackButton, StarRating } from '../components/SharedComponents';
 import { useStore, calculateDistinctStars } from '../store';
 import { useAudio } from '../hooks/useAudio';
+import { InstallAppButton } from '../components/InstallPrompt';
 
 type Tab = 'overview' | 'letters' | 'numbers' | 'stickers' | 'settings';
 
@@ -184,20 +185,23 @@ export function ProgressPage() {
             </p>
           </div>
 
-          {/* Interactive Avatar button */}
-          <button
-            onClick={() => {
-              playPop();
-              setShowAvatarPicker(true);
-            }}
-            className="w-12 h-12 rounded-full bg-white/25 border-2 border-white/60 flex items-center justify-center text-2xl shrink-0 shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer relative group"
-            title="Change Avatar"
-          >
-            <span>{currentAvatar}</span>
-            <span className="absolute -bottom-1 -right-1 bg-amber-400 text-amber-950 text-[10px] font-black rounded-full w-4 h-4 flex items-center justify-center border border-white">
-              ✏️
-            </span>
-          </button>
+          <div className="flex items-center gap-2 shrink-0">
+            <InstallAppButton className="hidden sm:inline-flex py-1.5 px-3 text-xs" />
+            {/* Interactive Avatar button */}
+            <button
+              onClick={() => {
+                playPop();
+                setShowAvatarPicker(true);
+              }}
+              className="w-12 h-12 rounded-full bg-white/25 border-2 border-white/60 flex items-center justify-center text-2xl shrink-0 shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer relative group"
+              title="Change Avatar"
+            >
+              <span>{currentAvatar}</span>
+              <span className="absolute -bottom-1 -right-1 bg-amber-400 text-amber-950 text-[10px] font-black rounded-full w-4 h-4 flex items-center justify-center border border-white">
+                ✏️
+              </span>
+            </button>
+          </div>
         </div>
 
         {/* Tab Navigation */}

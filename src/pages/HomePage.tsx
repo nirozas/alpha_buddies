@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../store';
+import { InstallAppButton } from '../components/InstallPrompt';
 
 export function HomePage() {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ export function HomePage() {
         style={{ backgroundImage: "url('/forest-home.png')" }}
       />
 
-      {/* HEADER HUD (Logo and Parents button) */}
+      {/* HEADER HUD (Logo, Install App, and Parents button) */}
       <div className="absolute top-0 w-full p-4 flex justify-between items-start z-50 pointer-events-none">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
@@ -32,11 +33,13 @@ export function HomePage() {
           Alpha<span style={{ color: '#F97316', WebkitTextStroke: '2px #C2410C' }}>Buddies</span>
         </motion.h1>
 
-        <div className="pointer-events-auto flex items-center gap-2.5 sm:gap-3">
+        <div className="pointer-events-auto flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
+          <InstallAppButton />
+
           <motion.button
             whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.94 }}
             onClick={() => navigate('/progress')}
-            className="flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-full shadow-xl border-3 border-amber-300 bg-amber-400 hover:bg-amber-500 text-amber-950 font-black text-sm sm:text-base cursor-pointer transition-transform"
+            className="flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full shadow-xl border-3 border-amber-300 bg-amber-400 hover:bg-amber-500 text-amber-950 font-black text-xs sm:text-base cursor-pointer transition-transform"
             style={{ fontFamily: 'Nunito' }}
           >
             🏆 Player Dashboard
