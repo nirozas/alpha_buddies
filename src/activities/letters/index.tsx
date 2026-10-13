@@ -20,6 +20,7 @@ import { ScavengerHunt } from './ScavengerHunt';
 import { LetterDotToDot } from './LetterDotToDot';
 import { MagicTrace } from './MagicTrace';
 import { MissingBridge } from './MissingBridge';
+import { AlphabetTrain } from './AlphabetTrain';
 
 export function LetterActivityRouter() {
   const { activity } = useParams<{ activity: string }>();
@@ -46,6 +47,7 @@ export function LetterActivityRouter() {
     case 'letter-dot-to-dot':    return <LetterDotToDot />;
     case 'magic-trace':          return <MagicTrace />;
     case 'missing-bridge':       return <MissingBridge />;
+    case 'alphabet-train':       return <AlphabetTrain />;
     default: return <div style={{ fontFamily: 'Nunito', padding: 32, fontSize: '1.2rem' }}>Activity not found 😕</div>;
   }
 }

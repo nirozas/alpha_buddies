@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <defs>
+    <radialGradient id="bg1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="60%" stop-color="#0284C7"/>
+      <stop offset="100%" stop-color="#1E1B4B"/>
+    </radialGradient>
+    <linearGradient id="gold1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEF08A"/>
+      <stop offset="40%" stop-color="#FACC15"/>
+      <stop offset="70%" stop-color="#EAB308"/>
+      <stop offset="100%" stop-color="#CA8A04"/>
+    </linearGradient>
+    <linearGradient id="rim1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFBEB"/>
+      <stop offset="50%" stop-color="#FCD34D"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+    <filter id="glow1" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Outer Starburst Rim -->
+  <circle cx="120" cy="120" r="112" fill="url(#rim1)" filter="drop-shadow(0 8px 16px rgba(0,0,0,0.25))"/>
+  <circle cx="120" cy="120" r="102" fill="#FFFFFF"/>
+  <circle cx="120" cy="120" r="96" fill="url(#bg1)"/>
+
+  <!-- Shimmer rays -->
+  <path d="M120 28 L123 60 L120 62 L117 60 Z" fill="#FFFFFF" opacity="0.6"/>
+  <path d="M120 212 L123 180 L120 178 L117 180 Z" fill="#FFFFFF" opacity="0.6"/>
+  <path d="M28 120 L60 123 L62 120 L60 117 Z" fill="#FFFFFF" opacity="0.6"/>
+  <path d="M212 120 L180 123 L178 120 L180 117 Z" fill="#FFFFFF" opacity="0.6"/>
+
+  <!-- Cheerful 3D Star -->
+  <path d="M120 48 L138 90 L184 94 L149 124 L160 169 L120 144 L80 169 L91 124 L56 94 L102 90 Z" fill="url(#gold1)" stroke="#B45309" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Star 3D highlight facet -->
+  <path d="M120 48 L138 90 L120 144 L91 124 L56 94 L102 90 Z" fill="#FEF08A" opacity="0.45"/>
+
+  <!-- Cute Eyes -->
+  <ellipse cx="106" cy="112" rx="6" ry="9" fill="#1E293B"/>
+  <ellipse cx="134" cy="112" rx="6" ry="9" fill="#1E293B"/>
+  <!-- Catchlights -->
+  <circle cx="108" cy="109" r="2.5" fill="#FFFFFF"/>
+  <circle cx="136" cy="109" r="2.5" fill="#FFFFFF"/>
+  <circle cx="104" cy="115" r="1" fill="#FFFFFF"/>
+  <circle cx="132" cy="115" r="1" fill="#FFFFFF"/>
+
+  <!-- Rosy Cheeks -->
+  <ellipse cx="96" cy="122" rx="7" ry="4" fill="#F43F5E" opacity="0.75"/>
+  <ellipse cx="144" cy="122" rx="7" ry="4" fill="#F43F5E" opacity="0.75"/>
+
+  <!-- Big Happy Smile -->
+  <path d="M112 122 Q120 132 128 122" fill="none" stroke="#1E293B" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Sparkling glitter dots -->
+  <circle cx="68" cy="68" r="3" fill="#FFFFFF"/>
+  <circle cx="172" cy="65" r="4" fill="#FDE047"/>
+  <circle cx="180" cy="150" r="3" fill="#FFFFFF"/>
+  <circle cx="62" cy="154" r="3.5" fill="#F472B6"/>
+  <!-- Cross Sparkles -->
+  <path d="M172 80 Q172 88 180 88 Q172 88 172 96 Q172 88 164 88 Q172 88 172 80 Z" fill="#FFFFFF"/>
+  <path d="M68 135 Q68 141 74 141 Q68 141 68 147 Q68 141 62 141 Q68 141 68 135 Z" fill="#FEF08A"/>
+
+  <!-- Award Ribbon Banner -->
+  <g transform="translate(0, 8)">
+    <path d="M50 178 L35 198 L60 196 Z" fill="#BE123C"/>
+    <path d="M190 178 L205 198 L180 196 Z" fill="#BE123C"/>
+    <rect x="52" y="172" width="136" height="26" rx="13" fill="#E11D48" stroke="#FFFFFF" stroke-width="3"/>
+    <text x="120" y="189" font-family="'Nunito', sans-serif" font-weight="900" font-size="12" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">FIRST STAR</text>
+  </g>
+</svg>

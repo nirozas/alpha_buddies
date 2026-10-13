@@ -74,14 +74,30 @@ export interface ActivityMeta {
   multiSelect?: boolean;
 }
 
+export interface Sticker {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  category: 'starter' | 'stars' | 'letters' | 'numbers' | 'games' | 'mystic' | 'mastery' | 'streak';
+  imageUrl?: string;
+  level?: number;
+  tier?: 'Novice' | 'Explorer' | 'Champion' | 'Master' | 'Mythic';
+}
+
 export interface ChildProgress {
   lettersCompleted: Record<string, boolean>;
   numbersCompleted: Record<number, boolean>;
   starsEarned: Record<string, 1 | 2 | 3>;
   activitiesCompleted: Record<string, number>;
+  stickers: string[];
   streakDays: number;
   totalPlaytime: number;
   lastPlayDate: string;
+  avatar?: string;
+  dailyStars?: Record<string, number>;
+  badges?: string[];
+  perfectScores?: number;
 }
 
 export type BuddyMood = 'happy' | 'excited' | 'thinking' | 'celebrating' | 'idle' | 'sad' | 'neutral';

@@ -1,3 +1,4 @@
+import { calculateStars } from '../../utils/scoring';
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -62,7 +63,8 @@ export function MissingBridge() {
             setMistakes(0);
           } else {
             playFanfare();
-            awardStars('missing-bridge', 3);
+            const earnedStars = calculateStars(mistakes);
+            awardStars('missing-bridge', earnedStars);
             incrementActivity('missing-bridge');
             setShowCelebration(true);
           }
@@ -156,8 +158,13 @@ export function MissingBridge() {
         </div>
       </div>
 
-      <CelebrationScreen active={showCelebration} stars={3} message="Bridge Fixed! 🌉"
-        onContinue={() => navigate('/letters')} />
+      <CelebrationScreen 
+        active={showCelebration} 
+        stars={calculateStars(mistakes)} 
+        message="Bridge Fixed! 🌉"
+        onContinue={() => navigate('/letters/activity/missing-bridge')} 
+        onMenu={() => navigate('/letters')}
+      />
     </div>
   );
 }

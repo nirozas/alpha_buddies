@@ -7,29 +7,29 @@ export const LETTER_ACTIVITIES: ActivityMeta[] = [
   { id: 'letter-sounds', name: 'Letter Sounds', description: 'Listen and find!', icon: '🔊', type: 'letter', group: 'recognition' },
   { id: 'pop-the-bubble', name: 'Pop the Bubble', description: 'Pop the right bubble!', icon: '🫧', type: 'letter', group: 'recognition' },
   { id: 'memory-letters', name: 'Memory Letters', description: 'Match the letters!', icon: '🧠', type: 'letter', group: 'recognition' },
-  { id: 'flip-find', name: 'Flip & Find', description: 'Match the pairs!', icon: '🃏', type: 'letter', group: 'recognition' },
-  { id: 'letter-match', name: 'Letter Match', description: 'Match capital and small!', icon: '🔍', type: 'letter', group: 'recognition' },
-  { id: 'letter-caterpillar', name: 'Letter Caterpillar', description: 'Catch the letters!', icon: '🐛', type: 'letter', group: 'recognition' },
+  { id: 'flip-find', name: 'Flip & Find', description: 'Match the pairs!', icon: '🃏', type: 'letter', group: 'recognition', multiSelect: true },
+  { id: 'letter-match', name: 'Letter Match', description: 'Match capital and small!', icon: '🔍', type: 'letter', group: 'recognition', multiSelect: true },
+  { id: 'letter-caterpillar', name: 'Letter Caterpillar', description: 'Catch the letters!', icon: '🐛', type: 'letter', group: 'recognition', multiSelect: true },
   { id: 'color-by-code', name: 'Color by Code', description: 'Color by letters!', icon: '🖌️', type: 'letter', group: 'recognition', multiSelect: true },
   
   // Sequencing & Visual Memory
   { id: 'alphabet-train', name: 'Alphabet Train', description: 'Put letters in order!', icon: '🚂', type: 'letter', group: 'recognition' },
-  { id: 'mystery-reveal', name: 'Mystery Reveal', description: 'Scratch and guess!', icon: '❄️', type: 'letter', group: 'recognition' },
+  { id: 'mystery-reveal', name: 'Mystery Reveal', description: 'Scratch and guess!', icon: '❄️', type: 'letter', group: 'recognition', multiSelect: true },
   { id: 'scavenger-hunt', name: 'Scavenger Hunt', description: 'Find real things!', icon: '🔍', type: 'letter', group: 'usage' },
 
   // Formation (Guided -> Creative)
   { id: 'build-a-letter', name: 'Build a Letter', description: 'Build with blocks!', icon: '🧱', type: 'letter', group: 'formation' },
-  { id: 'letter-dot-to-dot', name: 'Connect the Dots', description: 'Follow the numbers!', icon: '🔢', type: 'letter', group: 'formation' },
-  { id: 'magic-trace', name: 'Magic Trace', description: 'Trace with sparkles!', icon: '✨', type: 'letter', group: 'formation' },
-  { id: 'trace-draw', name: 'Trace & Draw', description: 'Trace the letter!', icon: '✏️', type: 'letter', group: 'formation' },
+  { id: 'letter-dot-to-dot', name: 'Connect the Dots', description: 'Follow the numbers!', icon: '🔢', type: 'letter', group: 'formation', multiSelect: true },
+  { id: 'magic-trace', name: 'Magic Trace', description: 'Trace with sparkles!', icon: '✨', type: 'letter', group: 'formation', multiSelect: true },
+  { id: 'trace-draw', name: 'Trace & Draw', description: 'Trace the letter!', icon: '✏️', type: 'letter', group: 'formation', multiSelect: true },
   { id: 'colour-the-letter', name: 'Colour the Letter', description: 'Colour it in!', icon: '🎨', type: 'letter', group: 'formation' },
   { id: 'stamp-letter', name: 'Stamp the Letter', description: 'Stamp the matches!', icon: '🖍️', type: 'letter', group: 'formation' },
 
   // Usage / Phonics
   { id: 'missing-bridge', name: 'Missing Bridge', description: 'Fix the bridge!', icon: '🌉', type: 'letter', group: 'usage' },
-  { id: 'say-it-out-loud', name: 'Say It Out Loud', description: 'Repeat after me!', icon: '🗣️', type: 'letter', group: 'usage' },
-  { id: 'first-letter-sound', name: 'First Letter Sound', description: 'Find the starting letter!', icon: '🔤', type: 'letter', group: 'usage' },
-  { id: 'what-starts-with', name: 'What Starts With?', description: 'Find the right picture!', icon: '🖼️', type: 'letter', group: 'usage' },
+  { id: 'say-it-out-loud', name: 'Say It Out Loud', description: 'Repeat after me!', icon: '🗣️', type: 'letter', group: 'usage', multiSelect: true },
+  { id: 'first-letter-sound', name: 'First Letter Sound', description: 'Find the starting letter!', icon: '🔤', type: 'letter', group: 'usage', multiSelect: true },
+  { id: 'what-starts-with', name: 'What Starts With?', description: 'Find the right picture!', icon: '🖼️', type: 'letter', group: 'usage', multiSelect: true },
   { id: 'find-in-paragraph', name: 'Find in Story', description: 'Find letters in story!', icon: '📚', type: 'letter', group: 'usage' },
 ];
 

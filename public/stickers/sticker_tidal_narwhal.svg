@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+    <defs>
+      
+  <filter id="sticker-shadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.25"/>
+  </filter>
+  <filter id="soft-glow" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="3" result="blur"/>
+    <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+  </filter>
+  <g id="sparkle">
+    <path d="M0 -8 Q0 0 8 0 Q0 0 0 8 Q0 0 -8 0 Q0 0 0 -8 Z" fill="#FFFBEB" filter="url(#soft-glow)"/>
+    <circle cx="0" cy="0" r="2.5" fill="#FEF08A"/>
+  </g>
+  <g id="gold-star">
+    <path d="M0 -7 L2 -2 L7 -2 L3 1 L5 6 L0 3 L-5 6 L-3 1 L-7 -2 L-2 -2 Z" fill="#FACC15"/>
+    <circle cx="0" cy="0" r="1.5" fill="#FFF"/>
+  </g>
+
+      <linearGradient id="narwhal-horn" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="#F43F5E"/>
+        <stop offset="30%" stop-color="#FBBF24"/>
+        <stop offset="60%" stop-color="#34D399"/>
+        <stop offset="100%" stop-color="#818CF8"/>
+      </linearGradient>
+    </defs>
+    <path d="M120 25 C185 25 215 65 215 125 C215 185 180 215 120 215 C60 215 25 185 25 125 C25 65 55 25 120 25 Z" fill="#FFFFFF" filter="url(#sticker-shadow)"/>
+    <!-- Spiral Horn -->
+    <polygon points="120,25 112,85 128,85" fill="url(#narwhal-horn)"/>
+    <!-- Round Chibi Narwhal Body -->
+    <circle cx="120" cy="130" r="62" fill="#38BDF8"/>
+    <ellipse cx="120" cy="155" rx="45" ry="32" fill="#F0F9FF"/>
+    <!-- Flippers -->
+    <ellipse cx="60" cy="140" rx="15" ry="8" transform="rotate(-30 60 140)" fill="#0284C7"/>
+    <ellipse cx="180" cy="140" rx="15" ry="8" transform="rotate(30 180 140)" fill="#0284C7"/>
+    <!-- Big Eyes -->
+    <circle cx="102" cy="120" r="10" fill="#0F172A"/>
+    <circle cx="138" cy="120" r="10" fill="#0F172A"/>
+    <circle cx="99" cy="116" r="4" fill="#FFFFFF"/>
+    <circle cx="135" cy="116" r="4" fill="#FFFFFF"/>
+    <!-- Smile & Cheeks -->
+    <circle cx="90" cy="132" r="6" fill="#F472B6" opacity="0.6"/>
+    <circle cx="150" cy="132" r="6" fill="#F472B6" opacity="0.6"/>
+    <path d="M113 130 Q120 138 127 130" stroke="#0F172A" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <use href="#sparkle" x="50" y="55"/>
+    <use href="#sparkle" x="190" y="55"/>
+  </svg>

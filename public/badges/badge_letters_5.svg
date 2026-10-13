@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <defs>
+    <radialGradient id="bg6" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6EE7B7"/>
+      <stop offset="50%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#064E3B"/>
+    </radialGradient>
+  </defs>
+
+  <circle cx="120" cy="120" r="112" fill="#10B981" stroke="#A7F3D0" stroke-width="4"/>
+  <circle cx="120" cy="120" r="102" fill="#FFFFFF"/>
+  <circle cx="120" cy="120" r="96" fill="url(#bg6)"/>
+
+  <!-- Rocket Book -->
+  <rect x="85" y="70" width="70" height="90" rx="8" fill="#F43F5E" stroke="#FFFFFF" stroke-width="4"/>
+  <path d="M85 70 Q120 85 155 70 L155 160 Q120 175 85 160 Z" fill="#FB7185"/>
+
+  <!-- Alphabet Blocks on Book -->
+  <rect x="96" y="86" width="22" height="22" rx="4" fill="#FEF08A"/>
+  <text x="107" y="103" font-family="'Nunito', sans-serif" font-weight="900" font-size="15" fill="#854D0E" text-anchor="middle">A</text>
+
+  <rect x="122" y="86" width="22" height="22" rx="4" fill="#67E8F9"/>
+  <text x="133" y="103" font-family="'Nunito', sans-serif" font-weight="900" font-size="15" fill="#0E7490" text-anchor="middle">B</text>
+
+  <rect x="109" y="114" width="22" height="22" rx="4" fill="#C084FC"/>
+  <text x="120" y="131" font-family="'Nunito', sans-serif" font-weight="900" font-size="15" fill="#6B21A8" text-anchor="middle">C</text>
+
+  <!-- Cute Rocket Fins & Booster -->
+  <polygon points="85,130 65,155 85,150" fill="#F59E0B" stroke="#FFFFFF" stroke-width="2"/>
+  <polygon points="155,130 175,155 155,150" fill="#F59E0B" stroke="#FFFFFF" stroke-width="2"/>
+  <polygon points="105,160 120,185 135,160" fill="#FACC15"/>
+
+  <!-- Glitter sparkles -->
+  <circle cx="60" cy="75" r="4" fill="#FEF08A"/>
+  <circle cx="180" cy="80" r="4" fill="#FFFFFF"/>
+
+  <!-- Banner -->
+  <g transform="translate(0, 10)">
+    <rect x="46" y="170" width="148" height="26" rx="13" fill="#059669" stroke="#FFFFFF" stroke-width="3"/>
+    <text x="120" y="187" font-family="'Nunito', sans-serif" font-weight="900" font-size="12" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">LETTER CADET</text>
+  </g>
+</svg>

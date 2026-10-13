@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <defs>
+    <radialGradient id="bg3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#C084FC"/>
+      <stop offset="60%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#1E1B4B"/>
+    </radialGradient>
+    <linearGradient id="gem" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A5F3FC"/>
+      <stop offset="40%" stop-color="#38BDF8"/>
+      <stop offset="80%" stop-color="#0284C7"/>
+      <stop offset="100%" stop-color="#0369A1"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="120" cy="120" r="112" fill="#A855F7" stroke="#E9D5FF" stroke-width="4"/>
+  <circle cx="120" cy="120" r="102" fill="#FFFFFF"/>
+  <circle cx="120" cy="120" r="96" fill="url(#bg3)"/>
+
+  <!-- Golden Angel Wings -->
+  <path d="M120 115 C90 80 40 85 35 120 C35 140 60 145 80 135 C70 145 65 155 75 160 C90 165 110 140 120 130 Z" fill="#FCD34D" stroke="#B45309" stroke-width="2.5"/>
+  <path d="M120 115 C150 80 200 85 205 120 C205 140 180 145 160 135 C170 145 175 155 165 160 C150 165 130 140 120 130 Z" fill="#FCD34D" stroke="#B45309" stroke-width="2.5"/>
+
+  <!-- Large Faceted Diamond Gem -->
+  <polygon points="120,60 156,88 142,148 120,165 98,148 84,88" fill="url(#gem)" stroke="#FFFFFF" stroke-width="3"/>
+  <polygon points="120,60 156,88 120,115" fill="#E0F2FE" opacity="0.6"/>
+  <polygon points="120,60 84,88 120,115" fill="#BAE6FD" opacity="0.4"/>
+  <polygon points="120,115 156,88 142,148" fill="#0284C7" opacity="0.3"/>
+  <polygon points="120,115 120,165 142,148" fill="#0369A1" opacity="0.5"/>
+  <polygon points="120,115 120,165 98,148" fill="#38BDF8" opacity="0.3"/>
+
+  <!-- Gem Starburst Glow -->
+  <path d="M120 50 L122 70 L120 72 L118 70 Z" fill="#FFFFFF"/>
+  <circle cx="102" cy="80" r="3" fill="#FFFFFF"/>
+  <circle cx="138" cy="80" r="3" fill="#FFFFFF"/>
+  <path d="M148 70 Q148 76 154 76 Q148 76 148 82 Q148 76 142 76 Q148 76 148 70 Z" fill="#FFFFFF"/>
+
+  <!-- Banner -->
+  <g transform="translate(0, 10)">
+    <rect x="46" y="170" width="148" height="26" rx="13" fill="#7C3AED" stroke="#FFFFFF" stroke-width="3"/>
+    <text x="120" y="187" font-family="'Nunito', sans-serif" font-weight="900" font-size="12" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">PERFECTIONIST</text>
+  </g>
+</svg>

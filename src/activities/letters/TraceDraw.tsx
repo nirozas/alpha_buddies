@@ -1,3 +1,4 @@
+import { calculateStars } from '../../utils/scoring';
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -13,18 +14,31 @@ type Point = { x: number; y: number };
 export function TraceDraw() {
   const { letter } = useParams<{ letter: string }>();
   const navigate = useNavigate();
-  const { awardStars, incrementActivity } = useStore();
-  const ld = LETTERS_DATA.find(l => l.letter === letter?.toUpperCase())!;
+  const { awardStars, incrementActivity, masteredLetter, masteredLetters } = useStore();
+
+  const rawLetters = letter
+    ? letter.split(',').map(s => s.trim().toUpperCase()).filter(Boolean)
+    : (masteredLetters && masteredLetters.length > 0 ? masteredLetters : (masteredLetter ? [masteredLetter] : ['A']));
+  const targetLetters = rawLetters.length > 0 ? rawLetters : ['A'];
+
+  const [letterIndex, setLetterIndex] = useState(0);
+  const currentLetter = targetLetters[letterIndex] || targetLetters[0];
+  const ld = LETTERS_DATA.find(l => l.letter === currentLetter) || LETTERS_DATA[0];
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [drawing, setDrawing] = useState(false);
   const [coverage, setCoverage] = useState(0);
+  const [mistakes, setMistakes] = useState(0);
   const [showCelebration, setShowCelebration] = useState(false);
   const [showFact, setShowFact] = useState(false);
   const [cleared, setCleared] = useState(false);
   const [brushColor, setBrushColor] = useState(ld.color);
   const [nextPointIndex, setNextPointIndex] = useState(0);
   const [mode, setMode] = useState<'upper' | 'lower' | 'word'>('upper');
+
+  useEffect(() => {
+    setBrushColor(ld.color);
+  }, [ld.color]);
 
   const BASE_SIZE = Math.min(window.innerWidth - 64, 380);
   const WORD_LETTER_WIDTH = BASE_SIZE * 0.6; // Slightly smaller letters in words
@@ -127,9 +141,28 @@ export function TraceDraw() {
         setCoverage((newIdx / dots.length) * 100);
         if (newIdx === dots.length) {
           playDing();
-          awardStars(`${ld.letter}-trace-draw-${mode}`, 3);
-          incrementActivity(`${ld.letter}-trace-draw-${mode}`);
-          setTimeout(() => setShowCelebration(true), 500);
+          awardStars(`${currentLetter}-trace-draw-${mode}`, 3);
+          incrementActivity(`${currentLetter}-trace-draw-${mode}`);
+
+          if (letterIndex < targetLetters.length - 1) {
+            speak(`Super tracing! Now let's trace letter ${targetLetters[letterIndex + 1]}!`);
+            setTimeout(() => {
+              setLetterIndex(i => i + 1);
+              setMistakes(m => m + 1);
+    setCleared(c => !c);
+              setNextPointIndex(0);
+              setCoverage(0);
+            }, 800);
+          } else {
+            const earnedStars = calculateStars(mistakes);
+            targetLetters.forEach(l => {
+              awardStars(`${l}-trace-draw`, earnedStars);
+              incrementActivity(`${l}-trace-draw`);
+            });
+            awardStars('trace-draw', earnedStars);
+            incrementActivity('trace-draw');
+            setTimeout(() => setShowCelebration(true), 500);
+          }
         }
         break;
       }
@@ -175,8 +208,33 @@ export function TraceDraw() {
   return (
     <div className="min-h-dvh flex flex-col items-center pb-12 relative z-10 bg-transparent">
       <div className="w-full flex items-center justify-between p-4 flex-wrap gap-4">
-        <BackButton onClick={() => navigate(-1)} color={ld.color} />
+        <BackButton onClick={() => navigate('/letters')} color={ld.color} />
         
+        {targetLetters.length > 1 && (
+          <div className="flex items-center gap-1.5 px-3 py-1 bg-white/95 backdrop-blur rounded-full shadow-md border-2 border-amber-400">
+            <span className="text-xs font-black text-amber-900" style={{ fontFamily: 'Nunito' }}>
+              Letter {letterIndex + 1}/{targetLetters.length}:
+            </span>
+            <div className="flex items-center gap-1">
+              {targetLetters.map((tl, idx) => (
+                <span
+                  key={tl}
+                  className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-black transition-all ${
+                    idx < letterIndex
+                      ? 'bg-emerald-500 text-white shadow-sm'
+                      : idx === letterIndex
+                      ? 'bg-amber-500 text-white scale-110 shadow-md ring-2 ring-amber-300'
+                      : 'bg-gray-200 text-gray-500'
+                  }`}
+                  style={{ fontFamily: 'Nunito' }}
+                >
+                  {idx < letterIndex ? '✓' : tl}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div className="flex gap-2 p-1 bg-white/50 rounded-2xl shadow-inner">
           {(['upper', 'lower', 'word'] as const).map(m => (
             <button
@@ -364,10 +422,17 @@ export function TraceDraw() {
 
       {showFact && (
         <div className="p-4 w-full max-w-sm mt-2">
-          <FunFactCard fact={ld.funFact} emoji={ld.exampleEmoji} onClose={() => navigate(-1)} />
+          <FunFactCard fact={ld.funFact} emoji={ld.exampleEmoji} onClose={() => {
+            const parts = window.location.pathname.split('/').filter(Boolean);
+            if (parts.length >= 4) {
+              navigate(`/${parts[0]}/${parts[1]}/${parts[2]}`);
+            } else {
+              navigate('/letters');
+            }
+          }} />
         </div>
       )}
-      <CelebrationScreen active={showCelebration} stars={3} message={`Brilliant tracing! ✏️`}
+      <CelebrationScreen active={showCelebration} stars={calculateStars(mistakes)} message={`Brilliant tracing! ✏️`}
         onContinue={() => { setShowCelebration(false); setShowFact(true); }} />
     </div>
   );

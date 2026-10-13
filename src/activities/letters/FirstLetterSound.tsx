@@ -1,6 +1,7 @@
+import { calculateStars } from '../../utils/scoring';
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { LETTERS_DATA } from '../../constants/letters';
 import { BackButton, CelebrationScreen, FunFactCard } from '../../components/SharedComponents';
 import { BuddyBear } from '../../components/BuddyBear';
@@ -16,12 +17,17 @@ interface GameCard {
 
 export function FirstLetterSound() {
   const navigate = useNavigate();
-  const { awardStars, incrementActivity } = useStore();
+  const { letter } = useParams<{ letter?: string }>();
+  const { awardStars, incrementActivity, masteredLetter, masteredLetters } = useStore();
   const { speak, playPop, playDing, playBoing } = useAudio();
+
+  const activeMastered = (masteredLetters && masteredLetters.length > 0)
+    ? masteredLetters
+    : (letter ? [letter.toUpperCase()] : (masteredLetter ? [masteredLetter] : []));
 
   const [caseMode, setCaseMode] = useState<'upper' | 'lower' | 'both'>('upper');
   const [playMode, setPlayMode] = useState<'word' | 'picture' | 'both'>('both');
-  const [selectedLetters, setSelectedLetters] = useState<string[]>([]);
+  const [selectedLetters, setSelectedLetters] = useState<string[]>(activeMastered.length > 0 ? activeMastered : ['A']);
   const [gameState, setGameState] = useState<'selection' | 'playing' | 'won'>('selection');
   
   // Game Logic State
@@ -32,6 +38,7 @@ export function FirstLetterSound() {
   const [gameCards, setGameCards] = useState<GameCard[]>([]);
   const [score, setScore] = useState(0);
   const [tries, setTries] = useState(3);
+  const [mistakes, setMistakes] = useState(0);
   const [showFact, setShowFact] = useState(false);
 
   // ── Handlers ───────────────────────────────────────────────────────────────
@@ -113,6 +120,20 @@ export function FirstLetterSound() {
     }
   }, [gameState, currentObject, playStimulus]);
 
+  useEffect(() => {
+    if (activeMastered.length > 0) {
+      setGameState('playing');
+      setScore(0);
+      setTries(3);
+      setUsedObjects([]);
+      const { letter: chosenLetter, object } = pickNewTarget(activeMastered, []);
+      setCurrentTarget(chosenLetter);
+      setCurrentObject(object);
+      setUsedObjects([`${chosenLetter}-${object.word}`]);
+      buildRound(chosenLetter, caseMode);
+    }
+  }, [activeMastered.length, pickNewTarget, buildRound, caseMode]);
+
   const handleCardClick = (card: GameCard) => {
     if (card.letter === currentTarget) {
       playDing();
@@ -120,11 +141,19 @@ export function FirstLetterSound() {
       setScore(newScore);
       
       if (newScore >= 5) {
-        awardStars('first-letter-sound', 3);
+        const earnedStars = calculateStars(mistakes);
+        if (activeMastered.length > 0) {
+          activeMastered.forEach(l => {
+            awardStars(`${l}-first-letter-sound`, earnedStars);
+            incrementActivity(`${l}-first-letter-sound`);
+          });
+        }
+        awardStars('first-letter-sound', earnedStars);
         incrementActivity('first-letter-sound');
         setGameState('won');
       } else {
-        const { letter, object } = pickNewTarget(selectedLetters, usedObjects);
+        const nextLetterList = activeMastered.length > 0 ? activeMastered : selectedLetters;
+        const { letter, object } = pickNewTarget(nextLetterList, usedObjects);
         setCurrentTarget(letter);
         setCurrentObject(object);
         setUsedObjects(prev => [...prev, `${letter}-${object.word}`]);
@@ -133,6 +162,7 @@ export function FirstLetterSound() {
     } else {
       playBoing();
       speak(`Oops! That's ${card.letter}. Try again!`);
+      setMistakes(m => m + 1);
       setTries(prev => Math.max(0, prev - 1));
       if (tries <= 1) setTries(3);
     }
@@ -142,94 +172,126 @@ export function FirstLetterSound() {
 
   if (gameState === 'selection') {
     return (
-      <div className="min-h-dvh flex flex-col items-center bg-[#FDF2F8] p-6 overflow-y-auto">
-        <div className="w-full flex items-center justify-between max-w-5xl mb-6">
-          <BackButton onClick={() => navigate(-1)} color="#DB2777" />
-          <h2 className="text-2xl font-black text-[#DB2777]">Set Up Your Game</h2>
-          <div style={{ width: 56 }} />
-        </div>
-
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-white/80 backdrop-blur-md p-6 rounded-[3rem] shadow-2xl border-4 border-[#DB2777] max-w-4xl w-full flex flex-col items-center gap-6"
-        >
-          <BuddyBear mood="thinking" size={80} speech="Choose how you want to play!" />
-          
-          <div className="flex flex-col md:flex-row gap-8 w-full">
-            {/* Case Mode */}
-            <div className="flex-1 flex flex-col gap-3">
-              <p className="font-black text-[#DB2777] text-center">Letter Style</p>
-              <div className="flex gap-2 p-2 bg-pink-100 rounded-2xl">
-                {(['upper', 'lower', 'both'] as const).map(m => (
-                  <button
-                    key={m}
-                    onClick={() => { playPop(); setCaseMode(m); }}
-                    className={`flex-1 py-3 rounded-xl font-black transition-all ${
-                      caseMode === m ? 'bg-[#DB2777] text-white' : 'text-[#DB2777]'
-                    }`}
-                  >
-                    {m === 'upper' ? 'ABC' : m === 'lower' ? 'abc' : 'Aa'}
-                  </button>
-                ))}
-              </div>
+      <div className="h-dvh max-h-dvh flex flex-col justify-between overflow-hidden p-2 sm:p-4 relative z-10 select-none font-nunito bg-[#FDF2F8]">
+        <div className="w-full max-w-3xl mx-auto flex flex-col h-full justify-between">
+          {/* Header */}
+          <div className="flex items-center justify-between shrink-0 mb-1">
+            <BackButton color="#DB2777" />
+            <div className="flex items-center gap-2">
+              <span className="text-2xl sm:text-3xl">🔤</span>
+              <h2 className="text-xl sm:text-2xl font-black text-[#DB2777]">First Letter Sound</h2>
             </div>
+            <div style={{ width: 44 }} />
+          </div>
 
-            {/* Play Mode */}
-            <div className="flex-1 flex flex-col gap-3">
-              <p className="font-black text-[#DB2777] text-center">Game Hint</p>
-              <div className="flex gap-2 p-2 bg-pink-100 rounded-2xl">
-                {(['word', 'picture', 'both'] as const).map(m => (
-                  <button
-                    key={m}
-                    onClick={() => { playPop(); setPlayMode(m); }}
-                    className={`flex-1 py-3 rounded-xl font-black transition-all ${
-                      playMode === m ? 'bg-[#DB2777] text-white' : 'text-[#DB2777]'
-                    }`}
-                  >
-                    {m === 'word' ? '🔊' : m === 'picture' ? '🖼️' : '🔊+🖼️'}
-                  </button>
-                ))}
+          {/* Mode Selectors in Compact Row */}
+          <div className="bg-white/90 backdrop-blur rounded-2xl p-2 sm:p-2.5 shadow-md border border-pink-100 shrink-0 mb-1.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {/* Case Mode */}
+              <div>
+                <p className="font-black text-xs text-pink-950 mb-1">Letter Style:</p>
+                <div className="flex gap-1.5 bg-pink-50 p-1 rounded-xl">
+                  {(['upper', 'lower', 'both'] as const).map(m => (
+                    <button
+                      key={m}
+                      type="button"
+                      onClick={() => { playPop(); setCaseMode(m); }}
+                      className={`flex-1 py-1 rounded-lg font-black text-xs transition-all cursor-pointer ${
+                        caseMode === m ? 'bg-[#DB2777] text-white shadow-sm' : 'text-[#DB2777] hover:bg-white'
+                      }`}
+                    >
+                      {m === 'upper' ? 'ABC' : m === 'lower' ? 'abc' : 'Aa'}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Play Hint Mode */}
+              <div>
+                <p className="font-black text-xs text-pink-950 mb-1">Game Hint:</p>
+                <div className="flex gap-1.5 bg-pink-50 p-1 rounded-xl">
+                  {(['word', 'picture', 'both'] as const).map(m => (
+                    <button
+                      key={m}
+                      type="button"
+                      onClick={() => { playPop(); setPlayMode(m); }}
+                      className={`flex-1 py-1 rounded-lg font-black text-xs transition-all cursor-pointer ${
+                        playMode === m ? 'bg-[#DB2777] text-white shadow-sm' : 'text-[#DB2777] hover:bg-white'
+                      }`}
+                    >
+                      {m === 'word' ? '🔊 Sound' : m === 'picture' ? '🖼️ Picture' : '🔊+🖼️ Both'}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-6 md:grid-cols-9 gap-2 w-full">
-            {LETTERS_DATA.map(ld => {
-              const isSelected = selectedLetters.includes(ld.letter);
-              const display = caseMode === 'upper' ? ld.uppercase : (caseMode === 'lower' ? ld.lowercase : `${ld.uppercase}${ld.lowercase}`);
-              return (
-                <button
-                  key={ld.letter}
-                  onClick={() => toggleLetter(ld.letter)}
-                  className={`aspect-square rounded-xl flex items-center justify-center font-black transition-all border-4 ${
-                    isSelected ? 'bg-[#DB2777] text-white scale-110 shadow-lg' : 'bg-white text-[#DB2777] border-gray-100 opacity-60'
-                  }`}
-                  style={{ borderColor: isSelected ? '#DB2777' : 'transparent', fontSize: caseMode === 'both' ? '0.75rem' : '1rem' }}
+          {/* Letters Grid: Fits all 26 letters in screen view without scrolling */}
+          <div className="bg-white/90 backdrop-blur rounded-2xl p-2.5 sm:p-3 shadow-md border border-pink-100 flex-1 flex flex-col justify-between min-h-0 mb-1.5">
+            <div className="flex items-center justify-between mb-1 shrink-0 px-1">
+              <span className="font-black text-xs sm:text-sm text-pink-950 flex items-center gap-1">
+                <span>🎯</span> Selected Letters ({selectedLetters.length}/26):
+              </span>
+              <div className="flex gap-1.5">
+                <button 
+                  type="button"
+                  onClick={() => setSelectedLetters(LETTERS_DATA.map(l => l.letter))}
+                  className="text-xs font-black px-2.5 py-0.5 rounded-full border border-pink-300 text-[#DB2777] bg-pink-50 hover:bg-pink-100 cursor-pointer"
                 >
-                  {display}
+                  All
                 </button>
-              );
-            })}
+                <button 
+                  type="button"
+                  onClick={() => setSelectedLetters([])}
+                  className="text-xs font-black px-2.5 py-0.5 rounded-full border border-slate-300 text-slate-600 bg-slate-50 hover:bg-slate-100 cursor-pointer"
+                >
+                  Clear
+                </button>
+              </div>
+            </div>
+
+            <div className="flex-1 flex items-center justify-center min-h-0 overflow-y-auto py-1">
+              <div className="grid grid-cols-7 sm:grid-cols-9 gap-1.5 sm:gap-2.5 w-full justify-items-stretch">
+                {LETTERS_DATA.map(ld => {
+                  const isSelected = selectedLetters.includes(ld.letter);
+                  const display = caseMode === 'upper' ? ld.uppercase : (caseMode === 'lower' ? ld.lowercase : `${ld.uppercase}${ld.lowercase}`);
+                  return (
+                    <motion.button
+                      key={ld.letter}
+                      type="button"
+                      whileHover={{ scale: 1.08 }}
+                      whileTap={{ scale: 0.92 }}
+                      onClick={() => toggleLetter(ld.letter)}
+                      className={`aspect-square rounded-xl sm:rounded-2xl flex items-center justify-center font-black transition-all border-2 cursor-pointer ${
+                        isSelected ? 'bg-[#DB2777] text-white border-[#DB2777] shadow-sm' : 'bg-white text-slate-400 border-slate-200 hover:border-slate-300'
+                      }`}
+                      style={{ fontSize: caseMode === 'both' ? 'clamp(0.85rem, 2vw, 1.3rem)' : 'clamp(1rem, 2.4vw, 1.7rem)' }}
+                    >
+                      {display}
+                    </motion.button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
-          <div className="flex gap-4">
-            <button onClick={() => setSelectedLetters(LETTERS_DATA.map(l => l.letter))} className="text-[#DB2777] font-bold underline">Select All</button>
-            <button onClick={() => setSelectedLetters([])} className="text-[#DB2777] font-bold underline">Clear</button>
+          {/* Start Game Button */}
+          <div className="shrink-0 pt-1 pb-1">
+            <motion.button
+              type="button"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              disabled={selectedLetters.length === 0}
+              onClick={startGame}
+              className={`w-full py-3 rounded-2xl font-black text-base sm:text-lg shadow-xl transition-all cursor-pointer ${
+                selectedLetters.length > 0 ? 'bg-[#DB2777] text-white' : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+              }`}
+            >
+              Start Game ({selectedLetters.length} letter{selectedLetters.length > 1 ? 's' : ''})! 🚀
+            </motion.button>
           </div>
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            disabled={selectedLetters.length === 0}
-            onClick={startGame}
-            className={`px-12 py-4 rounded-full font-black text-xl shadow-xl transition-all ${
-              selectedLetters.length > 0 ? 'bg-[#DB2777] text-white' : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-            }`}
-          >
-            Start Game! 🚀
-          </motion.button>
-        </motion.div>
+        </div>
       </div>
     );
   }
@@ -310,7 +372,7 @@ export function FirstLetterSound() {
 
       <CelebrationScreen 
         active={gameState === 'won'} 
-        stars={3} 
+        stars={calculateStars(mistakes)} 
         message="Phonics Pro! 🔤✨"
         onContinue={() => { setGameState('won'); setShowFact(true); }}
       />
@@ -320,7 +382,14 @@ export function FirstLetterSound() {
           <FunFactCard 
             fact={`Great job! You know that ${currentObject?.word} starts with ${currentLD.letter}!`} 
             emoji={currentLD.exampleEmoji} 
-            onClose={() => navigate(-1)} 
+            onClose={() => {
+            const parts = window.location.pathname.split('/').filter(Boolean);
+            if (parts.length >= 4) {
+              navigate(`/${parts[0]}/${parts[1]}/${parts[2]}`);
+            } else {
+              navigate('/letters');
+            }
+          }} 
           />
         </div>
       )}

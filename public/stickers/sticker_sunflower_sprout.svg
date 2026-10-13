@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+    <defs>
+      
+  <filter id="sticker-shadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.25"/>
+  </filter>
+  <filter id="soft-glow" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="3" result="blur"/>
+    <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+  </filter>
+  <g id="sparkle">
+    <path d="M0 -8 Q0 0 8 0 Q0 0 0 8 Q0 0 -8 0 Q0 0 0 -8 Z" fill="#FFFBEB" filter="url(#soft-glow)"/>
+    <circle cx="0" cy="0" r="2.5" fill="#FEF08A"/>
+  </g>
+  <g id="gold-star">
+    <path d="M0 -7 L2 -2 L7 -2 L3 1 L5 6 L0 3 L-5 6 L-3 1 L-7 -2 L-2 -2 Z" fill="#FACC15"/>
+    <circle cx="0" cy="0" r="1.5" fill="#FFF"/>
+  </g>
+
+      <linearGradient id="sprout-pot" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#FB923C"/>
+        <stop offset="100%" stop-color="#C2410C"/>
+      </linearGradient>
+      <linearGradient id="sprout-face" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#86EFAC"/>
+        <stop offset="100%" stop-color="#22C55E"/>
+      </linearGradient>
+    </defs>
+    <path d="M120 20 C180 20 210 60 210 125 C210 185 175 218 120 218 C65 218 30 185 30 125 C30 60 60 20 120 20 Z" fill="#FFFFFF" filter="url(#sticker-shadow)"/>
+    <!-- Sunflower Petals -->
+    <g fill="#FBBF24" stroke="#F59E0B" stroke-width="2">
+      <ellipse cx="120" cy="50" rx="14" ry="24"/>
+      <ellipse cx="160" cy="65" rx="14" ry="24" transform="rotate(45 160 65)"/>
+      <ellipse cx="175" cy="105" rx="14" ry="24" transform="rotate(90 175 105)"/>
+      <ellipse cx="160" cy="145" rx="14" ry="24" transform="rotate(135 160 145)"/>
+      <ellipse cx="120" cy="160" rx="14" ry="24"/>
+      <ellipse cx="80" cy="145" rx="14" ry="24" transform="rotate(45 80 145)"/>
+      <ellipse cx="65" cy="105" rx="14" ry="24" transform="rotate(90 65 105)"/>
+      <ellipse cx="80" cy="65" rx="14" ry="24" transform="rotate(135 80 65)"/>
+    </g>
+    <!-- Center Cute Face -->
+    <circle cx="120" cy="105" r="45" fill="url(#sprout-face)"/>
+    <!-- Cute Eyes -->
+    <ellipse cx="105" cy="100" rx="7" ry="10" fill="#0F172A"/>
+    <ellipse cx="135" cy="100" rx="7" ry="10" fill="#0F172A"/>
+    <circle cx="102" cy="96" r="3" fill="#FFFFFF"/>
+    <circle cx="132" cy="96" r="3" fill="#FFFFFF"/>
+    <!-- Rosy Cheeks & Smile -->
+    <circle cx="95" cy="110" r="6" fill="#F43F5E" opacity="0.6"/>
+    <circle cx="145" cy="110" r="6" fill="#F43F5E" opacity="0.6"/>
+    <path d="M113 112 Q120 119 127 112" stroke="#0F172A" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <!-- Little Leaf Crown -->
+    <path d="M120 60 Q130 40 145 45 Q135 60 120 60 Z" fill="#4ADE80"/>
+    <path d="M120 60 Q110 40 95 45 Q105 60 120 60 Z" fill="#22C55E"/>
+    <use href="#sparkle" x="50" y="45"/>
+    <use href="#sparkle" x="190" y="60"/>
+    <use href="#gold-star" x="120" y="180"/>
+  </svg>

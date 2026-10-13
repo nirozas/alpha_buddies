@@ -1,3 +1,4 @@
+import { calculateStars } from '../../utils/scoring';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -14,6 +15,7 @@ export function BuildTower() {
 
   const target = Math.max(1, nd.digit);
   const [blocks, setBlocks] = useState<number[]>([]);
+  const [mistakes, setMistakes] = useState(0);
   const [wobble, setWobble] = useState(false);
   const [showCelebration, setShowCelebration] = useState(false);
   const [showFact, setShowFact] = useState(false);
@@ -23,6 +25,7 @@ export function BuildTower() {
   const addBlock = () => {
     if (blocks.length >= target + 2) return;
     if (blocks.length >= target) {
+      setMistakes(m => m + 1);
       setWobble(true);
       setTimeout(() => { setWobble(false); setBlocks([]); }, 1200);
       return;
@@ -30,7 +33,8 @@ export function BuildTower() {
     const newBlocks = [...blocks, blocks.length];
     setBlocks(newBlocks);
     if (newBlocks.length === target) {
-      awardStars(`${nd.digit}-build-tower`, 3);
+      const earnedStars = calculateStars(mistakes);
+      awardStars(`${nd.digit}-build-tower`, earnedStars);
       incrementActivity(`${nd.digit}-build-tower`);
       setTimeout(() => setShowCelebration(true), 600);
     }
@@ -39,7 +43,7 @@ export function BuildTower() {
   return (
     <div className="min-h-dvh flex flex-col items-center pb-8" style={{ background: nd.bgColor }}>
       <div className="w-full flex items-center justify-between p-4">
-        <BackButton onClick={() => navigate(-1)} color={nd.color} />
+        <BackButton color={nd.color} />
         <h2 style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: '1.1rem', color: nd.color }}>Build the Tower</h2>
         <div style={{ width: 56 }} />
       </div>
@@ -110,10 +114,17 @@ export function BuildTower() {
 
       {showFact && (
         <div className="p-4 w-full max-w-sm mt-4">
-          <FunFactCard fact={nd.funFact} emoji={nd.emoji} onClose={() => navigate(-1)} />
+          <FunFactCard fact={nd.funFact} emoji={nd.emoji} onClose={() => {
+            const parts = window.location.pathname.split('/').filter(Boolean);
+            if (parts.length >= 4) {
+              navigate(`/${parts[0]}/${parts[1]}/${parts[2]}`);
+            } else {
+              navigate('/numbers');
+            }
+          }} />
         </div>
       )}
-      <CelebrationScreen active={showCelebration} stars={3} message={`Tower of ${target}! Amazing! 🏗️`}
+      <CelebrationScreen active={showCelebration} stars={calculateStars(mistakes)} message={`Tower of ${target}! Amazing! 🏗️`}
         onContinue={() => { setShowCelebration(false); setShowFact(true); }} />
     </div>
   );

@@ -75,7 +75,9 @@ export function FindInParagraph() {
       setFoundIndices(newFound);
       
       if (newFound.length === parsedWords.totalTargets) {
-        awardStars(`${ld.letter}-find-in-paragraph-${mode}`, mistakes === 0 ? 3 : mistakes <= 2 ? 2 : 1);
+        const stars = mistakes === 0 ? 3 : mistakes <= 2 ? 2 : 1;
+        awardStars(`${ld.letter}-find-in-paragraph-${mode}`, stars);
+        awardStars(`${ld.letter}-find-in-paragraph`, stars);
         incrementActivity(`${ld.letter}-find-in-paragraph-${mode}`);
         setTimeout(() => setShowCelebration(true), 1500); // Wait for speech to finish
       }
@@ -92,7 +94,7 @@ export function FindInParagraph() {
     return (
       <div className="min-h-dvh flex flex-col items-center justify-center p-8 relative z-10">
         <div className="absolute top-4 left-4">
-          <BackButton onClick={() => navigate(-1)} color={ld.color} />
+          <BackButton color={ld.color} />
         </div>
         
         <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-center mb-12">
@@ -128,7 +130,7 @@ export function FindInParagraph() {
   return (
     <div className="min-h-dvh flex flex-col items-center pb-12 bg-transparent relative z-10">
       <div className="w-full flex items-center justify-between p-4">
-        <BackButton onClick={() => navigate(-1)} color={ld.color} />
+        <BackButton color={ld.color} />
         <h2 style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: '1.1rem', color: ld.color }}>Find the Letter</h2>
         <div style={{ width: 56 }} />
       </div>
@@ -192,8 +194,12 @@ export function FindInParagraph() {
         </div>
       </div>
 
-      <CelebrationScreen active={showCelebration} stars={mistakes === 0 ? 3 : mistakes <= 2 ? 2 : 1} message="You found them all! 🕵️‍♂️"
-        onContinue={() => navigate(-1)}
+      <CelebrationScreen 
+        active={showCelebration} 
+        stars={mistakes === 0 ? 3 : mistakes <= 2 ? 2 : 1} 
+        message="You found them all! 🕵️‍♂️"
+        onContinue={() => navigate('/letters/activity/find-in-paragraph')}
+        onMenu={() => navigate('/letters')}
       >
         <FunFactCard fact={ld.funFact} emoji={ld.exampleEmoji} />
       </CelebrationScreen>

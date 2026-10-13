@@ -1,17 +1,29 @@
 import { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { NUMBERS_DATA } from '../../constants/numbers';
 import type { NumberData } from '../../types';
 import { BackButton, CelebrationScreen } from '../../components/SharedComponents';
 import { useStore } from '../../store';
 import { useAudio } from '../../hooks/useAudio';
+import { usePinchZoom } from '../../hooks/usePinchZoom';
 import { TEMPLATES, type ColorTemplate } from '../letters/colorByCodeTemplates';
 
 export function NumberColorByCode() {
   const navigate = useNavigate();
   const { awardStars, incrementActivity } = useStore();
   const { playDing, playBoing, playPop, speak } = useAudio();
+
+  const {
+    zoom,
+    pan,
+    isPanning,
+    containerRef,
+    resetZoom,
+    handleTouchStart,
+    handleTouchMove,
+    handleTouchEnd,
+  } = usePinchZoom({ onReset: playPop, maxZoom: 3 });
 
   // Setup state
   const [step, setStep] = useState<1 | 2 | 3>(1); // 1: picture, 2: numbers, 3: game
@@ -52,6 +64,7 @@ export function NumberColorByCode() {
   };
 
   const handleRegionClick = (regionId: string, regionColorId: number) => {
+    if (isPanning) return;
     if (filledRegions.includes(regionId) || autoFillRest) return;
 
     const assignedNumber = colorMapping[regionColorId];
@@ -97,7 +110,7 @@ export function NumberColorByCode() {
     return (
       <div className="min-h-dvh bg-gradient-to-br from-green-50 to-blue-50 flex flex-col items-center p-8 relative z-10 font-nunito">
         <div className="w-full flex items-center justify-between mb-8 max-w-5xl">
-          <BackButton onClick={() => navigate(-1)} color="#475569" />
+          <BackButton color="#475569" />
           <h1 className="text-4xl font-black text-slate-800 tracking-tight">Step 1: Choose a Picture</h1>
           <div className="w-12" />
         </div>
@@ -274,8 +287,37 @@ export function NumberColorByCode() {
         </div>
 
         {/* Canvas */}
-        <div className="bg-white p-4 rounded-[3rem] shadow-2xl border-8 border-slate-100 w-full max-w-[500px] aspect-square relative">
-          <svg viewBox="0 0 400 400" className="w-full h-full rounded-[2rem] overflow-hidden" style={{ backgroundColor: '#F8FAFC' }}>
+        <div 
+          ref={containerRef}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchEnd}
+          className="bg-white p-4 rounded-[3rem] shadow-2xl border-8 border-slate-100 w-full max-w-[500px] aspect-square relative overflow-hidden select-none touch-none flex items-center justify-center"
+        >
+          {/* Floating Reset Zoom Badge */}
+          <AnimatePresence>
+            {zoom > 1.05 && (
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                onClick={resetZoom}
+                className="absolute top-4 right-4 z-30 bg-slate-800/90 hover:bg-slate-900 text-white px-3 py-1.5 rounded-full text-xs font-black shadow-lg backdrop-blur-md flex items-center gap-1.5 border border-white/20 active:scale-95 transition-all cursor-pointer"
+                title="Reset zoom to 100%"
+              >
+                <span>🔍 {Math.round(zoom * 100)}%</span>
+                <span className="text-amber-300 text-[10px] uppercase font-bold tracking-wider">Reset</span>
+              </motion.button>
+            )}
+          </AnimatePresence>
+
+          <motion.div
+            className="w-full h-full rounded-[2rem] overflow-hidden flex items-center justify-center"
+            animate={{ scale: zoom, x: pan.x, y: pan.y }}
+            transition={isPanning ? { duration: 0 } : { type: 'spring', stiffness: 300, damping: 30 }}
+          >
+            <svg viewBox="0 0 400 400" className="w-full h-full rounded-[2rem] overflow-hidden" style={{ backgroundColor: '#F8FAFC' }}>
             {/* Draw all background regions first */}
             {selectedTemplate.regions.map(region => {
               const assignedNumber = colorMapping[region.colorId];
@@ -353,6 +395,7 @@ export function NumberColorByCode() {
               );
             })}
           </svg>
+          </motion.div>
         </div>
       </div>
 

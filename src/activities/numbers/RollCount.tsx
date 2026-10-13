@@ -94,7 +94,7 @@ export function RollCount() {
   return (
     <div className="min-h-dvh flex flex-col items-center pb-8" style={{ background: nd.bgColor }}>
       <div className="w-full flex items-center justify-between p-4">
-        <BackButton onClick={() => navigate(-1)} color={nd.color} />
+        <BackButton color={nd.color} />
         <h2 style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: '1.1rem', color: nd.color }}>Roll &amp; Count</h2>
         <span style={{ fontFamily: 'Nunito', fontWeight: 700, color: nd.color }}>{score}/{ROUNDS}</span>
       </div>
@@ -144,7 +144,14 @@ export function RollCount() {
 
       {showFact && (
         <div className="p-4 w-full max-w-sm mt-4">
-          <FunFactCard fact={nd.funFact} emoji={nd.emoji} onClose={() => navigate(-1)} />
+          <FunFactCard fact={nd.funFact} emoji={nd.emoji} onClose={() => {
+            const parts = window.location.pathname.split('/').filter(Boolean);
+            if (parts.length >= 4) {
+              navigate(`/${parts[0]}/${parts[1]}/${parts[2]}`);
+            } else {
+              navigate('/numbers');
+            }
+          }} />
         </div>
       )}
       <CelebrationScreen active={showCelebration} stars={mistakes === 0 ? 3 : mistakes <= 1 ? 2 : 1}

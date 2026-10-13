@@ -17,10 +17,18 @@ interface Particle {
 export function MagicTrace() {
   const { letter } = useParams<{ letter: string }>();
   const navigate = useNavigate();
-  const { awardStars, incrementActivity } = useStore();
+  const { awardStars, incrementActivity, masteredLetter, masteredLetters } = useStore();
   const { playPop, playDing, playFanfare, speak } = useAudio();
 
-  const lData = LETTERS_DATA.find(l => l.letter === letter);
+  const rawLetters = letter
+    ? letter.split(',').map(s => s.trim().toUpperCase()).filter(Boolean)
+    : (masteredLetters && masteredLetters.length > 0 ? masteredLetters : (masteredLetter ? [masteredLetter] : ['A']));
+  const targetLetters = rawLetters.length > 0 ? rawLetters : ['A'];
+
+  const [letterIndex, setLetterIndex] = useState(0);
+  const currentLetter = targetLetters[letterIndex] || targetLetters[0];
+  const lData = LETTERS_DATA.find(l => l.letter === currentLetter) || LETTERS_DATA[0];
+
   const [particles, setParticles] = useState<Particle[]>([]);
   const [isTracing, setIsTracing] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -30,8 +38,12 @@ export function MagicTrace() {
   const particleId = useRef(0);
 
   useEffect(() => {
-    if (letter) speak(`Trace the magic ${letter}!`);
-  }, [letter, speak]);
+    if (currentLetter) {
+      speak(`Trace the magic ${currentLetter}!`);
+      setProgress(0);
+      setParticles([]);
+    }
+  }, [currentLetter, speak]);
 
   const addParticle = (x: number, y: number) => {
     const colors = ['#F472B6', '#60A5FA', '#34D399', '#FBBF24', '#A78BFA'];
@@ -43,19 +55,32 @@ export function MagicTrace() {
       size: Math.random() * 15 + 10
     };
     setParticles(prev => [...prev.slice(-100), newParticle]);
-    
-    // Simple progress simulation based on unique area covered or just time spent tracing
-    setProgress(p => Math.min(100, p + 0.5));
+    setProgress(p => Math.min(100, p + 0.8));
   };
 
   useEffect(() => {
     if (progress >= 100 && !showCelebration) {
-      playFanfare();
-      awardStars(`magic-trace-${letter}`, 3);
-      incrementActivity(`magic-trace-${letter}`);
-      setShowCelebration(true);
+      awardStars(`magic-trace-${currentLetter}`, 3);
+      incrementActivity(`magic-trace-${currentLetter}`);
+
+      if (letterIndex < targetLetters.length - 1) {
+        playDing();
+        speak(`Magic! Now let's trace letter ${targetLetters[letterIndex + 1]}!`);
+        setTimeout(() => {
+          setLetterIndex(i => i + 1);
+        }, 500);
+      } else {
+        playFanfare();
+        targetLetters.forEach(l => {
+          awardStars(`magic-trace-${l}`, 3);
+          incrementActivity(`magic-trace-${l}`);
+        });
+        awardStars('magic-trace', 3);
+        incrementActivity('magic-trace');
+        setShowCelebration(true);
+      }
     }
-  }, [progress, letter, showCelebration]);
+  }, [progress, currentLetter, letterIndex, targetLetters, showCelebration]);
 
   const handleInteraction = (e: any) => {
     if (!isTracing) return;
@@ -78,9 +103,34 @@ export function MagicTrace() {
 
   return (
     <div className="min-h-dvh flex flex-col items-center bg-fuchsia-50 font-nunito relative overflow-hidden">
-      <div className="w-full flex items-center p-4 z-10">
-        <BackButton onClick={() => navigate('/letters/activity/magic-trace')} color="#C026D3" />
-        <h1 className="flex-1 text-center text-4xl font-black text-fuchsia-700">Magic Trace</h1>
+      <div className="w-full flex items-center justify-between p-4 z-10">
+        <BackButton onClick={() => navigate('/letters')} color="#C026D3" />
+        <h1 className="text-3xl md:text-4xl font-black text-fuchsia-700">Magic Trace {currentLetter}</h1>
+        {targetLetters.length > 1 ? (
+          <div className="flex items-center gap-1.5 px-3 py-1 bg-white/95 backdrop-blur rounded-full shadow-md border-2 border-fuchsia-300">
+            <span className="text-xs font-black text-fuchsia-950">
+              Letter {letterIndex + 1}/{targetLetters.length}:
+            </span>
+            <div className="flex items-center gap-1">
+              {targetLetters.map((tl, idx) => (
+                <span
+                  key={tl}
+                  className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-black transition-all ${
+                    idx < letterIndex
+                      ? 'bg-emerald-500 text-white'
+                      : idx === letterIndex
+                      ? 'bg-fuchsia-600 text-white scale-110 shadow-md ring-2 ring-fuchsia-300'
+                      : 'bg-gray-200 text-gray-500'
+                  }`}
+                >
+                  {idx < letterIndex ? '✓' : tl}
+                </span>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div style={{ width: 56 }} />
+        )}
       </div>
 
       <div className="flex-1 w-full max-w-2xl flex flex-col items-center justify-center relative p-6">

@@ -1,3 +1,4 @@
+import { calculateStars } from '../../utils/scoring';
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -27,6 +28,7 @@ export function NumberSounds() {
   const [gameCards, setGameCards] = useState<GameCard[]>([]);
   const [score, setScore] = useState(0);
   const [tries, setTries] = useState(3);
+  const [mistakes, setMistakes] = useState(0);
   const [showFact, setShowFact] = useState(false);
 
   // ── Handlers ───────────────────────────────────────────────────────────────
@@ -84,7 +86,12 @@ export function NumberSounds() {
       setScore(newScore);
       
       if (newScore >= 5) {
-        awardStars('number-sounds', 3);
+        const earnedStars = calculateStars(mistakes);
+        selectedNumbers.forEach(n => {
+          awardStars(`${n}-number-sounds`, earnedStars);
+          incrementActivity(`${n}-number-sounds`);
+        });
+        awardStars('number-sounds', earnedStars);
         incrementActivity('number-sounds');
         setGameState('won');
       } else {
@@ -95,6 +102,7 @@ export function NumberSounds() {
     } else {
       playBoing();
       speak(`Oops! That's ${card.digit}. Try again!`);
+      setMistakes(m => m + 1);
       setTries(prev => Math.max(0, prev - 1));
       if (tries <= 1) setTries(3);
     }
@@ -106,7 +114,7 @@ export function NumberSounds() {
     return (
       <div className="min-h-dvh flex flex-col items-center bg-[#F0F9FF] p-6 overflow-y-auto">
         <div className="w-full flex items-center justify-between max-w-5xl mb-6">
-          <BackButton onClick={() => navigate(-1)} color="#0284C7" />
+          <BackButton color="#0284C7" />
           <h2 className="text-2xl font-black text-[#0284C7]">Number Set Up</h2>
           <div style={{ width: 56 }} />
         </div>
@@ -256,7 +264,7 @@ export function NumberSounds() {
 
       <CelebrationScreen 
         active={gameState === 'won'} 
-        stars={3} 
+        stars={calculateStars(mistakes)} 
         message="Number Expert! 🏆✨"
         onContinue={() => { setGameState('won'); setShowFact(true); }}
       />
@@ -266,7 +274,14 @@ export function NumberSounds() {
           <FunFactCard 
             fact="You're getting so good at recognizing numbers! Keep it up!" 
             emoji="🔢" 
-            onClose={() => navigate(-1)} 
+            onClose={() => {
+            const parts = window.location.pathname.split('/').filter(Boolean);
+            if (parts.length >= 4) {
+              navigate(`/${parts[0]}/${parts[1]}/${parts[2]}`);
+            } else {
+              navigate('/numbers');
+            }
+          }} 
           />
         </div>
       )}

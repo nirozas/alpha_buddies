@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+    <defs>
+      
+  <filter id="sticker-shadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.25"/>
+  </filter>
+  <filter id="soft-glow" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="3" result="blur"/>
+    <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+  </filter>
+  <g id="sparkle">
+    <path d="M0 -8 Q0 0 8 0 Q0 0 0 8 Q0 0 -8 0 Q0 0 0 -8 Z" fill="#FFFBEB" filter="url(#soft-glow)"/>
+    <circle cx="0" cy="0" r="2.5" fill="#FEF08A"/>
+  </g>
+  <g id="gold-star">
+    <path d="M0 -7 L2 -2 L7 -2 L3 1 L5 6 L0 3 L-5 6 L-3 1 L-7 -2 L-2 -2 Z" fill="#FACC15"/>
+    <circle cx="0" cy="0" r="1.5" fill="#FFF"/>
+  </g>
+
+      <linearGradient id="ham-fur" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#FDE68A"/>
+        <stop offset="60%" stop-color="#F59E0B"/>
+        <stop offset="100%" stop-color="#D97706"/>
+      </linearGradient>
+    </defs>
+    <path d="M120 25 C175 25 210 65 210 125 C210 185 175 215 120 215 C65 215 30 185 30 125 C30 65 65 25 120 25 Z" fill="#FFFFFF" filter="url(#sticker-shadow)"/>
+    <!-- Ears -->
+    <circle cx="65" cy="55" r="22" fill="#F59E0B"/>
+    <circle cx="65" cy="55" r="13" fill="#F472B6"/>
+    <circle cx="175" cy="55" r="22" fill="#F59E0B"/>
+    <circle cx="175" cy="55" r="13" fill="#F472B6"/>
+    <!-- Body & Chubby Cheeks -->
+    <ellipse cx="120" cy="130" rx="65" ry="68" fill="url(#ham-fur)"/>
+    <ellipse cx="120" cy="148" rx="42" ry="45" fill="#FEF3C7"/>
+    <!-- Big Sparkling Eyes -->
+    <circle cx="95" cy="100" r="14" fill="#1E293B"/>
+    <circle cx="145" cy="100" r="14" fill="#1E293B"/>
+    <circle cx="90" cy="95" r="5" fill="#FFFFFF"/>
+    <circle cx="140" cy="95" r="5" fill="#FFFFFF"/>
+    <circle cx="98" cy="106" r="2.5" fill="#FFFFFF"/>
+    <circle cx="148" cy="106" r="2.5" fill="#FFFFFF"/>
+    <!-- Shiny Star in Paws -->
+    <circle cx="85" cy="155" r="12" fill="#FDE68A"/>
+    <circle cx="155" cy="155" r="12" fill="#FDE68A"/>
+    <polygon points="120,135 126,150 142,150 129,160 134,175 120,165 106,175 111,160 98,150 114,150" fill="#FACC15" stroke="#EAB308" stroke-width="2"/>
+    <!-- Cheeks & Cute Mouth -->
+    <ellipse cx="68" cy="115" rx="12" ry="9" fill="#FB7185" opacity="0.6"/>
+    <ellipse cx="172" cy="115" rx="12" ry="9" fill="#FB7185" opacity="0.6"/>
+    <path d="M120 112 Q115 118 112 115 M120 112 Q125 118 128 115" stroke="#78350F" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <use href="#sparkle" x="45" y="105"/>
+    <use href="#sparkle" x="195" y="95"/>
+    <use href="#sparkle" x="120" y="40"/>
+  </svg>

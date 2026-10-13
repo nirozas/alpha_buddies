@@ -1,24 +1,39 @@
 import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { LETTERS_DATA } from '../../constants/letters';
 import type { LetterData } from '../../types';
 import { BackButton, CelebrationScreen } from '../../components/SharedComponents';
 import { BuddyBear } from '../../components/BuddyBear';
 import { useStore } from '../../store';
 import { useAudio } from '../../hooks/useAudio';
+import { usePinchZoom } from '../../hooks/usePinchZoom';
 import { TEMPLATES, type ColorTemplate } from './colorByCodeTemplates';
 
 type Mode = 'capital' | 'small' | 'both';
 
 export function ColorByCode() {
   const navigate = useNavigate();
-  const { awardStars, incrementActivity } = useStore();
+  const { letter } = useParams<{ letter?: string }>();
+  const { awardStars, incrementActivity, masteredLetter, masteredLetters } = useStore();
   const { playDing, playBoing, playPop, speak } = useAudio();
+
+  const {
+    zoom,
+    pan,
+    isPanning,
+    containerRef,
+    resetZoom,
+    handleTouchStart,
+    handleTouchMove,
+    handleTouchEnd,
+  } = usePinchZoom({ onReset: playPop, maxZoom: 3 });
+
+  const activeMastered = letter ? [letter.toUpperCase()] : (masteredLetters && masteredLetters.length > 0 ? masteredLetters : (masteredLetter ? [masteredLetter] : []));
 
   // Setup state
   const [step, setStep] = useState<1 | 2 | 3>(1); // 1: picture, 2: letters, 3: game
-  const [selectedLetters, setSelectedLetters] = useState<string[]>([]);
+  const [selectedLetters, setSelectedLetters] = useState<string[]>(activeMastered);
   const [selectedTemplate, setSelectedTemplate] = useState<ColorTemplate>(TEMPLATES[0]);
   const [mode, setMode] = useState<Mode>('capital');
 
@@ -56,6 +71,7 @@ export function ColorByCode() {
   };
 
   const handleRegionClick = (regionId: string, regionColorId: number) => {
+    if (isPanning) return;
     if (filledRegions.includes(regionId) || autoFillRest) return;
 
     const assignedLetter = colorMapping[regionColorId];
@@ -73,9 +89,9 @@ export function ColorByCode() {
       if (newFilled.length === targetRegions.length) {
         // Win!
         setAutoFillRest(true);
-        const lKey = selectedLetters.join('-');
-        awardStars(`color-by-code-${lKey}`, mistakes === 0 ? 3 : mistakes <= 2 ? 2 : 1);
-        incrementActivity(`color-by-code-${lKey}`);
+        const lKey = activeMastered.length > 0 ? `${activeMastered[0]}-color-by-code` : `color-by-code-${selectedLetters.join('-')}`;
+        awardStars(lKey, mistakes === 0 ? 3 : mistakes <= 2 ? 2 : 1);
+        incrementActivity(lKey);
         setTimeout(() => setShowCelebration(true), 1500);
       }
     } else {
@@ -105,7 +121,7 @@ export function ColorByCode() {
     return (
       <div className="min-h-dvh bg-gradient-to-br from-green-50 to-blue-50 flex flex-col items-center p-8 relative z-10 font-nunito">
         <div className="w-full flex items-center justify-between mb-8 max-w-5xl">
-          <BackButton onClick={() => navigate(-1)} color="#475569" />
+          <BackButton color="#475569" />
           <h1 className="text-4xl font-black text-slate-800 tracking-tight">Step 1: Choose a Picture</h1>
           <div className="w-12" />
         </div>
@@ -180,7 +196,7 @@ export function ColorByCode() {
               <span>Pick up to {Object.keys(selectedTemplate.palette).length} Letters</span>
               <span className="text-sm bg-slate-100 px-3 py-1 rounded-full">{selectedLetters.length} / {Object.keys(selectedTemplate.palette).length}</span>
             </h2>
-            <div className="flex flex-wrap gap-2 overflow-y-auto max-h-64 pr-2">
+            <div className="grid grid-cols-7 sm:grid-cols-9 gap-1.5 sm:gap-2 w-full">
               {LETTERS_DATA.map(ld => {
                 const maxAllowed = Object.keys(selectedTemplate.palette).length;
                 const isSelected = selectedLetters.includes(ld.letter);
@@ -189,8 +205,9 @@ export function ColorByCode() {
                 return (
                   <motion.button
                     key={ld.letter}
-                    whileHover={isDisabled ? {} : { scale: 1.1 }}
-                    whileTap={isDisabled ? {} : { scale: 0.9 }}
+                    type="button"
+                    whileHover={isDisabled ? {} : { scale: 1.08 }}
+                    whileTap={isDisabled ? {} : { scale: 0.92 }}
                     onClick={() => {
                       if (isSelected) {
                         setSelectedLetters(selectedLetters.filter(l => l !== ld.letter));
@@ -202,7 +219,7 @@ export function ColorByCode() {
                         playBoing();
                       }
                     }}
-                    className={`w-12 h-12 rounded-xl flex items-center justify-center font-black text-xl transition-colors border-2
+                    className={`aspect-square rounded-xl flex items-center justify-center font-black text-base sm:text-lg transition-colors border-2 cursor-pointer
                       ${isSelected ? 'bg-indigo-500 text-white border-indigo-600 shadow-md' : 
                         isDisabled ? 'bg-slate-100 text-slate-300 border-slate-200 cursor-not-allowed' : 
                         'bg-white text-slate-600 border-slate-200 hover:border-indigo-300'}`}
@@ -296,8 +313,37 @@ export function ColorByCode() {
         </div>
 
         {/* Canvas */}
-        <div className="bg-white p-4 rounded-[3rem] shadow-2xl border-8 border-slate-100 w-full max-w-[500px] aspect-square relative">
-          <svg viewBox="0 0 400 400" className="w-full h-full rounded-[2rem] overflow-hidden" style={{ backgroundColor: '#F8FAFC' }}>
+        <div 
+          ref={containerRef}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchEnd}
+          className="bg-white p-4 rounded-[3rem] shadow-2xl border-8 border-slate-100 w-full max-w-[500px] aspect-square relative overflow-hidden select-none touch-none flex items-center justify-center"
+        >
+          {/* Floating Reset Zoom Badge */}
+          <AnimatePresence>
+            {zoom > 1.05 && (
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                onClick={resetZoom}
+                className="absolute top-4 right-4 z-30 bg-slate-800/90 hover:bg-slate-900 text-white px-3 py-1.5 rounded-full text-xs font-black shadow-lg backdrop-blur-md flex items-center gap-1.5 border border-white/20 active:scale-95 transition-all cursor-pointer"
+                title="Reset zoom to 100%"
+              >
+                <span>🔍 {Math.round(zoom * 100)}%</span>
+                <span className="text-amber-300 text-[10px] uppercase font-bold tracking-wider">Reset</span>
+              </motion.button>
+            )}
+          </AnimatePresence>
+
+          <motion.div
+            className="w-full h-full rounded-[2rem] overflow-hidden flex items-center justify-center"
+            animate={{ scale: zoom, x: pan.x, y: pan.y }}
+            transition={isPanning ? { duration: 0 } : { type: 'spring', stiffness: 300, damping: 30 }}
+          >
+            <svg viewBox="0 0 400 400" className="w-full h-full rounded-[2rem] overflow-hidden" style={{ backgroundColor: '#F8FAFC' }}>
             {/* Draw all background regions first */}
             {selectedTemplate.regions.map(region => {
               const assignedLetter = colorMapping[region.colorId];
@@ -377,6 +423,7 @@ export function ColorByCode() {
               );
             })}
           </svg>
+          </motion.div>
         </div>
       </div>
 

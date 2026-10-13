@@ -87,7 +87,7 @@ export function StampTheLetter() {
   return (
     <div className="min-h-dvh flex flex-col items-center pb-12 bg-transparent relative z-10">
       <div className="w-full flex items-center justify-between p-4">
-        <BackButton onClick={() => navigate(-1)} color={ld.color} />
+        <BackButton color={ld.color} />
         <h2 style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: '1.1rem', color: ld.color }}>Stamp the Letter</h2>
         <div style={{ width: 56 }} />
       </div>
@@ -169,7 +169,16 @@ export function StampTheLetter() {
       </div>
 
       <CelebrationScreen active={showCelebration} stars={mistakes === 0 ? 3 : mistakes <= 2 ? 2 : 1} message="All stamped! 🖍️"
-        onContinue={() => navigate(-1)}
+        onContinue={() => {
+          const currentIndex = LETTERS_DATA.findIndex(l => l.letter === ld.letter);
+          if (currentIndex >= 0 && currentIndex < LETTERS_DATA.length - 1) {
+            const nextLetter = LETTERS_DATA[currentIndex + 1].letter;
+            setShowCelebration(false);
+            navigate(`/letters/activity/stamp-letter/${nextLetter}`);
+          } else {
+            navigate('/letters');
+          }
+        }}
       >
         <FunFactCard fact={ld.funFact} emoji={ld.exampleEmoji} />
       </CelebrationScreen>

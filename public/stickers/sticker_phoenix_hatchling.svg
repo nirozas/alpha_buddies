@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+    <defs>
+      
+  <filter id="sticker-shadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.25"/>
+  </filter>
+  <filter id="soft-glow" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="3" result="blur"/>
+    <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+  </filter>
+  <g id="sparkle">
+    <path d="M0 -8 Q0 0 8 0 Q0 0 0 8 Q0 0 -8 0 Q0 0 0 -8 Z" fill="#FFFBEB" filter="url(#soft-glow)"/>
+    <circle cx="0" cy="0" r="2.5" fill="#FEF08A"/>
+  </g>
+  <g id="gold-star">
+    <path d="M0 -7 L2 -2 L7 -2 L3 1 L5 6 L0 3 L-5 6 L-3 1 L-7 -2 L-2 -2 Z" fill="#FACC15"/>
+    <circle cx="0" cy="0" r="1.5" fill="#FFF"/>
+  </g>
+
+      <linearGradient id="fire-grad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#FEF08A"/>
+        <stop offset="50%" stop-color="#F97316"/>
+        <stop offset="100%" stop-color="#DC2626"/>
+      </linearGradient>
+    </defs>
+    <path d="M120 25 C185 25 215 65 215 125 C215 185 180 215 120 215 C60 215 25 185 25 125 C25 65 55 25 120 25 Z" fill="#FFFFFF" filter="url(#sticker-shadow)"/>
+    <!-- Flame Wings -->
+    <polygon points="50,140 25,100 65,115 40,85 85,105 75,145" fill="url(#fire-grad)"/>
+    <polygon points="190,140 215,100 175,115 200,85 155,105 165,145" fill="url(#fire-grad)"/>
+    <!-- Golden Egg Shell Bottom -->
+    <path d="M70 145 C70 195 170 195 170 145 L155 155 L140 145 L120 155 L100 145 L85 155 Z" fill="#FEF08A" stroke="#EAB308" stroke-width="3"/>
+    <!-- Chick Head -->
+    <circle cx="120" cy="105" r="42" fill="url(#fire-grad)"/>
+    <!-- Golden Feather Crown -->
+    <polygon points="120,40 110,65 130,65" fill="#FACC15"/>
+    <polygon points="105,48 100,70 115,68" fill="#F97316"/>
+    <polygon points="135,48 140,70 125,68" fill="#F97316"/>
+    <!-- Big Sparkling Eyes -->
+    <circle cx="105" cy="102" r="10" fill="#0F172A"/>
+    <circle cx="135" cy="102" r="10" fill="#0F172A"/>
+    <circle cx="102" cy="98" r="4" fill="#FFFFFF"/>
+    <circle cx="132" cy="98" r="4" fill="#FFFFFF"/>
+    <polygon points="120,108 112,120 128,120" fill="#F59E0B"/>
+    <use href="#sparkle" x="40" y="60"/>
+    <use href="#sparkle" x="200" y="60"/>
+    <use href="#gold-star" x="120" y="175"/>
+  </svg>

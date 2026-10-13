@@ -55,16 +55,7 @@ export function useAudio() {
 
   // Handle Background Music
   useEffect(() => {
-    if (!bgmHowl) {
-      // Background music placeholder removed to prevent 403 Forbidden error
-      bgmHowl = new Howl({
-        src: ['data:audio/mp3;base64,'], // Empty data URI to prevent errors until real audio is added
-        loop: true,
-        volume: settings.musicVolume,
-        html5: true, 
-      });
-    }
-
+    if (!bgmHowl) return;
     if (settings.musicVolume > 0 && !bgmHowl.playing()) {
       bgmHowl.volume(settings.musicVolume);
       bgmHowl.play();

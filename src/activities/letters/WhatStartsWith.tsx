@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, useParams } from 'react-router-dom';
 import { LETTERS_DATA } from '../../constants/letters';
@@ -6,11 +6,36 @@ import { BackButton, CelebrationScreen, FunFactCard } from '../../components/Sha
 import { BuddyBear } from '../../components/BuddyBear';
 import { useStore } from '../../store';
 
+interface ChoiceOption {
+  word: string;
+  image: string;
+  letter: string;
+  isCorrect: boolean;
+  emoji?: string;
+}
+
 export function WhatStartsWith() {
   const { letter } = useParams<{ letter: string }>();
   const navigate = useNavigate();
-  const { awardStars, incrementActivity } = useStore();
-  const ld = LETTERS_DATA.find(l => l.letter === letter?.toUpperCase())!;
+  const { awardStars, incrementActivity, masteredLetter, masteredLetters } = useStore();
+
+  const rawLetters = letter
+    ? letter.split(',').map(s => s.trim().toUpperCase()).filter(Boolean)
+    : (masteredLetters && masteredLetters.length > 0 ? masteredLetters : (masteredLetter ? [masteredLetter] : ['A']));
+  const targetLetters = rawLetters.length > 0 ? rawLetters : ['A'];
+
+  const roundLetters = useMemo(() => {
+    if (targetLetters.length === 1) {
+      return Array(5).fill(targetLetters[0]);
+    }
+    const list: string[] = [];
+    while (list.length < Math.max(5, targetLetters.length)) {
+      list.push(...targetLetters);
+    }
+    return list.slice(0, Math.max(5, targetLetters.length));
+  }, [targetLetters]);
+
+  const ROUNDS = roundLetters.length;
 
   const [round, setRound] = useState(0);
   const [score, setScore] = useState(0);
@@ -18,30 +43,32 @@ export function WhatStartsWith() {
   const [shake, setShake] = useState<number | null>(null);
   const [showCelebration, setShowCelebration] = useState(false);
   const [showFact, setShowFact] = useState(false);
-  const ROUNDS = 5;
 
-  const buildOptions = () => {
-    // Correct option
-    const correctObj = ld.objects[Math.floor(Math.random() * ld.objects.length)];
+  const currentRoundLetter = roundLetters[round] || roundLetters[0];
+  const ld = LETTERS_DATA.find(l => l.letter === currentRoundLetter) || LETTERS_DATA[0];
+
+  const buildOptions = (targetL: string): ChoiceOption[] => {
+    const targetLD = LETTERS_DATA.find(l => l.letter === targetL) || LETTERS_DATA[0];
+    const correctObj = targetLD.objects[Math.floor(Math.random() * targetLD.objects.length)];
     
     // 3 Incorrect options from other letters
-    const otherLetters = LETTERS_DATA.filter(l => l.letter !== ld.letter)
+    const otherLetters = LETTERS_DATA.filter(l => l.letter !== targetL)
       .sort(() => Math.random() - 0.5).slice(0, 3);
     
-    const incorrectObjs = otherLetters.map(l => {
+    const incorrectObjs: ChoiceOption[] = otherLetters.map(l => {
       const obj = l.objects[Math.floor(Math.random() * l.objects.length)];
       return { ...obj, letter: l.letter, isCorrect: false };
     });
 
-    const all = [
-      { ...correctObj, letter: ld.letter, isCorrect: true },
+    const all: ChoiceOption[] = [
+      { ...correctObj, letter: targetL, isCorrect: true },
       ...incorrectObjs
     ].sort(() => Math.random() - 0.5);
     
     return all;
   };
 
-  const [options] = useState(() => Array.from({ length: ROUNDS }, buildOptions));
+  const options: ChoiceOption[][] = useMemo(() => roundLetters.map((l: string) => buildOptions(l)), [roundLetters]);
 
   const handlePick = (idx: number, opt: { isCorrect: boolean, letter: string }) => {
     if (selected !== null) return;
@@ -51,9 +78,13 @@ export function WhatStartsWith() {
       setScore(newScore);
       setTimeout(() => {
         if (round + 1 >= ROUNDS) {
-          const stars: 1|2|3 = newScore >= 4 ? 3 : newScore >= 2 ? 2 : 1;
-          awardStars(`${ld.letter}-what-starts-with`, stars);
-          incrementActivity(`${ld.letter}-what-starts-with`);
+          const stars: 1|2|3 = newScore >= Math.ceil(ROUNDS * 0.7) ? 3 : newScore >= Math.ceil(ROUNDS * 0.4) ? 2 : 1;
+          targetLetters.forEach(l => {
+            awardStars(`${l}-what-starts-with`, stars);
+            incrementActivity(`${l}-what-starts-with`);
+          });
+          awardStars('what-starts-with', stars);
+          incrementActivity('what-starts-with');
           setShowCelebration(true);
         } else {
           setRound(r => r + 1);
@@ -66,17 +97,26 @@ export function WhatStartsWith() {
     }
   };
 
-  const currentOptions = options[Math.min(round, ROUNDS - 1)];
+  const currentOptions = options[Math.min(round, ROUNDS - 1)] || options[0];
 
   return (
     <div className="min-h-dvh flex flex-col items-center pb-8 relative z-10 bg-transparent">
       <div className="w-full flex items-center justify-between p-4">
-        <BackButton onClick={() => navigate(-1)} color={ld.color} />
-        <h2 style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: '1.2rem', color: ld.color }}>What Starts With?</h2>
+        <BackButton onClick={() => navigate('/letters')} color={ld.color} />
+        <div className="flex items-center gap-2">
+          <h2 style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: '1.2rem', color: ld.color }}>What Starts With?</h2>
+          {targetLetters.length > 1 && (
+            <div className="flex items-center gap-1 px-3 py-1 bg-white/90 backdrop-blur rounded-full shadow border border-amber-300">
+              <span className="text-xs font-black text-amber-900" style={{ fontFamily: 'Nunito' }}>
+                Round {round + 1}/{ROUNDS}
+              </span>
+            </div>
+          )}
+        </div>
         <span style={{ fontFamily: 'Nunito', fontWeight: 700, color: ld.color, fontSize: '1.1rem' }}>{score}/{ROUNDS} ⭐</span>
       </div>
 
-      <BuddyBear mood={selected !== null && currentOptions[selected].isCorrect ? 'celebrating' : 'happy'}
+      <BuddyBear mood={selected !== null && currentOptions[selected]?.isCorrect ? 'celebrating' : 'happy'}
         size={100}
         speech={`Which one starts with the letter "${ld.uppercase}"? 🔍`}
       />
@@ -165,12 +205,21 @@ export function WhatStartsWith() {
 
       {showFact && (
         <div className="p-4 w-full max-w-sm mt-4">
-          <FunFactCard fact={ld.funFact} emoji={ld.exampleEmoji} onClose={() => navigate(-1)} />
+          <FunFactCard fact={ld.funFact} emoji={ld.exampleEmoji} onClose={() => {
+            const parts = window.location.pathname.split('/').filter(Boolean);
+            if (parts.length >= 4) {
+              navigate(`/${parts[0]}/${parts[1]}/${parts[2]}`);
+            } else {
+              navigate('/letters');
+            }
+          }} />
         </div>
       )}
       <CelebrationScreen active={showCelebration} stars={score >= 4 ? 3 : score >= 2 ? 2 : 1}
         message={score === ROUNDS ? "Perfect Score! 🌈" : "What a star! 🌟"}
-        onContinue={() => { setShowCelebration(false); setShowFact(true); }} />
+        onContinue={() => navigate('/letters/activity/what-starts-with')}
+        onMenu={() => navigate('/letters')}
+      />
     </div>
   );
 }

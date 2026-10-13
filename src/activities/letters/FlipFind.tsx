@@ -1,3 +1,4 @@
+import { calculateStars } from '../../utils/scoring';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -64,22 +65,31 @@ function buildCards(letter: string, mode: 'upper' | 'lower' | 'both') {
 export function FlipFind() {
   const { letter } = useParams<{ letter: string }>();
   const navigate = useNavigate();
-  const { awardStars, incrementActivity, progress } = useStore();
+  const { awardStars, incrementActivity, progress, masteredLetter, masteredLetters } = useStore();
   const { speak, playPop, playDing, playBoing } = useAudio();
-  const ld = LETTERS_DATA.find(l => l.letter === letter?.toUpperCase()) || LETTERS_DATA[0];
+
+  const rawLetters = letter
+    ? letter.split(',').map(s => s.trim().toUpperCase()).filter(Boolean)
+    : (masteredLetters && masteredLetters.length > 0 ? masteredLetters : (masteredLetter ? [masteredLetter] : ['A']));
+  const targetLetters = rawLetters.length > 0 ? rawLetters : ['A'];
+
+  const [letterIndex, setLetterIndex] = useState(0);
+  const currentLetter = targetLetters[letterIndex] || targetLetters[0];
+  const ld = LETTERS_DATA.find(l => l.letter === currentLetter) || LETTERS_DATA[0];
 
   const [mode, setMode] = useState<'upper' | 'lower' | 'both' | null>(null);
   const [cards, setCards] = useState<Card[]>([]);
   const [flipped, setFlipped] = useState<string[]>([]);
+  const [mistakes, setMistakes] = useState(0);
   const [showCelebration, setShowCelebration] = useState(false);
   const [showFact, setShowFact] = useState(false);
 
   useEffect(() => {
     if (mode) {
-      setCards(buildCards(ld.letter, mode));
+      setCards(buildCards(currentLetter, mode));
       setFlipped([]);
     }
-  }, [ld.letter, mode]);
+  }, [currentLetter, mode]);
 
   const checkWin = (currentFlipped: string[]) => {
     const flippedCards = cards.filter(c => currentFlipped.includes(c.id));
@@ -102,7 +112,21 @@ export function FlipFind() {
         awardStars(`${ld.letter}-flip-find`, 3);
       }
 
-      setTimeout(() => setShowCelebration(true), 600);
+      if (letterIndex < targetLetters.length - 1) {
+        speak(`Great job! Next, let's find letter ${targetLetters[letterIndex + 1]}!`);
+        setTimeout(() => {
+          setLetterIndex(i => i + 1);
+        }, 900);
+      } else {
+        const earnedStars = calculateStars(mistakes);
+        targetLetters.forEach(l => {
+          awardStars(`${l}-flip-find`, earnedStars);
+          incrementActivity(`${l}-flip-find`);
+        });
+        awardStars('flip-find', earnedStars);
+        incrementActivity('flip-find');
+        setTimeout(() => setShowCelebration(true), 600);
+      }
     }
   };
 
@@ -138,7 +162,7 @@ export function FlipFind() {
     return (
       <div className="fixed inset-0 flex flex-col items-center justify-center p-6 bg-transparent relative z-10">
         <div className="absolute top-4 left-4 z-[110]">
-          <BackButton onClick={() => navigate(-1)} color={ld.color} />
+          <BackButton color={ld.color} />
         </div>
         
         <motion.div
@@ -187,6 +211,32 @@ export function FlipFind() {
     <div className="fixed inset-0 flex flex-col overflow-hidden bg-transparent relative z-10">
       <div className="w-full flex items-center justify-between p-4 relative z-[100]">
         <BackButton onClick={() => setMode(null)} color={ld.color} />
+        
+        {targetLetters.length > 1 && (
+          <div className="flex items-center gap-1.5 px-3 py-1 bg-white/95 backdrop-blur rounded-full shadow-md border-2 border-amber-400">
+            <span className="text-xs font-black text-amber-900" style={{ fontFamily: 'Nunito' }}>
+              Letter {letterIndex + 1}/{targetLetters.length}:
+            </span>
+            <div className="flex items-center gap-1">
+              {targetLetters.map((tl, idx) => (
+                <span
+                  key={tl}
+                  className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-black transition-all ${
+                    idx < letterIndex
+                      ? 'bg-emerald-500 text-white shadow-sm'
+                      : idx === letterIndex
+                      ? 'bg-amber-500 text-white scale-110 shadow-md ring-2 ring-amber-300'
+                      : 'bg-gray-200 text-gray-500'
+                  }`}
+                  style={{ fontFamily: 'Nunito' }}
+                >
+                  {idx < letterIndex ? '✓' : tl}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div className="flex-1 max-w-[200px] mx-4">
           <ProgressBar value={correctCount} max={mode === 'both' ? 4 : 3} color={ld.color} />
           <p className="text-[10px] font-black uppercase text-center mt-1 opacity-60">Found: {correctCount}/{mode === 'both' ? 4 : 3}</p>
@@ -258,7 +308,14 @@ export function FlipFind() {
 
       {showFact && (
         <div className="absolute inset-0 flex items-center justify-center p-6 z-[200] bg-black/40 backdrop-blur-md">
-          <FunFactCard fact={ld.funFact} emoji={ld.exampleEmoji} onClose={() => navigate(-1)} />
+          <FunFactCard fact={ld.funFact} emoji={ld.exampleEmoji} onClose={() => {
+            const parts = window.location.pathname.split('/').filter(Boolean);
+            if (parts.length >= 4) {
+              navigate(`/${parts[0]}/${parts[1]}/${parts[2]}`);
+            } else {
+              navigate('/letters');
+            }
+          }} />
         </div>
       )}
     </div>

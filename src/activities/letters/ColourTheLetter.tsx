@@ -71,7 +71,7 @@ const STYLES = [
 export function ColourTheLetter() {
   const { letter } = useParams<{ letter: string }>();
   const navigate = useNavigate();
-  const { awardStars, incrementActivity } = useStore();
+  const { awardStars, incrementActivity, markLetterComplete } = useStore();
   const ld = LETTERS_DATA.find(l => l.letter === letter?.toUpperCase())!;
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -92,15 +92,28 @@ export function ColourTheLetter() {
   const [zoom, setZoom] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [isPanning, setIsPanning] = useState(false);
-  const startPanRef = useRef({ x: 0, y: 0 });
+  const { playDing, playPop } = useAudio();
+
+  const pinchRef = useRef<{
+    initialDist: number;
+    initialZoom: number;
+    initialPan: { x: number; y: number };
+    initialMid: { x: number; y: number };
+  } | null>(null);
+
+  const resetZoom = useCallback(() => {
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+    pinchRef.current = null;
+    setIsPanning(false);
+    playPop();
+  }, [playPop]);
   
   const [history, setHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [showCelebration, setShowCelebration] = useState(false);
   const [croppedImage, setCroppedImage] = useState<string | null>(null);
   const [previews, setPreviews] = useState<string[]>([]);
-
-  const { playDing, playPop } = useAudio();
 
   // Generate previews for the gallery
   useEffect(() => {
@@ -254,18 +267,44 @@ export function ColourTheLetter() {
     if (!canvas) return;
     const ctx = canvas.getContext('2d')!;
     const resize = () => {
-      const rect = canvas.parentElement?.getBoundingClientRect();
-      if (rect) {
-        const temp = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        canvas.width = rect.width;
-        canvas.height = rect.height;
-        ctx.putImageData(temp, 0, 0);
+      const parent = canvas.parentElement;
+      if (parent) {
+        const w = parent.clientWidth || 800;
+        const h = parent.clientHeight || 800;
+        if (canvas.width !== w || canvas.height !== h) {
+          const temp = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          canvas.width = w;
+          canvas.height = h;
+          ctx.putImageData(temp, 0, 0);
+        }
       }
     };
     setTimeout(resize, 100); 
     window.addEventListener('resize', resize);
     return () => window.removeEventListener('resize', resize);
   }, [croppedImage]);
+
+  // Trackpad pinch-to-zoom & mouse wheel zoom
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      const zoomFactor = e.ctrlKey ? -e.deltaY * 0.01 : -e.deltaY * 0.002;
+      setZoom(prev => {
+        const next = Math.min(Math.max(prev + zoomFactor, 1), 4);
+        if (next <= 1.02) {
+          setPan({ x: 0, y: 0 });
+          return 1;
+        }
+        return next;
+      });
+    };
+
+    container.addEventListener('wheel', handleWheel, { passive: false });
+    return () => container.removeEventListener('wheel', handleWheel);
+  }, []);
 
   const saveHistory = () => {
     const canvas = canvasRef.current;
@@ -425,13 +464,97 @@ export function ColourTheLetter() {
     saveHistory();
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length >= 2) {
+      if (e.cancelable) e.preventDefault();
+      setIsDrawing(false);
+      setIsPanning(true);
+      const t0 = e.touches[0];
+      const t1 = e.touches[1];
+      const dist = Math.hypot(t0.clientX - t1.clientX, t0.clientY - t1.clientY);
+      const midX = (t0.clientX + t1.clientX) / 2;
+      const midY = (t0.clientY + t1.clientY) / 2;
+
+      pinchRef.current = {
+        initialDist: Math.max(dist, 10),
+        initialZoom: zoom,
+        initialPan: { ...pan },
+        initialMid: { x: midX, y: midY },
+      };
+      return;
+    }
+
+    if (e.touches.length === 1 && e.target === canvasRef.current) {
+      startDrawing(e);
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length >= 2) {
+      if (e.cancelable) e.preventDefault();
+      const t0 = e.touches[0];
+      const t1 = e.touches[1];
+      const dist = Math.hypot(t0.clientX - t1.clientX, t0.clientY - t1.clientY);
+      const midX = (t0.clientX + t1.clientX) / 2;
+      const midY = (t0.clientY + t1.clientY) / 2;
+
+      if (!pinchRef.current) {
+        pinchRef.current = {
+          initialDist: Math.max(dist, 10),
+          initialZoom: zoom,
+          initialPan: { ...pan },
+          initialMid: { x: midX, y: midY },
+        };
+        setIsPanning(true);
+        setIsDrawing(false);
+        return;
+      }
+
+      const { initialDist, initialZoom, initialPan, initialMid } = pinchRef.current;
+      const scaleFactor = dist / initialDist;
+      let newZoom = Math.min(Math.max(initialZoom * scaleFactor, 1), 4);
+
+      const deltaX = midX - initialMid.x;
+      const deltaY = midY - initialMid.y;
+      let newPanX = initialPan.x + deltaX;
+      let newPanY = initialPan.y + deltaY;
+
+      if (newZoom <= 1.05) {
+        newZoom = 1;
+        newPanX = 0;
+        newPanY = 0;
+      } else {
+        const maxPan = 350 * newZoom;
+        newPanX = Math.max(-maxPan, Math.min(maxPan, newPanX));
+        newPanY = Math.max(-maxPan, Math.min(maxPan, newPanY));
+      }
+
+      setZoom(newZoom);
+      setPan({ x: newPanX, y: newPanY });
+      return;
+    }
+
+    if (e.touches.length === 1 && isDrawing && !isPanning) {
+      draw(e);
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (e.touches.length >= 2) return;
+
+    if (pinchRef.current || isPanning) {
+      pinchRef.current = null;
+      setIsPanning(false);
+      setIsDrawing(false);
+      return;
+    }
+
+    endDrawing(e);
+  };
+
   const startDrawing = (e: React.MouseEvent | React.TouchEvent) => {
     if ('touches' in e && e.touches.length >= 2) {
-      setIsPanning(true);
-      setIsDrawing(false);
-      const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
-      const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-      startPanRef.current = { x: midX - pan.x, y: midY - pan.y };
+      handleTouchStart(e);
       return;
     }
 
@@ -467,17 +590,12 @@ export function ColourTheLetter() {
   };
 
   const draw = (e: React.MouseEvent | React.TouchEvent) => {
-    if (isPanning && 'touches' in e && e.touches.length >= 2) {
-      const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
-      const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-      setPan({
-        x: midX - startPanRef.current.x,
-        y: midY - startPanRef.current.y
-      });
+    if ('touches' in e && e.touches.length >= 2) {
+      handleTouchMove(e);
       return;
     }
 
-    if (!isDrawing) return;
+    if (!isDrawing || isPanning) return;
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d')!;
     const { x, y } = getCoords(e);
@@ -496,8 +614,19 @@ export function ColourTheLetter() {
   };
 
   const endDrawing = (e?: React.MouseEvent | React.TouchEvent) => {
+    if (e && 'touches' in e) {
+      if (e.touches.length >= 2) return;
+      if (pinchRef.current || isPanning) {
+        pinchRef.current = null;
+        setIsPanning(false);
+        setIsDrawing(false);
+        return;
+      }
+    }
+
     if (isPanning) {
       setIsPanning(false);
+      pinchRef.current = null;
       return;
     }
 
@@ -525,7 +654,7 @@ export function ColourTheLetter() {
     return (
       <div className="min-h-dvh bg-transparent flex flex-col items-center justify-center p-8 font-nunito text-white relative z-10">
         <div className="absolute top-4 left-4 z-50">
-          <BackButton onClick={() => navigate(-1)} color="white" />
+          <BackButton color="white" />
         </div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
           <h1 className="text-5xl font-black mb-4 tracking-tight">Pick a Style! 🎨</h1>
@@ -593,7 +722,7 @@ export function ColourTheLetter() {
             <LucideTrash2 size={22} />
           </button>
           <div className="w-px h-6 bg-white/10 mx-2" />
-          <button onClick={() => { awardStars('color', 3); setShowCelebration(true); }} className="bg-emerald-500 hover:bg-emerald-600 px-6 py-2 rounded-xl font-black text-sm flex items-center gap-2 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
+          <button onClick={() => { const earnedStars = (history.length >= 3 ? 3 : history.length >= 1 ? 2 : 1) as 1 | 2 | 3; const key = `${ld.letter}-colour-the-letter`; awardStars(key, earnedStars); awardStars(`${ld.letter}-color-the-letter`, earnedStars); incrementActivity(key); markLetterComplete(ld.letter); setShowCelebration(true); }} className="bg-emerald-500 hover:bg-emerald-600 px-6 py-2 rounded-xl font-black text-sm flex items-center gap-2 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
             <LucideCheck size={20} /> Finish
           </button>
         </div>
@@ -616,29 +745,80 @@ export function ColourTheLetter() {
             </motion.button>
           ))}
           
-          <div className="mt-auto flex flex-col items-center gap-2 py-4 border-t border-white/5 w-full">
-            <button onClick={() => setZoom(z => Math.min(z + 0.25, 4))} className="p-2 rounded-xl hover:bg-white/10 transition-all text-white/50 hover:text-white">
+          <div className="mt-auto flex flex-col items-center gap-1.5 py-3 border-t border-white/5 w-full">
+            <button 
+              onClick={() => setZoom(z => Math.min(z + 0.25, 4))} 
+              className="p-2 rounded-xl hover:bg-white/10 transition-all text-white/50 hover:text-white active:scale-90"
+              title="Zoom In"
+            >
               <LucideZoomIn size={20} />
             </button>
-            <div className="text-[10px] font-black text-amber-500">{Math.round(zoom * 100)}%</div>
-            <button onClick={() => {
-              setZoom(z => {
-                const newZ = Math.max(z - 0.25, 1);
-                if (newZ === 1) setPan({ x: 0, y: 0 });
-                return newZ;
-              });
-            }} className="p-2 rounded-xl hover:bg-white/10 transition-all text-white/50 hover:text-white">
+            <button 
+              onClick={resetZoom}
+              className="text-[10px] font-black text-amber-500 hover:text-amber-400 px-1.5 py-0.5 rounded hover:bg-white/5 transition-all"
+              title="Click to reset zoom"
+            >
+              {Math.round(zoom * 100)}%
+            </button>
+            {zoom > 1.05 && (
+              <button 
+                onClick={resetZoom}
+                className="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 transition-all active:scale-95"
+                title="Reset to 100%"
+              >
+                1:1
+              </button>
+            )}
+            <button 
+              onClick={() => {
+                setZoom(z => {
+                  const newZ = Math.max(z - 0.25, 1);
+                  if (newZ === 1) setPan({ x: 0, y: 0 });
+                  return newZ;
+                });
+              }} 
+              className="p-2 rounded-xl hover:bg-white/10 transition-all text-white/50 hover:text-white active:scale-90"
+              title="Zoom Out"
+            >
               <LucideZoomOut size={20} />
             </button>
           </div>
         </div>
 
         {/* Center Canvas Area */}
-        <div className="flex-1 bg-[#0a0a0a] flex items-center justify-center p-4 relative overflow-hidden">
+        <div 
+          ref={containerRef}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchEnd}
+          className="flex-1 bg-[#0a0a0a] flex items-center justify-center p-2 sm:p-4 relative overflow-hidden select-none touch-none"
+        >
+          {/* Floating Reset Zoom Badge */}
+          <AnimatePresence>
+            {zoom > 1.05 && (
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8, y: -10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.8, y: -10 }}
+                onClick={resetZoom}
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 z-40 bg-black/85 hover:bg-black text-white px-3.5 py-1.5 rounded-full text-xs font-black shadow-2xl backdrop-blur-md flex items-center gap-2 border border-white/20 active:scale-95 transition-all cursor-pointer"
+                title="Reset zoom to 100%"
+              >
+                <span>🔍 {Math.round(zoom * 100)}%</span>
+                <span className="bg-amber-500/25 text-amber-300 text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded">Reset</span>
+              </motion.button>
+            )}
+          </AnimatePresence>
+
           <motion.div 
-            className="relative w-full max-w-3xl aspect-square bg-white rounded-3xl shadow-[0_0_100px_rgba(0,0,0,0.8)] overflow-hidden cursor-crosshair"
+            className="relative aspect-square bg-white rounded-3xl shadow-[0_0_100px_rgba(0,0,0,0.8)] overflow-hidden cursor-crosshair select-none touch-none"
+            style={{
+              width: 'min(100%, calc(100vh - 5.5rem), 768px)',
+              height: 'min(100%, calc(100vh - 5.5rem), 768px)',
+            }}
             animate={{ scale: zoom, x: pan.x, y: pan.y }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            transition={isPanning ? { duration: 0 } : { type: 'spring', stiffness: 300, damping: 30 }}
           >
             {croppedImage && (
               <>
@@ -649,9 +829,10 @@ export function ColourTheLetter() {
                   onMouseMove={draw}
                   onMouseUp={endDrawing}
                   onMouseLeave={endDrawing}
-                  onTouchStart={startDrawing}
-                  onTouchMove={draw}
-                  onTouchEnd={endDrawing}
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+                  onTouchEnd={handleTouchEnd}
+                  onTouchCancel={handleTouchEnd}
                   className="absolute inset-0 w-full h-full touch-none z-10"
                 />
                 <img src={croppedImage} className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none mix-blend-multiply z-20" />
@@ -659,11 +840,11 @@ export function ColourTheLetter() {
             )}
           </motion.div>
 
-          {/* Pan Slide Bars */}
+          {/* Pan Slide Bars (Desktop auxiliary controls) */}
           {zoom > 1 && (
             <>
               {/* Vertical Pan (Y-axis) */}
-              <div className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 h-1/2 z-50 flex items-center justify-center">
+              <div className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 h-1/2 z-30 hidden sm:flex items-center justify-center opacity-40 hover:opacity-100 transition-opacity">
                 <input 
                   type="range" 
                   min={-300 * zoom} 
@@ -671,13 +852,13 @@ export function ColourTheLetter() {
                   value={-pan.y} 
                   onChange={(e) => setPan({ ...pan, y: -parseInt(e.target.value) })}
                   className="accent-amber-500 cursor-pointer"
-                  style={{ transform: 'rotate(90deg)', width: '40vh' }}
+                  style={{ transform: 'rotate(90deg)', width: '30vh' }}
                   title="Shift Up/Down"
                 />
               </div>
 
               {/* Horizontal Pan (X-axis) */}
-              <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 w-1/2 z-50 flex items-center justify-center">
+              <div className="absolute bottom-2 md:bottom-6 left-1/2 -translate-x-1/2 w-1/3 z-30 hidden sm:flex items-center justify-center opacity-40 hover:opacity-100 transition-opacity">
                 <input 
                   type="range" 
                   min={-300 * zoom} 
@@ -761,8 +942,10 @@ export function ColourTheLetter() {
         </div>
       </div>
 
-      <CelebrationScreen active={showCelebration} stars={3} message="Amazing Work! 🎨"
-        onContinue={() => navigate(-1)} />
+      <CelebrationScreen active={showCelebration} stars={(history.length >= 3 ? 3 : history.length >= 1 ? 2 : 1) as 1 | 2 | 3} message="Amazing Work! 🎨"
+        onContinue={() => navigate('/letters/activity/colour-the-letter')}
+        onMenu={() => navigate('/letters')}
+      />
     </div>
   );
 }

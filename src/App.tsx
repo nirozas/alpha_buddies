@@ -17,6 +17,7 @@ import { NumberActivityRouter } from './activities/numbers';
 import { NumberSounds } from './activities/numbers/NumberSounds';
 import { NumberColorByCode } from './activities/numbers/NumberColorByCode';
 import { PageTransition } from './components/PageTransition';
+import { StickerRewardModal } from './components/SharedComponents';
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -76,6 +77,7 @@ function App() {
     <BrowserRouter>
       <AnimatedRoutes />
       <PortraitOverlay />
+      <StickerRewardModal />
     </BrowserRouter>
   );
 }

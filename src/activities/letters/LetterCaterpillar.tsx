@@ -1,3 +1,4 @@
+import { calculateStars } from '../../utils/scoring';
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -73,128 +74,143 @@ function injectFallStyle() {
 // SETUP SCREEN
 // ─────────────────────────────────────────────────────────────
 function SetupScreen({
-  initialLetter,
+  initialLetters,
   onStart,
 }: {
-  initialLetter: string;
+  initialLetters: string[];
   onStart: (selected: string[], mode: Mode) => void;
 }) {
-  const [selected, setSelected] = useState<string[]>([initialLetter]);
+  const [selected, setSelected] = useState<string[]>(initialLetters.length > 0 ? initialLetters : ['A']);
   const [mode, setMode] = useState<Mode>('capital');
 
   const toggle = (l: string) => {
     setSelected(prev =>
       prev.includes(l)
         ? prev.length > 1 ? prev.filter(x => x !== l) : prev   // keep at least 1
-        : prev.length < 27 ? [...prev, l] : prev
+        : prev.length < 26 ? [...prev, l] : prev
     );
   };
 
   const selectAll = () => setSelected([...ALPHABET]);
-  const clearAll  = () => setSelected([initialLetter]);
+  const clearAll  = () => setSelected(initialLetters.length > 0 ? initialLetters : ['A']);
 
+  const initialLetter = initialLetters[0] || 'A';
   const ld0 = LETTERS_DATA.find(l => l.letter === initialLetter) || LETTERS_DATA[0];
 
   return (
-    <div className="min-h-dvh flex flex-col items-center pb-8 bg-transparent relative z-10 px-4">
-      <div className="w-full max-w-2xl">
+    <div className="h-dvh max-h-dvh flex flex-col justify-between overflow-hidden bg-transparent relative z-10 p-2 sm:p-4 select-none font-nunito">
+      <div className="w-full max-w-3xl mx-auto flex flex-col h-full justify-between">
         {/* Header */}
-        <div className="flex items-center gap-3 pt-6 pb-4">
-          <span style={{ fontSize: '2.5rem' }}>🐛</span>
+        <div className="flex items-center gap-2.5 pt-1 pb-1 shrink-0">
+          <span className="text-3xl">🐛</span>
           <div>
-            <h1 style={{ fontFamily: 'Nunito', fontWeight: 900, fontSize: '1.8rem', color: ld0.color, margin: 0 }}>
+            <h1 style={{ fontFamily: 'Nunito', fontWeight: 900, fontSize: '1.4rem', color: ld0.color, margin: 0, lineHeight: 1.1 }}>
               Letter Caterpillar
             </h1>
-            <p style={{ fontFamily: 'Nunito', fontWeight: 600, color: '#666', margin: 0 }}>
+            <p style={{ fontFamily: 'Nunito', fontWeight: 700, color: '#666', margin: 0, fontSize: '0.8rem' }}>
               Pick letters to catch, then grow your caterpillar!
             </p>
           </div>
         </div>
 
         {/* Mode selector */}
-        <div className="bg-white/80 backdrop-blur rounded-2xl p-4 mb-4 shadow-lg border border-white/60">
-          <p style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: '1rem', color: '#555', marginBottom: 10 }}>
+        <div className="bg-white/85 backdrop-blur rounded-2xl p-2.5 shadow-md border border-white/60 shrink-0 mb-1.5">
+          <p style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: '0.85rem', color: '#555', marginBottom: 6 }}>
             Show letters as:
           </p>
-          <div className="flex gap-3">
+          <div className="flex gap-2">
             {(['capital', 'small', 'both'] as Mode[]).map(m => (
               <button
                 key={m}
+                type="button"
                 onClick={() => setMode(m)}
-                className="flex-1 py-2 rounded-xl font-bold capitalize transition-all border-2"
+                className="flex-1 py-1.5 rounded-xl font-black transition-all border-2 cursor-pointer text-center"
                 style={{
                   fontFamily: 'Nunito',
-                  fontWeight: 800,
-                  fontSize: '1.1rem',
                   background: mode === m ? ld0.color : 'white',
                   color: mode === m ? 'white' : '#555',
-                  borderColor: mode === m ? ld0.color : '#ddd',
+                  borderColor: mode === m ? ld0.color : '#e2e8f0',
                 }}
               >
-                {m === 'capital' ? 'A' : m === 'small' ? 'a' : 'Aa'}
-                <span style={{ fontSize: '0.7rem', display: 'block', fontWeight: 600, opacity: 0.8 }}>
+                <div style={{ fontSize: '1.1rem', lineHeight: 1 }}>
+                  {m === 'capital' ? 'A' : m === 'small' ? 'a' : 'Aa'}
+                </div>
+                <div style={{ fontSize: '0.65rem', fontWeight: 700, opacity: 0.9 }}>
                   {m === 'capital' ? 'Capital' : m === 'small' ? 'Lowercase' : 'Both'}
-                </span>
+                </div>
               </button>
             ))}
           </div>
         </div>
 
-        {/* Letters grid */}
-        <div className="bg-white/80 backdrop-blur rounded-2xl p-4 shadow-lg border border-white/60 mb-5">
-          <div className="flex justify-between items-center mb-3">
-            <p style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: '1rem', color: '#555' }}>
-              Select letters ({selected.length}/27):
+        {/* Letters grid: Fits all 26 letters in screen view without scrolling */}
+        <div className="bg-white/85 backdrop-blur rounded-2xl p-2.5 sm:p-3 shadow-md border border-white/60 flex-1 flex flex-col justify-between min-h-0 mb-1.5">
+          <div className="flex justify-between items-center mb-1 shrink-0 px-1">
+            <p style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: '0.85rem', color: '#555', margin: 0 }}>
+              Select letters ({selected.length}/26):
             </p>
-            <div className="flex gap-2">
+            <div className="flex gap-1.5">
               <button
+                type="button"
                 onClick={selectAll}
-                className="text-xs font-bold px-3 py-1 rounded-full border-2 transition-all"
+                className="text-xs font-bold px-2.5 py-0.5 rounded-full border-2 transition-all cursor-pointer"
                 style={{ fontFamily: 'Nunito', borderColor: ld0.color, color: ld0.color, background: 'white' }}
-              >All</button>
+              >
+                All
+              </button>
               <button
+                type="button"
                 onClick={clearAll}
-                className="text-xs font-bold px-3 py-1 rounded-full border-2 transition-all"
+                className="text-xs font-bold px-2.5 py-0.5 rounded-full border-2 transition-all cursor-pointer"
                 style={{ fontFamily: 'Nunito', borderColor: '#ccc', color: '#888', background: 'white' }}
-              >Reset</button>
+              >
+                Reset
+              </button>
             </div>
           </div>
 
-          <div className="grid grid-cols-9 gap-1.5">
-            {ALPHABET.map(l => {
-              const ld2 = LETTERS_DATA.find(x => x.letter === l)!;
-              const sel = selected.includes(l);
-              return (
-                <motion.button
-                  key={l}
-                  whileTap={{ scale: 0.88 }}
-                  onClick={() => toggle(l)}
-                  className="aspect-square rounded-xl flex items-center justify-center font-black text-lg border-2 transition-all shadow-sm"
-                  style={{
-                    fontFamily: 'Nunito',
-                    background: sel ? ld2.color : 'white',
-                    color: sel ? 'white' : '#888',
-                    borderColor: sel ? ld2.color : '#e5e5e5',
-                    fontSize: '1.1rem',
-                  }}
-                >
-                  {l}
-                </motion.button>
-              );
-            })}
+          <div className="flex-1 flex items-center justify-center min-h-0 overflow-y-auto py-1">
+            <div className="grid grid-cols-7 sm:grid-cols-9 gap-1.5 sm:gap-2.5 w-full justify-items-stretch">
+              {ALPHABET.map(l => {
+                const ld2 = LETTERS_DATA.find(x => x.letter === l)!;
+                const sel = selected.includes(l);
+                return (
+                  <motion.button
+                    key={l}
+                    type="button"
+                    whileHover={{ scale: 1.08 }}
+                    whileTap={{ scale: 0.92 }}
+                    onClick={() => toggle(l)}
+                    className="aspect-square rounded-xl sm:rounded-2xl flex items-center justify-center font-black border-2 transition-all shadow-sm cursor-pointer"
+                    style={{
+                      fontFamily: 'Nunito',
+                      background: sel ? ld2.color : 'white',
+                      color: sel ? 'white' : '#888',
+                      borderColor: sel ? ld2.color : '#e5e5e5',
+                      fontSize: 'clamp(1rem, 2.4vw, 1.6rem)',
+                    }}
+                  >
+                    {mode === 'small' ? ld2.lowercase : mode === 'both' ? `${ld2.uppercase}${ld2.lowercase}` : ld2.uppercase}
+                  </motion.button>
+                );
+              })}
+            </div>
           </div>
         </div>
 
         {/* Start */}
-        <motion.button
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          onClick={() => onStart(selected, mode)}
-          className="w-full py-4 rounded-2xl text-white font-black text-xl shadow-2xl border-4 border-white"
-          style={{ fontFamily: 'Nunito', background: ld0.color, fontSize: '1.4rem' }}
-        >
-          🐛 Start Catching!
-        </motion.button>
+        <div className="shrink-0 pt-1 pb-1">
+          <motion.button
+            type="button"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => onStart(selected, mode)}
+            className="w-full py-3 rounded-2xl text-white font-black text-lg shadow-xl border-2 border-white cursor-pointer"
+            style={{ fontFamily: 'Nunito', background: ld0.color }}
+          >
+            🐛 Start Catching ({selected.length} letter{selected.length > 1 ? 's' : ''})!
+          </motion.button>
+        </div>
       </div>
     </div>
   );
@@ -224,7 +240,8 @@ function GameScreen({
   const randomTarget = () => targetLetters[Math.floor(Math.random() * targetLetters.length)];
 
   const [currentTargetLetter, setCurrentTargetLetter] = useState<string>(() => randomTarget());
-  const [caught, setCaught] = useState(0);          // how many caught so far
+  const [caught, setCaught] = useState(0);
+  const [mistakes, setMistakes] = useState(0);          // how many caught so far
   const [segments, setSegments] = useState<string[]>([]);
   const [shake, setShake] = useState(false);
   const [showCelebration, setShowCelebration] = useState(false);
@@ -295,8 +312,13 @@ function GameScreen({
     setCaught(newCaught);
 
     if (newCaught >= GOAL) {
-      awardStars(activityKey, 3);
-      incrementActivity(activityKey);
+      const earnedStars = calculateStars(mistakes);
+      targetLetters.forEach(l => {
+        awardStars(`${l}-letter-caterpillar`, earnedStars);
+        incrementActivity(`${l}-letter-caterpillar`);
+      });
+      awardStars('letter-caterpillar', earnedStars);
+      incrementActivity('letter-caterpillar');
       setTimeout(() => setShowCelebration(true), 500);
     } else {
       // Pick a new random target (prefer different from current if possible)
@@ -441,12 +463,19 @@ function GameScreen({
 
       {showFact && (
         <div className="fixed inset-x-4 bottom-8 z-[10000]">
-          <FunFactCard fact={accentLd.funFact} emoji={accentLd.exampleEmoji} onClose={() => navigate(-1)} />
+          <FunFactCard fact={accentLd.funFact} emoji={accentLd.exampleEmoji} onClose={() => {
+            const parts = window.location.pathname.split('/').filter(Boolean);
+            if (parts.length >= 4) {
+              navigate(`/${parts[0]}/${parts[1]}/${parts[2]}`);
+            } else {
+              navigate('/letters');
+            }
+          }} />
         </div>
       )}
       <CelebrationScreen
         active={showCelebration}
-        stars={3}
+        stars={calculateStars(mistakes)}
         message="Super caterpillar! 🐛🌟"
         onContinue={() => { setShowCelebration(false); setShowFact(true); }}
       />
@@ -458,9 +487,17 @@ function GameScreen({
 // MAIN EXPORT
 // ─────────────────────────────────────────────────────────────
 export function LetterCaterpillar() {
-  const { letter } = useParams<{ letter: string }>();
+  const { letter } = useParams<{ letter?: string }>();
   const navigate = useNavigate();
-  const initialLetter = letter?.toUpperCase() || 'A';
+  const { masteredLetter, masteredLetters } = useStore();
+  
+  // In games that allow selection of more than one letter, when in "Pick letters to master" mode, add all these letters to the game
+  const activeMastered = (masteredLetters && masteredLetters.length > 0)
+    ? masteredLetters
+    : (letter ? [letter.toUpperCase()] : (masteredLetter ? [masteredLetter] : ['A']));
+
+  const initialLetters = activeMastered;
+  const initialLetter = initialLetters[0] || 'A';
   const ld = LETTERS_DATA.find(l => l.letter === initialLetter) || LETTERS_DATA[0];
 
   const [gameConfig, setGameConfig] = useState<{ letters: string[]; mode: Mode } | null>(null);
@@ -469,10 +506,10 @@ export function LetterCaterpillar() {
     return (
       <>
         <div className="absolute top-4 left-4 z-20">
-          <BackButton onClick={() => navigate(-1)} color={ld.color} />
+          <BackButton onClick={() => navigate('/letters')} color={ld.color} />
         </div>
         <SetupScreen
-          initialLetter={initialLetter}
+          initialLetters={initialLetters}
           onStart={(letters, mode) => setGameConfig({ letters, mode })}
         />
       </>
@@ -484,7 +521,7 @@ export function LetterCaterpillar() {
       targetLetters={gameConfig.letters}
       mode={gameConfig.mode}
       onBack={() => setGameConfig(null)}
-      activityKey={`caterpillar`}
+      activityKey={activeMastered.length > 0 ? `${activeMastered[0]}-letter-caterpillar` : 'caterpillar'}
     />
   );
 }

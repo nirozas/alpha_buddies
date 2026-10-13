@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { BackButton, CelebrationScreen } from '../../components/SharedComponents';
 import { useStore } from '../../store';
 import { useAudio } from '../../hooks/useAudio';
@@ -8,8 +8,12 @@ import { LETTERS_DATA } from '../../constants/letters';
 
 export function AlphabetTrain() {
   const navigate = useNavigate();
-  const { awardStars, incrementActivity } = useStore();
+  const { letter } = useParams<{ letter?: string }>();
+  const { awardStars, incrementActivity, masteredLetter, masteredLetters } = useStore();
   const { playPop, playDing, playBoing, playFanfare, speak } = useAudio();
+
+  const activeMastered = letter ? [letter.toUpperCase()] : (masteredLetters && masteredLetters.length > 0 ? masteredLetters : (masteredLetter ? [masteredLetter] : []));
+  const hasMastered = activeMastered.length > 0;
 
   const [sequence, setSequence] = useState<string[]>([]);
   const [missingIndex, setMissingIndex] = useState<number>(0);
@@ -19,17 +23,31 @@ export function AlphabetTrain() {
   const [showCelebration, setShowCelebration] = useState(false);
   const [animatingTrain, setAnimatingTrain] = useState(false);
   const [level, setLevel] = useState(1);
-  const totalLevels = 40;
+  const totalLevels = hasMastered ? activeMastered.length * 2 : 40;
   const missingCarRef = useRef<HTMLDivElement>(null);
 
   const generateRound = (lvl: number) => {
-    // Progressive starting point: 0 to 22
-    // We have 40 levels, so we cycle through the alphabet roughly twice
-    const startIdx = Math.floor((lvl - 1) / 1.8) % 23;
-    const seq = LETTERS_DATA.slice(startIdx, startIdx + 4).map(l => l.letter);
-    
-    // Vary the missing index based on level so it's not always the same position
-    const mIdx = (lvl - 1) % 4;
+    let seq: string[] = [];
+    let mIdx = (lvl - 1) % 4;
+
+    if (hasMastered) {
+      const currentLetter = activeMastered[(lvl - 1) % activeMastered.length];
+      const targetIdx = LETTERS_DATA.findIndex(l => l.letter === currentLetter);
+      const posInSeq = (lvl - 1) % 4;
+      const startIdx = Math.max(0, Math.min(22, (targetIdx !== -1 ? targetIdx : 0) - posInSeq));
+      seq = LETTERS_DATA.slice(startIdx, startIdx + 4).map(l => l.letter);
+      mIdx = seq.indexOf(currentLetter);
+      if (mIdx === -1) {
+        mIdx = 0;
+        seq[0] = currentLetter;
+      }
+    } else {
+      // Progressive starting point: 0 to 22
+      // We have 40 levels, so we cycle through the alphabet roughly twice
+      const startIdx = Math.floor((lvl - 1) / 1.8) % 23;
+      seq = LETTERS_DATA.slice(startIdx, startIdx + 4).map(l => l.letter);
+      mIdx = (lvl - 1) % 4;
+    }
     
     // Generate 3 wrong options
     const wrongOptions: string[] = [];
@@ -83,6 +101,12 @@ export function AlphabetTrain() {
             // Final Victory
             playFanfare();
             const stars = mistakes === 0 ? 3 : mistakes <= 3 ? 2 : 1;
+            if (hasMastered) {
+              activeMastered.forEach(l => {
+                awardStars(`${l}-alphabet-train`, stars);
+                incrementActivity(`${l}-alphabet-train`);
+              });
+            }
             awardStars('alphabet-train', stars);
             incrementActivity('alphabet-train');
             setTimeout(() => setShowCelebration(true), 2000);

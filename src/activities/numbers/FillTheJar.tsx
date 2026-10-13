@@ -1,3 +1,4 @@
+import { calculateStars } from '../../utils/scoring';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -14,6 +15,7 @@ export function FillTheJar() {
 
   const target = Math.max(1, nd.digit);
   const [count, setCount] = useState(0);
+  const [mistakes, setMistakes] = useState(0);
   const [overflow, setOverflow] = useState(false);
   const [showCelebration, setShowCelebration] = useState(false);
   const [showFact, setShowFact] = useState(false);
@@ -22,6 +24,7 @@ export function FillTheJar() {
   const handleAdd = () => {
     if (count >= target + 2) return;
     if (count >= target) {
+      setMistakes(m => m + 1);
       setOverflow(true);
       setTimeout(() => setOverflow(false), 800);
       return;
@@ -30,7 +33,8 @@ export function FillTheJar() {
     setCount(newCount);
     setItems(i => [...i, Date.now()]);
     if (newCount === target) {
-      awardStars(`${nd.digit}-fill-the-jar`, 3);
+      const earnedStars = calculateStars(mistakes);
+      awardStars(`${nd.digit}-fill-the-jar`, earnedStars);
       incrementActivity(`${nd.digit}-fill-the-jar`);
       setTimeout(() => setShowCelebration(true), 600);
     }
@@ -42,7 +46,7 @@ export function FillTheJar() {
   return (
     <div className="min-h-dvh flex flex-col items-center pb-8" style={{ background: nd.bgColor }}>
       <div className="w-full flex items-center justify-between p-4">
-        <BackButton onClick={() => navigate(-1)} color={nd.color} />
+        <BackButton color={nd.color} />
         <h2 style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: '1.1rem', color: nd.color }}>Fill the Jar</h2>
         <div style={{ width: 56 }} />
       </div>
@@ -120,10 +124,17 @@ export function FillTheJar() {
 
       {showFact && (
         <div className="p-4 w-full max-w-sm mt-4">
-          <FunFactCard fact={nd.funFact} emoji={nd.emoji} onClose={() => navigate(-1)} />
+          <FunFactCard fact={nd.funFact} emoji={nd.emoji} onClose={() => {
+            const parts = window.location.pathname.split('/').filter(Boolean);
+            if (parts.length >= 4) {
+              navigate(`/${parts[0]}/${parts[1]}/${parts[2]}`);
+            } else {
+              navigate('/numbers');
+            }
+          }} />
         </div>
       )}
-      <CelebrationScreen active={showCelebration} stars={3} message="Perfect fill! 🫙🎉"
+      <CelebrationScreen active={showCelebration} stars={calculateStars(mistakes)} message="Perfect fill! 🫙🎉"
         onContinue={() => { setShowCelebration(false); setShowFact(true); }} />
     </div>
   );

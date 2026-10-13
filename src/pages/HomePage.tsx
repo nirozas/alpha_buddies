@@ -32,14 +32,25 @@ export function HomePage() {
           Alpha<span style={{ color: '#F97316', WebkitTextStroke: '2px #C2410C' }}>Buddies</span>
         </motion.h1>
 
-        <motion.button
-          whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
-          onClick={() => navigate('/progress')}
-          className="pointer-events-auto flex items-center gap-2 px-5 py-3 rounded-full shadow-lg border-2 border-[#6C3CE1]"
-          style={{ background: 'white', fontFamily: 'Nunito', fontWeight: 800, color: '#6C3CE1', fontSize: '1rem' }}
-        >
-          🔒 Parents
-        </motion.button>
+        <div className="pointer-events-auto flex items-center gap-2.5 sm:gap-3">
+          <motion.button
+            whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.94 }}
+            onClick={() => navigate('/progress')}
+            className="flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-full shadow-xl border-3 border-amber-300 bg-amber-400 hover:bg-amber-500 text-amber-950 font-black text-sm sm:text-base cursor-pointer transition-transform"
+            style={{ fontFamily: 'Nunito' }}
+          >
+            🏆 Player Dashboard
+          </motion.button>
+
+          <motion.button
+            whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.94 }}
+            onClick={() => navigate('/progress')}
+            className="flex items-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full shadow-lg border-2 border-purple-300 bg-white/90 hover:bg-white text-purple-700 font-extrabold text-xs sm:text-sm cursor-pointer transition-transform"
+            style={{ fontFamily: 'Nunito' }}
+          >
+            🔒 Parents
+          </motion.button>
+        </div>
       </div>
 
       {/* 

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+    <defs>
+      
+  <filter id="sticker-shadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.25"/>
+  </filter>
+  <filter id="soft-glow" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="3" result="blur"/>
+    <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+  </filter>
+  <g id="sparkle">
+    <path d="M0 -8 Q0 0 8 0 Q0 0 0 8 Q0 0 -8 0 Q0 0 0 -8 Z" fill="#FFFBEB" filter="url(#soft-glow)"/>
+    <circle cx="0" cy="0" r="2.5" fill="#FEF08A"/>
+  </g>
+  <g id="gold-star">
+    <path d="M0 -7 L2 -2 L7 -2 L3 1 L5 6 L0 3 L-5 6 L-3 1 L-7 -2 L-2 -2 Z" fill="#FACC15"/>
+    <circle cx="0" cy="0" r="1.5" fill="#FFF"/>
+  </g>
+
+      <linearGradient id="astral-mane" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#FDE047"/>
+        <stop offset="50%" stop-color="#F97316"/>
+        <stop offset="100%" stop-color="#7C3AED"/>
+      </linearGradient>
+    </defs>
+    <path d="M120 25 C185 25 215 65 215 125 C215 185 180 215 120 215 C60 215 25 185 25 125 C25 65 55 25 120 25 Z" fill="#FFFFFF" filter="url(#sticker-shadow)"/>
+    <!-- Cosmic Sun Mane -->
+    <circle cx="120" cy="115" r="68" fill="url(#astral-mane)"/>
+    <!-- Golden King Crown -->
+    <polygon points="90,55 95,30 110,48 120,25 130,48 145,30 150,55" fill="#FACC15" stroke="#EAB308" stroke-width="2"/>
+    <!-- Lion Face -->
+    <circle cx="120" cy="120" r="45" fill="#FEF08A"/>
+    <!-- Eyes -->
+    <circle cx="102" cy="115" r="10" fill="#0F172A"/>
+    <circle cx="138" cy="115" r="10" fill="#0F172A"/>
+    <circle cx="98" cy="110" r="4" fill="#FFFFFF"/>
+    <circle cx="134" cy="110" r="4" fill="#FFFFFF"/>
+    <!-- Snout & Whiskers -->
+    <ellipse cx="120" cy="132" rx="14" ry="10" fill="#FFFFFF"/>
+    <polygon points="120,126 114,133 126,133" fill="#D97706"/>
+    <use href="#sparkle" x="40" y="65"/>
+    <use href="#sparkle" x="200" y="65"/>
+    <use href="#gold-star" x="120" y="175"/>
+  </svg>

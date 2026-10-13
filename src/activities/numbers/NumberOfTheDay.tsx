@@ -77,7 +77,7 @@ export function NumberOfTheDay() {
     <div className="min-h-dvh flex flex-col items-center pb-12" style={{ background: nd.bgColor }}>
       <div className="w-full flex items-center justify-between p-4 max-w-5xl">
         <div className="flex items-center gap-3">
-          <BackButton onClick={() => navigate(-1)} color={nd.color} />
+          <BackButton color={nd.color} />
         </div>
         
         <div className="flex-1 max-w-[200px] mx-4">
@@ -183,7 +183,13 @@ export function NumberOfTheDay() {
 
       <CelebrationScreen active={showCelebration} stars={3}
         message={`Fantastic! You know the number ${nd.digit}! 🎉`}
-        onContinue={() => navigate(-1)}
+        onContinue={() => {
+          if (nd.digit < 10) {
+            navigate(`/numbers/activity/number-of-the-day/${nd.digit + 1}`);
+          } else {
+            navigate('/numbers');
+          }
+        }}
       />
     </div>
   );

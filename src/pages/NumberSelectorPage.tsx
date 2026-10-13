@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, useParams } from 'react-router-dom';
 import { NUMBERS_DATA } from '../constants/numbers';
@@ -12,6 +13,9 @@ export function NumberSelectorPage() {
 
   const activityMeta = NUMBER_ACTIVITIES.find(a => a.id === activity);
 
+  const [randomDigit] = useState(() => Math.floor(Math.random() * NUMBERS_DATA.length));
+  const featuredNumberData = NUMBERS_DATA[randomDigit] || NUMBERS_DATA[1];
+
   if (!activityMeta) return <div>Activity not found</div>;
 
   return (
@@ -23,10 +27,24 @@ export function NumberSelectorPage() {
         </h1>
       </div>
 
-      <div className="text-center px-4 mt-2 mb-6">
-        <p className="text-xl font-bold text-gray-700" style={{ fontFamily: 'Nunito' }}>
+      <div className="text-center px-4 mt-2 mb-4 flex flex-col items-center gap-2">
+        <p className="text-base sm:text-lg font-bold text-gray-700" style={{ fontFamily: 'Nunito' }}>
           Select a number to play!
         </p>
+
+        <motion.button
+          type="button"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => navigate(`/numbers/activity/${activity}/${featuredNumberData.digit}`)}
+          className="flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-black text-white shadow-md hover:shadow-lg transition-all cursor-pointer border-2 border-white/80 active:scale-95"
+          style={{ backgroundColor: featuredNumberData.color }}
+        >
+          <span>⭐ Play Number {featuredNumberData.digit}</span>
+          <span className="text-[10px] bg-white/25 px-2 py-0.5 rounded-full font-black uppercase">
+            Random →
+          </span>
+        </motion.button>
       </div>
 
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 px-4 w-full max-w-4xl">

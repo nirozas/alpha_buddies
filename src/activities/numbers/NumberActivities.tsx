@@ -1,3 +1,4 @@
+import { calculateStars } from '../../utils/scoring';
 // N2 Trace Number, N4 Number Match, N6 Number Road, N9 Counting Song
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -125,7 +126,7 @@ export function TraceNumber() {
   return (
     <div className="min-h-dvh flex flex-col items-center" style={{ background: nd.bgColor }}>
       <div className="w-full flex items-center justify-between p-4">
-        <BackButton onClick={() => navigate(-1)} color={nd.color} />
+        <BackButton color={nd.color} />
         <h2 style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: '1.1rem', color: nd.color }}>Trace the Number</h2>
         <motion.button whileTap={{ scale: 0.9 }} onClick={() => { setCoverage(0); setCleared(c => !c); setDrawing(false); }}
           className="rounded-full px-3 py-1 text-sm font-bold"
@@ -149,7 +150,14 @@ export function TraceNumber() {
             animate={{ width: `${coverage}%` }} transition={{ type: 'spring' }} />
         </div>
       </div>
-      {showFact && <div className="p-4 w-full max-w-sm mt-2"><FunFactCard fact={nd.funFact} emoji={nd.emoji} onClose={() => navigate(-1)} /></div>}
+      {showFact && <div className="p-4 w-full max-w-sm mt-2"><FunFactCard fact={nd.funFact} emoji={nd.emoji} onClose={() => {
+            const parts = window.location.pathname.split('/').filter(Boolean);
+            if (parts.length >= 4) {
+              navigate(`/${parts[0]}/${parts[1]}/${parts[2]}`);
+            } else {
+              navigate('/numbers');
+            }
+          }} /></div>}
       <CelebrationScreen active={showCelebration} stars={3} message="Great tracing! ✏️" onContinue={() => { setShowCelebration(false); setShowFact(true); }} />
     </div>
   );
@@ -174,7 +182,7 @@ export function NumberMatch() {
   return (
     <div className="min-h-dvh flex flex-col items-center pb-8" style={{ background: nd.bgColor }}>
       <div className="w-full flex items-center justify-between p-4">
-        <BackButton onClick={() => navigate(-1)} color={nd.color} />
+        <BackButton color={nd.color} />
         <h2 style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: '1.1rem', color: nd.color }}>Number Match</h2>
         <div style={{ width: 56 }} />
       </div>
@@ -191,7 +199,7 @@ export function NumberMatch() {
                 if (selected !== null && options[selected].digit === nd.digit) return;
                 setSelected(i);
                 if (isCorrect) {
-                  awardStars(`${nd.digit}-number-match`, mistakes === 0 ? 3 : mistakes <= 1 ? 2 : 1);
+                  awardStars(`${nd.digit}-number-match`, calculateStars(mistakes));
                   incrementActivity(`${nd.digit}-number-match`);
                   setTimeout(() => setShowCelebration(true), 500);
                 } else {
@@ -211,8 +219,15 @@ export function NumberMatch() {
           );
         })}
       </div>
-      {showFact && <div className="p-4 w-full max-w-sm mt-4"><FunFactCard fact={nd.funFact} emoji={nd.emoji} onClose={() => navigate(-1)} /></div>}
-      <CelebrationScreen active={showCelebration} stars={mistakes === 0 ? 3 : mistakes <= 1 ? 2 : 1} message="Number matched! 🔢"
+      {showFact && <div className="p-4 w-full max-w-sm mt-4"><FunFactCard fact={nd.funFact} emoji={nd.emoji} onClose={() => {
+            const parts = window.location.pathname.split('/').filter(Boolean);
+            if (parts.length >= 4) {
+              navigate(`/${parts[0]}/${parts[1]}/${parts[2]}`);
+            } else {
+              navigate('/numbers');
+            }
+          }} /></div>}
+      <CelebrationScreen active={showCelebration} stars={calculateStars(mistakes)} message="Number matched! 🔢"
         onContinue={() => { setShowCelebration(false); setShowFact(true); }} />
     </div>
   );
@@ -246,7 +261,7 @@ export function NumberRoad() {
   return (
     <div className="min-h-dvh flex flex-col items-center pb-8" style={{ background: nd.bgColor }}>
       <div className="w-full flex items-center justify-between p-4">
-        <BackButton onClick={() => navigate(-1)} color={nd.color} />
+        <BackButton color={nd.color} />
         <h2 style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: '1.1rem', color: nd.color }}>Number Road</h2>
         <div style={{ width: 56 }} />
       </div>
@@ -270,7 +285,14 @@ export function NumberRoad() {
           </motion.button>
         ))}
       </div>
-      {showFact && <div className="p-4 w-full max-w-sm mt-4"><FunFactCard fact={nd.funFact} emoji={nd.emoji} onClose={() => navigate(-1)} /></div>}
+      {showFact && <div className="p-4 w-full max-w-sm mt-4"><FunFactCard fact={nd.funFact} emoji={nd.emoji} onClose={() => {
+            const parts = window.location.pathname.split('/').filter(Boolean);
+            if (parts.length >= 4) {
+              navigate(`/${parts[0]}/${parts[1]}/${parts[2]}`);
+            } else {
+              navigate('/numbers');
+            }
+          }} /></div>}
       <CelebrationScreen active={showCelebration} stars={3} message="Road champion! 🚗🏁"
         onContinue={() => { setShowCelebration(false); setShowFact(true); }} />
     </div>
@@ -304,7 +326,7 @@ export function CountingSong() {
   return (
     <div className="min-h-dvh flex flex-col items-center pb-8" style={{ background: nd.bgColor }}>
       <div className="w-full flex items-center justify-between p-4">
-        <BackButton onClick={() => navigate(-1)} color={nd.color} />
+        <BackButton color={nd.color} />
         <h2 style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: '1.1rem', color: nd.color }}>Counting Song</h2>
         <div style={{ width: 56 }} />
       </div>
@@ -329,7 +351,14 @@ export function CountingSong() {
           </motion.button>
         ))}
       </div>
-      {showFact && <div className="p-4 w-full max-w-sm mt-4"><FunFactCard fact={nd.funFact} emoji={nd.emoji} onClose={() => navigate(-1)} /></div>}
+      {showFact && <div className="p-4 w-full max-w-sm mt-4"><FunFactCard fact={nd.funFact} emoji={nd.emoji} onClose={() => {
+            const parts = window.location.pathname.split('/').filter(Boolean);
+            if (parts.length >= 4) {
+              navigate(`/${parts[0]}/${parts[1]}/${parts[2]}`);
+            } else {
+              navigate('/numbers');
+            }
+          }} /></div>}
       <CelebrationScreen active={showCelebration} stars={3} message="Counting superstar! 🎶🔢"
         onContinue={() => { setShowCelebration(false); setShowFact(true); }} />
     </div>

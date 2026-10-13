@@ -53,9 +53,18 @@ export function NumbersActivityHubPage() {
     <>
       <div className="hub-bg" />
       <div className="min-h-dvh flex flex-col items-center pb-24 relative z-10">
-        <div className="w-full flex items-center p-4 sticky top-0 z-50">
-          <BackButton onClick={() => navigate('/')} color="#2563EB" />
-          <h1 className="flex-1 text-center text-4xl font-black text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]" style={{ fontFamily: 'Nunito', marginRight: 56 }}>
+        <div className="w-full flex items-center justify-between p-4 sticky top-0 z-50">
+          <div className="flex items-center gap-2.5">
+            <BackButton onClick={() => navigate('/')} color="#2563EB" />
+            <button
+              onClick={() => navigate('/progress')}
+              className="flex items-center gap-1.5 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full shadow-lg border-2 border-amber-300 bg-amber-400 hover:bg-amber-500 text-amber-950 font-black text-xs sm:text-sm cursor-pointer active:scale-95 transition-transform"
+              style={{ fontFamily: 'Nunito' }}
+            >
+              🏆 Player Dashboard
+            </button>
+          </div>
+          <h1 className="text-center text-3xl sm:text-4xl font-black text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] mr-16 sm:mr-24" style={{ fontFamily: 'Nunito' }}>
             Number Games
           </h1>
         </div>

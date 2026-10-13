@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+    <defs>
+      
+  <filter id="sticker-shadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.25"/>
+  </filter>
+  <filter id="soft-glow" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="3" result="blur"/>
+    <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+  </filter>
+  <g id="sparkle">
+    <path d="M0 -8 Q0 0 8 0 Q0 0 0 8 Q0 0 -8 0 Q0 0 0 -8 Z" fill="#FFFBEB" filter="url(#soft-glow)"/>
+    <circle cx="0" cy="0" r="2.5" fill="#FEF08A"/>
+  </g>
+  <g id="gold-star">
+    <path d="M0 -7 L2 -2 L7 -2 L3 1 L5 6 L0 3 L-5 6 L-3 1 L-7 -2 L-2 -2 Z" fill="#FACC15"/>
+    <circle cx="0" cy="0" r="1.5" fill="#FFF"/>
+  </g>
+
+      <linearGradient id="fawn-grad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#FBCFE8"/>
+        <stop offset="100%" stop-color="#F472B6"/>
+      </linearGradient>
+    </defs>
+    <path d="M120 25 C185 25 215 65 215 125 C215 185 180 215 120 215 C60 215 25 185 25 125 C25 65 55 25 120 25 Z" fill="#FFFFFF" filter="url(#sticker-shadow)"/>
+    <!-- Flowering Antlers -->
+    <path d="M90 65 Q70 40 60 25 M75 45 Q55 45 45 40" stroke="#78350F" stroke-width="4" stroke-linecap="round"/>
+    <path d="M150 65 Q170 40 180 25 M165 45 Q185 45 195 40" stroke="#78350F" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="60" cy="25" r="7" fill="#FDA4AF"/>
+    <circle cx="45" cy="40" r="6" fill="#FDA4AF"/>
+    <circle cx="180" cy="25" r="7" fill="#FDA4AF"/>
+    <circle cx="195" cy="40" r="6" fill="#FDA4AF"/>
+    <!-- Head & Body -->
+    <ellipse cx="120" cy="145" rx="45" ry="50" fill="url(#fawn-grad)"/>
+    <circle cx="120" cy="95" r="42" fill="url(#fawn-grad)"/>
+    <!-- White Spots -->
+    <circle cx="110" cy="70" r="3" fill="#FFFFFF"/>
+    <circle cx="130" cy="70" r="3" fill="#FFFFFF"/>
+    <circle cx="120" cy="62" r="3.5" fill="#FFFFFF"/>
+    <!-- Big Doe Eyes -->
+    <ellipse cx="102" cy="95" rx="10" ry="14" fill="#0F172A"/>
+    <ellipse cx="138" cy="95" rx="10" ry="14" fill="#0F172A"/>
+    <circle cx="98" cy="90" r="4" fill="#FFFFFF"/>
+    <circle cx="134" cy="90" r="4" fill="#FFFFFF"/>
+    <!-- Cute Nose & Cheeks -->
+    <circle cx="120" cy="112" rx="4" ry="3" fill="#9D174D"/>
+    <use href="#sparkle" x="40" y="100"/>
+    <use href="#sparkle" x="200" y="100"/>
+    <use href="#gold-star" x="120" y="150"/>
+  </svg>

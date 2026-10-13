@@ -12,9 +12,19 @@ import { LETTER_SONGS } from '../../constants/letterSongs';
 export function SayItOutLoud() {
   const { letter } = useParams<{ letter: string }>();
   const navigate = useNavigate();
-  const { awardStars, incrementActivity } = useStore();
+  const { awardStars, incrementActivity, masteredLetter, masteredLetters } = useStore();
   const { speak, playDing } = useAudio();
-  const ld = LETTERS_DATA.find(l => l.letter === letter?.toUpperCase())!;
+
+  const rawLetters = letter
+    ? letter.split(',').map(s => s.trim().toUpperCase()).filter(Boolean)
+    : (masteredLetters && masteredLetters.length > 0 ? masteredLetters : (masteredLetter ? [masteredLetter] : ['A']));
+  const targetLetters = rawLetters.length > 0 ? rawLetters : ['A'];
+
+  const [letterIndex, setLetterIndex] = useState(0);
+  const currentLetter = targetLetters[letterIndex] || targetLetters[0];
+  const ld = LETTERS_DATA.find(l => l.letter === currentLetter) || LETTERS_DATA[0];
+
+  const WORDS_PER_LETTER = targetLetters.length > 1 ? 4 : 8;
 
   const [activeWord, setActiveWord] = useState<string | null>(null);
   const [completedWords, setCompletedWords] = useState<string[]>([]);
@@ -91,24 +101,65 @@ export function SayItOutLoud() {
     const newCompleted = [...completedWords, word];
     setCompletedWords(newCompleted);
     
-    if (newCompleted.length >= 8) { // Complete after 8 words to avoid exhaustion
+    if (newCompleted.length >= WORDS_PER_LETTER) {
       awardStars(`${ld.letter}-say-it-out-loud`, 3);
       incrementActivity(`${ld.letter}-say-it-out-loud`);
-      setTimeout(() => setShowCelebration(true), 1000);
+
+      if (letterIndex < targetLetters.length - 1) {
+        speak(`Great! Now let's say letter ${targetLetters[letterIndex + 1]}!`);
+        setTimeout(() => {
+          setLetterIndex(i => i + 1);
+          setCompletedWords([]);
+          setActiveWord(null);
+        }, 1000);
+      } else {
+        targetLetters.forEach(l => {
+          awardStars(`${l}-say-it-out-loud`, 3);
+          incrementActivity(`${l}-say-it-out-loud`);
+        });
+        awardStars('say-it-out-loud', 3);
+        incrementActivity('say-it-out-loud');
+        setTimeout(() => setShowCelebration(true), 1000);
+      }
     }
   };
 
   return (
     <div className="min-h-dvh flex flex-col items-center pb-12 bg-transparent relative z-10">
       <div className="w-full flex items-center justify-between p-4 max-w-5xl">
-        <BackButton onClick={() => navigate(-1)} color={ld.color} />
+        <BackButton onClick={() => navigate('/letters')} color={ld.color} />
         
+        {targetLetters.length > 1 && (
+          <div className="flex items-center gap-1.5 px-3 py-1 bg-white/95 backdrop-blur rounded-full shadow-md border-2 border-amber-400">
+            <span className="text-xs font-black text-amber-900" style={{ fontFamily: 'Nunito' }}>
+              Letter {letterIndex + 1}/{targetLetters.length}:
+            </span>
+            <div className="flex items-center gap-1">
+              {targetLetters.map((tl, idx) => (
+                <span
+                  key={tl}
+                  className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-black transition-all ${
+                    idx < letterIndex
+                      ? 'bg-emerald-500 text-white shadow-sm'
+                      : idx === letterIndex
+                      ? 'bg-amber-500 text-white scale-110 shadow-md ring-2 ring-amber-300'
+                      : 'bg-gray-200 text-gray-500'
+                  }`}
+                  style={{ fontFamily: 'Nunito' }}
+                >
+                  {idx < letterIndex ? '✓' : tl}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div className="flex-1 max-w-[200px] mx-4">
-          <ProgressBar value={completedWords.length} max={8} color={ld.color} />
-          <p className="text-[10px] font-black uppercase text-center mt-1 opacity-60">Words Done: {completedWords.length}/8</p>
+          <ProgressBar value={completedWords.length} max={WORDS_PER_LETTER} color={ld.color} />
+          <p className="text-[10px] font-black uppercase text-center mt-1 opacity-60">Words Done: {completedWords.length}/{WORDS_PER_LETTER}</p>
         </div>
 
-        <h2 style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: '1.25rem', color: ld.color }}>Say It Out Loud</h2>
+        <h2 style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: '1.25rem', color: ld.color }}>Say It Out Loud ({currentLetter})</h2>
       </div>
 
       <BuddyBear mood={listening ? 'thinking' : 'excited'} size={90}
@@ -200,7 +251,16 @@ export function SayItOutLoud() {
         active={showCelebration}
         stars={3}
         message="You have a great voice! 🎉🎤"
-        onContinue={() => navigate(-1)}
+        onContinue={() => {
+          const currentIndex = LETTERS_DATA.findIndex(l => l.letter === ld.letter);
+          if (currentIndex >= 0 && currentIndex < LETTERS_DATA.length - 1) {
+            const nextLetter = LETTERS_DATA[currentIndex + 1].letter;
+            setShowCelebration(false);
+            navigate(`/letters/activity/say-it-out-loud/${nextLetter}`);
+          } else {
+            navigate('/letters');
+          }
+        }}
       />
     </div>
   );
@@ -226,7 +286,7 @@ export function AlphabetSong() {
   return (
     <div className="min-h-dvh flex flex-col items-center pb-8 bg-transparent relative z-10">
       <div className="w-full flex items-center justify-between p-4 max-w-5xl relative z-10">
-        <BackButton onClick={() => navigate(-1)} color={ld.color} />
+        <BackButton color={ld.color} />
         <h2 style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: '1.5rem', color: ld.color }}>Letter {ld.letter} Songs</h2>
         <div style={{ width: 56 }} />
       </div>
@@ -334,7 +394,14 @@ export function AlphabetSong() {
 
       {showFact && (
         <div className="absolute inset-0 flex items-center justify-center p-6 z-[200] bg-black/40 backdrop-blur-md">
-          <FunFactCard fact={ld.funFact} emoji={ld.exampleEmoji} onClose={() => navigate(-1)} />
+          <FunFactCard fact={ld.funFact} emoji={ld.exampleEmoji} onClose={() => {
+            const parts = window.location.pathname.split('/').filter(Boolean);
+            if (parts.length >= 4) {
+              navigate(`/${parts[0]}/${parts[1]}/${parts[2]}`);
+            } else {
+              navigate('/letters');
+            }
+          }} />
         </div>
       )}
     </div>

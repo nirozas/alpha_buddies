@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+    <defs>
+      
+  <filter id="sticker-shadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.25"/>
+  </filter>
+  <filter id="soft-glow" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="3" result="blur"/>
+    <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+  </filter>
+  <g id="sparkle">
+    <path d="M0 -8 Q0 0 8 0 Q0 0 0 8 Q0 0 -8 0 Q0 0 0 -8 Z" fill="#FFFBEB" filter="url(#soft-glow)"/>
+    <circle cx="0" cy="0" r="2.5" fill="#FEF08A"/>
+  </g>
+  <g id="gold-star">
+    <path d="M0 -7 L2 -2 L7 -2 L3 1 L5 6 L0 3 L-5 6 L-3 1 L-7 -2 L-2 -2 Z" fill="#FACC15"/>
+    <circle cx="0" cy="0" r="1.5" fill="#FFF"/>
+  </g>
+
+      <linearGradient id="quetzal-grad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#34D399"/>
+        <stop offset="50%" stop-color="#38BDF8"/>
+        <stop offset="100%" stop-color="#F43F5E"/>
+      </linearGradient>
+    </defs>
+    <path d="M120 25 C185 25 215 65 215 125 C215 185 180 215 120 215 C60 215 25 185 25 125 C25 65 55 25 120 25 Z" fill="#FFFFFF" filter="url(#sticker-shadow)"/>
+    <!-- Curled Feather Body -->
+    <path d="M70 145 C60 90 140 85 155 125 C165 155 120 185 90 175" fill="none" stroke="url(#quetzal-grad)" stroke-width="26" stroke-linecap="round"/>
+    <!-- Head & Feather Crest -->
+    <circle cx="120" cy="85" r="36" fill="#34D399"/>
+    <polygon points="120,50 110,25 130,25" fill="#FBBF24"/>
+    <polygon points="105,55 90,32 110,38" fill="#F43F5E"/>
+    <polygon points="135,55 150,32 130,38" fill="#38BDF8"/>
+    <!-- Big Eye -->
+    <circle cx="112" cy="82" r="9" fill="#0F172A"/>
+    <circle cx="128" cy="82" r="9" fill="#0F172A"/>
+    <circle cx="109" cy="79" r="3" fill="#FFFFFF"/>
+    <circle cx="125" cy="79" r="3" fill="#FFFFFF"/>
+    <use href="#sparkle" x="50" y="80"/>
+    <use href="#sparkle" x="190" y="80"/>
+  </svg>

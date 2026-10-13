@@ -28,18 +28,34 @@ export function LetterOfTheDay() {
   useEffect(() => {
     if (letterParam) {
       const found = LETTERS_DATA.find(l => l.letter === letterParam.toUpperCase());
-      if (found) setLd(found);
+      if (found) {
+        setLd(found);
+        setTappedItems([]);
+        setShowCelebration(false);
+      }
     }
   }, [letterParam]);
 
   const checkCelebration = (newList: string[]) => {
     // Letter + 6 words = 7 items
     if (newList.length >= 7 && !showCelebration) {
-      const key = `${ld.letter}-letter-of-the-day`;
+      const key = `${ld.letter}-learn-my-letters`;
       awardStars(key, 3);
       incrementActivity(key);
       markLetterComplete(ld.letter);
       setTimeout(() => setShowCelebration(true), 1000);
+    }
+  };
+
+  const handleContinue = () => {
+    const currentIndex = LETTERS_DATA.findIndex(l => l.letter === ld.letter);
+    if (currentIndex >= 0 && currentIndex < LETTERS_DATA.length - 1) {
+      const nextLetter = LETTERS_DATA[currentIndex + 1].letter;
+      setShowCelebration(false);
+      setTappedItems([]);
+      navigate(`/letters/activity/learn-my-letters/${nextLetter}`);
+    } else {
+      navigate('/letters');
     }
   };
 
@@ -68,97 +84,116 @@ export function LetterOfTheDay() {
   };
 
   return (
-    <div className="min-h-dvh flex flex-col items-center pb-12 bg-transparent relative z-10">
+    <div className="h-dvh max-h-dvh flex flex-col justify-between items-center overflow-hidden p-2 sm:p-3 bg-transparent relative z-10 select-none font-nunito">
       {/* Top bar */}
-      <div className="w-full flex items-center justify-between p-4 max-w-5xl">
+      <div className="w-full flex items-center justify-between px-2 sm:px-4 py-1 max-w-5xl shrink-0">
         <div className="flex items-center gap-3">
-          <BackButton onClick={() => navigate(-1)} color={ld.color} />
+          <BackButton color={ld.color} />
         </div>
         
         <div className="flex-1 max-w-[200px] mx-4">
           <ProgressBar value={tappedItems.length} max={7} color={ld.color} />
-          <p className="text-[10px] font-black uppercase text-center mt-1 opacity-60">Activity Progress</p>
+          <p className="text-[10px] font-black uppercase text-center mt-0.5 opacity-60">Activity Progress</p>
         </div>
 
         <AudioButton onClick={() => speak(`Today's letter is ${ld.letter}`)} color={ld.color} />
       </div>
 
-      {/* Buddy */}
-      <BuddyBear mood={tappedItems.length >= 7 ? 'celebrating' : 'excited'} size={90}
-        speech={tappedItems.length >= 7 ? "You're a superstar! 🌟" : `Meet the letter ${ld.uppercase}! Tap the letter and all 6 words to finish!`}
-      />
+      {/* Buddy Bear */}
+      <div className="shrink-0 my-0.5 sm:my-1">
+        <BuddyBear mood={tappedItems.length >= 7 ? 'celebrating' : 'excited'} size={68}
+          speech={tappedItems.length >= 7 ? "You're a superstar! 🌟" : `Meet the letter ${ld.uppercase}! Tap the letter and all 6 words to finish!`}
+        />
+      </div>
 
       {/* Giant letter display */}
       <motion.button
+        type="button"
         onClick={handleLetterTap}
-        animate={letterBounce ? { scale: [1, 1.2, 0.9, 1.1, 1], rotate: [0, -5, 5, -3, 0] } : { y: [0, -10, 0] }}
+        animate={letterBounce ? { scale: [1, 1.15, 0.95, 1.05, 1], rotate: [0, -4, 4, -2, 0] } : { y: [0, -4, 0] }}
         transition={letterBounce ? { duration: 0.5 } : { repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
-        className="flex flex-col items-center mt-4 mb-8"
-        style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+        className="flex flex-col items-center my-0.5 sm:my-1 shrink-0 cursor-pointer"
+        style={{ background: 'none', border: 'none' }}
       >
         <div
-          className="rounded-[3rem] flex items-center justify-center shadow-2xl border-8 border-white relative overflow-hidden"
+          className="rounded-2xl sm:rounded-3xl flex items-center justify-center shadow-lg sm:shadow-xl border-4 sm:border-6 border-white relative overflow-hidden transition-all"
           style={{ 
-            width: 260, 
-            height: 180, 
+            height: 'clamp(64px, 12vh, 120px)',
+            aspectRatio: '1.4 / 1',
             background: `linear-gradient(135deg, ${ld.color}, ${ld.color}dd)` 
           }}
         >
           {/* Decorative shine */}
           <div className="absolute top-0 left-0 right-0 h-1/2 bg-white/20 skew-y-[-10deg] -translate-y-1/2" />
           
-          <span style={{ 
-            fontFamily: 'Nunito', 
-            fontWeight: 900, 
-            fontSize: '8rem', 
-            color: 'white', 
-            lineHeight: 1, 
-            letterSpacing: '-0.05em',
-            filter: 'drop-shadow(0 4px 0 rgba(0,0,0,0.1))'
-          }}>
+          <span 
+            className="font-black text-white leading-none tracking-tight"
+            style={{ 
+              fontFamily: 'Nunito', 
+              fontSize: 'clamp(2.8rem, 7vh, 5.5rem)', 
+              filter: 'drop-shadow(0 3px 0 rgba(0,0,0,0.12))'
+            }}
+          >
             {ld.uppercase}{ld.lowercase}
           </span>
         </div>
-        <span style={{ fontFamily: 'Nunito', fontWeight: 700, fontSize: '1.1rem', color: ld.color, marginTop: 12 }}>
+        <span 
+          className="font-bold text-xs sm:text-sm mt-1"
+          style={{ fontFamily: 'Nunito', color: ld.color }}
+        >
           Progress: {Math.round((tappedItems.length / 7) * 100)}% 🔊
         </span>
       </motion.button>
 
-      {/* 6 Words Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-6 px-4 w-full max-w-3xl">
+      {/* 6 Words Grid: Fits comfortably in screen view without scrolling */}
+      <div className="grid grid-cols-3 gap-2 sm:gap-3.5 md:gap-4 px-2 sm:px-4 w-full max-w-3xl flex-1 min-h-0 py-1">
         {ld.objects.slice(0, 6).map((obj, i) => {
           const isTapped = tappedItems.includes(obj.word);
           return (
             <motion.button
               key={i}
-              initial={{ opacity: 0, y: 20, rotate: i % 2 === 0 ? -2 : 2 }}
+              type="button"
+              initial={{ opacity: 0, y: 15, rotate: i % 2 === 0 ? -1 : 1 }}
               animate={{ opacity: 1, y: 0, rotate: 0 }}
-              whileHover={{ scale: 1.05, rotate: i % 2 === 0 ? 2 : -2, y: -5 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ delay: i * 0.05, type: 'spring', stiffness: 300 }}
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.96 }}
+              transition={{ delay: i * 0.04, type: 'spring', stiffness: 350 }}
               onClick={() => handleWordTap(obj.word)}
-              className={`relative overflow-hidden group rounded-3xl p-6 shadow-xl flex flex-col items-center justify-center gap-4 border-4 transition-all bg-white/80 backdrop-blur-sm hover:shadow-2xl ${
-                isTapped ? 'border-green-400' : 'border-white'
+              className={`relative overflow-hidden group rounded-2xl sm:rounded-3xl p-2 sm:p-3 shadow-md sm:shadow-lg flex flex-col items-center justify-between border-3 sm:border-4 transition-all bg-white/85 backdrop-blur-sm hover:shadow-xl cursor-pointer h-full min-h-0 ${
+                isTapped ? 'border-green-400 bg-green-50/70' : 'border-white'
               }`}
-              style={{ minHeight: '180px' }}
             >
-              {isTapped && <div className="absolute top-2 right-2 text-xl">✅</div>}
+              {isTapped && <div className="absolute top-1 right-1 sm:top-2 sm:right-2 text-sm sm:text-base">✅</div>}
+              
               {/* Animated background blob */}
               <div 
-                className="absolute -top-10 -right-10 w-24 h-24 rounded-full opacity-10 group-hover:opacity-20 transition-opacity"
+                className="absolute -top-8 -right-8 w-20 h-20 rounded-full opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none"
                 style={{ background: ld.color }}
               />
               
-              <motion.img 
-                src={obj.image}
-                alt={obj.word}
-                animate={{ y: [0, -5, 0] }}
-                transition={{ repeat: Infinity, duration: 2 + i, ease: 'easeInOut' }}
-                style={{ width: '100px', height: '100px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.1))' }}
-              />
+              <div className="flex-1 min-h-0 flex items-center justify-center w-full py-0.5">
+                <motion.img 
+                  src={obj.image}
+                  alt={obj.word}
+                  animate={{ y: [0, -3, 0] }}
+                  transition={{ repeat: Infinity, duration: 2 + i, ease: 'easeInOut' }}
+                  className="max-h-full max-w-full object-contain filter drop-shadow-md"
+                  style={{ 
+                    height: 'clamp(36px, 7.5vh, 72px)',
+                    width: 'auto',
+                    aspectRatio: '1 / 1'
+                  }}
+                />
+              </div>
               
-              <div className="bg-white/90 px-4 py-1 rounded-full shadow-inner border border-gray-100 w-full">
-                <p style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: '1.4rem', color: '#333', textAlign: 'center' }}>
+              <div className="bg-white/95 px-2 py-0.5 sm:px-3 sm:py-1 rounded-full shadow-inner border border-gray-100 w-full shrink-0">
+                <p 
+                  className="font-extrabold text-slate-800 text-center truncate"
+                  style={{ 
+                    fontFamily: 'Nunito', 
+                    fontSize: 'clamp(0.85rem, 1.8vh, 1.25rem)'
+                  }}
+                >
                   <span style={{ color: ld.color, fontWeight: 900, textDecoration: 'underline' }}>{obj.word[0]}</span>
                   {obj.word.slice(1)}
                 </p>
@@ -172,7 +207,7 @@ export function LetterOfTheDay() {
         active={showCelebration}
         stars={3}
         message={`Amazing! You've learned the letter ${ld.letter}! 🎉`}
-        onContinue={() => navigate(-1)}
+        onContinue={handleContinue}
       />
     </div>
   );

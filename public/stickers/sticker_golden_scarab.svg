@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+    <defs>
+      
+  <filter id="sticker-shadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.25"/>
+  </filter>
+  <filter id="soft-glow" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="3" result="blur"/>
+    <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+  </filter>
+  <g id="sparkle">
+    <path d="M0 -8 Q0 0 8 0 Q0 0 0 8 Q0 0 -8 0 Q0 0 0 -8 Z" fill="#FFFBEB" filter="url(#soft-glow)"/>
+    <circle cx="0" cy="0" r="2.5" fill="#FEF08A"/>
+  </g>
+  <g id="gold-star">
+    <path d="M0 -7 L2 -2 L7 -2 L3 1 L5 6 L0 3 L-5 6 L-3 1 L-7 -2 L-2 -2 Z" fill="#FACC15"/>
+    <circle cx="0" cy="0" r="1.5" fill="#FFF"/>
+  </g>
+
+      <linearGradient id="gold-shell" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#FEF08A"/>
+        <stop offset="50%" stop-color="#EAB308"/>
+        <stop offset="100%" stop-color="#854D0E"/>
+      </linearGradient>
+    </defs>
+    <path d="M120 25 C185 25 215 65 215 125 C215 185 180 215 120 215 C60 215 25 185 25 125 C25 65 55 25 120 25 Z" fill="#FFFFFF" filter="url(#sticker-shadow)"/>
+    <!-- Golden Wing Covers -->
+    <ellipse cx="98" cy="135" rx="30" ry="50" fill="url(#gold-shell)"/>
+    <ellipse cx="142" cy="135" rx="30" ry="50" fill="url(#gold-shell)"/>
+    <!-- Head & Sun Crown -->
+    <circle cx="120" cy="75" r="28" fill="#F59E0B"/>
+    <circle cx="120" cy="45" r="14" fill="#EF4444"/>
+    <!-- Big Sparkly Eyes -->
+    <circle cx="108" cy="75" r="6" fill="#0F172A"/>
+    <circle cx="132" cy="75" r="6" fill="#0F172A"/>
+    <circle cx="106" cy="73" r="2" fill="#FFFFFF"/>
+    <circle cx="130" cy="73" r="2" fill="#FFFFFF"/>
+    <use href="#sparkle" x="45" y="80"/>
+    <use href="#sparkle" x="195" y="80"/>
+    <use href="#gold-star" x="120" y="135"/>
+  </svg>

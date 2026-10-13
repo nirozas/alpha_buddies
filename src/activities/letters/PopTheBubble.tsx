@@ -1,3 +1,4 @@
+import { calculateStars } from '../../utils/scoring';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -27,6 +28,7 @@ export function PopTheBubble() {
   const [mode, setMode] = useState<'upper' | 'lower' | 'both' | null>(null);
   const [bubbles, setBubbles] = useState<Bubble[]>([]);
   const [score, setScore] = useState(0);
+  const [mistakes, setMistakes] = useState(0);
   const [popped, setPopped] = useState<number[]>([]);
   const [showCelebration, setShowCelebration] = useState(false);
   const [showFact, setShowFact] = useState(false);
@@ -82,7 +84,8 @@ export function PopTheBubble() {
       if (newScore >= GOAL) {
         playDing();
         const key = `${ld.letter}-pop-the-bubble-${mode}`;
-        awardStars(key, 3);
+        const earnedStars = calculateStars(mistakes);
+        awardStars(key, earnedStars);
         incrementActivity(key);
         
         // Check if all modes are complete for total mastery
@@ -92,12 +95,13 @@ export function PopTheBubble() {
         
         if (hasUpper && hasLower && hasBoth) {
           // Mastered all 3! Award final stars for the activity itself
-          awardStars(`${ld.letter}-pop-the-bubble`, 3);
+          awardStars(`${ld.letter}-pop-the-bubble`, earnedStars);
         }
 
         setTimeout(() => setShowCelebration(true), 600);
       }
     } else {
+      setMistakes(m => m + 1);
       speak(`That's ${bubble.letter}! Find ${mode === 'upper' ? ld.uppercase : (mode === 'lower' ? ld.lowercase : ld.letter)}!`);
     }
   }, [popped, score, ld, mode, awardStars, incrementActivity, playPop, playDing, speak, progress.starsEarned]);
@@ -112,7 +116,7 @@ export function PopTheBubble() {
     return (
       <div className="fixed inset-0 flex flex-col items-center justify-center p-6 text-center z-10 bg-transparent">
         <div className="absolute top-4 left-4 z-[110]">
-          <BackButton onClick={() => navigate(-1)} color={ld.color} />
+          <BackButton color={ld.color} />
         </div>
         
         <motion.div
@@ -227,7 +231,14 @@ export function PopTheBubble() {
 
       {showFact && (
         <div className="absolute inset-0 flex items-center justify-center p-6 z-[200] bg-black/40 backdrop-blur-md">
-          <FunFactCard fact={ld.funFact} emoji={ld.exampleWord} onClose={() => navigate(-1)} />
+          <FunFactCard fact={ld.funFact} emoji={ld.exampleWord} onClose={() => {
+            const parts = window.location.pathname.split('/').filter(Boolean);
+            if (parts.length >= 4) {
+              navigate(`/${parts[0]}/${parts[1]}/${parts[2]}`);
+            } else {
+              navigate('/letters');
+            }
+          }} />
         </div>
       )}
       

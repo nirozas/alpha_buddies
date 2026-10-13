@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+    <defs>
+      
+  <filter id="sticker-shadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.25"/>
+  </filter>
+  <filter id="soft-glow" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="3" result="blur"/>
+    <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+  </filter>
+  <g id="sparkle">
+    <path d="M0 -8 Q0 0 8 0 Q0 0 0 8 Q0 0 -8 0 Q0 0 0 -8 Z" fill="#FFFBEB" filter="url(#soft-glow)"/>
+    <circle cx="0" cy="0" r="2.5" fill="#FEF08A"/>
+  </g>
+  <g id="gold-star">
+    <path d="M0 -7 L2 -2 L7 -2 L3 1 L5 6 L0 3 L-5 6 L-3 1 L-7 -2 L-2 -2 Z" fill="#FACC15"/>
+    <circle cx="0" cy="0" r="1.5" fill="#FFF"/>
+  </g>
+
+      <linearGradient id="candy-bat" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#F472B6"/>
+        <stop offset="100%" stop-color="#9333EA"/>
+      </linearGradient>
+    </defs>
+    <path d="M120 25 C185 25 218 65 218 125 C218 185 180 215 120 215 C60 215 22 185 22 125 C22 65 55 25 120 25 Z" fill="#FFFFFF" filter="url(#sticker-shadow)"/>
+    <!-- Pastel Wings -->
+    <path d="M120 120 C90 70 30 75 40 135 C50 165 85 155 120 145 Z" fill="#E879F9"/>
+    <path d="M120 120 C150 70 210 75 200 135 C190 165 155 155 120 145 Z" fill="#E879F9"/>
+    <!-- Pointy Big Ears -->
+    <polygon points="85,65 65,25 105,45" fill="#9333EA"/>
+    <polygon points="85,65 75,40 98,52" fill="#F472B6"/>
+    <polygon points="155,65 175,25 135,45" fill="#9333EA"/>
+    <polygon points="155,65 165,40 142,52" fill="#F472B6"/>
+    <!-- Body -->
+    <ellipse cx="120" cy="135" rx="35" ry="42" fill="url(#candy-bat)"/>
+    <circle cx="120" cy="90" r="35" fill="url(#candy-bat)"/>
+    <!-- Starry Eyes -->
+    <circle cx="106" cy="88" r="10" fill="#0F172A"/>
+    <circle cx="134" cy="88" r="10" fill="#0F172A"/>
+    <circle cx="103" cy="84" r="3.5" fill="#FFFFFF"/>
+    <circle cx="131" cy="84" r="3.5" fill="#FFFFFF"/>
+    <!-- Little Vampire Fangs -->
+    <polygon points="115,103 113,109 117,103" fill="#FFFFFF"/>
+    <polygon points="125,103 123,109 127,103" fill="#FFFFFF"/>
+    <use href="#sparkle" x="35" y="85"/>
+    <use href="#sparkle" x="205" y="85"/>
+    <use href="#gold-star" x="120" y="145"/>
+  </svg>
