@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="auroraGlow" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#06B6D4"/><stop offset="50%" stop-color="#A855F7"/><stop offset="100%" stop-color="#F43F5E"/></linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="230" fill="#ECFEFF" opacity="0.7"/>
+  <!-- Swirling Aurora Waves behind -->
+  <path d="M70 200 Q200 80 440 180 Q320 260 70 200 Z" fill="url(#auroraGlow)" opacity="0.5"/>
+  <!-- Pure Snowy Body -->
+  <ellipse cx="256" cy="300" rx="110" ry="95" fill="#FFFFFF" stroke="#E0F2FE" stroke-width="4"/>
+  <!-- Triple Aurora Tail Feathers -->
+  <path d="M340 320 Q440 330 420 230 Q360 260 340 320 Z" fill="url(#auroraGlow)"/>
+  <path d="M330 335 Q410 380 430 300 Q360 300 330 335 Z" fill="#22D3EE" opacity="0.8"/>
+  <!-- Head -->
+  <circle cx="256" cy="195" r="85" fill="#FFFFFF" stroke="#E0F2FE" stroke-width="3"/>
+  <!-- Fox Ears -->
+  <polygon points="180,140 170,60 230,120" fill="#FFFFFF"/>
+  <polygon points="185,130 180,85 220,120" fill="#E0F2FE"/>
+  <polygon points="332,140 342,60 282,120" fill="#FFFFFF"/>
+  <polygon points="327,130 332,85 292,120" fill="#E0F2FE"/>
+  <!-- Eyes glowing turquoise -->
+  <circle cx="215" cy="185" r="14" fill="#0891B2"/>
+  <circle cx="215" cy="185" r="9" fill="#0F172A"/>
+  <circle cx="211" cy="180" r="4" fill="#FFFFFF"/>
+  <circle cx="297" cy="185" r="14" fill="#0891B2"/>
+  <circle cx="297" cy="185" r="9" fill="#0F172A"/>
+  <circle cx="293" cy="180" r="4" fill="#FFFFFF"/>
+  <!-- Snout -->
+  <ellipse cx="256" cy="220" rx="14" ry="10" fill="#0F172A"/>
+  <!-- Sparkles -->
+  <polygon points="256,70 262,85 277,91 262,97 256,112 250,97 235,91 250,85" fill="#38BDF8"/>
+  <polygon points="120,290 124,300 134,304 124,308 120,318 116,308 106,304 116,300" fill="#F472B6"/>
+</svg>

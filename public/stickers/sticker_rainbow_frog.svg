@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="neonFrog" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4ADE80"/><stop offset="50%" stop-color="#22D3EE"/><stop offset="100%" stop-color="#A855F7"/></linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="230" fill="#F0FDF4" opacity="0.6"/>
+  <!-- Giant Floating Lotus Leaf -->
+  <ellipse cx="256" cy="370" rx="180" ry="60" fill="#15803D" opacity="0.8"/>
+  <ellipse cx="256" cy="365" rx="160" ry="50" fill="#22C55E"/>
+  <!-- Frog body -->
+  <ellipse cx="256" cy="290" rx="115" ry="95" fill="url(#neonFrog)"/>
+  <!-- Big Bulbous Eyes on Top -->
+  <circle cx="190" cy="190" r="45" fill="url(#neonFrog)"/>
+  <circle cx="190" cy="190" r="30" fill="#FFFFFF"/>
+  <circle cx="190" cy="190" r="18" fill="#0F172A"/>
+  <circle cx="185" cy="182" r="6" fill="#FFFFFF"/>
+  <circle cx="322" cy="190" r="45" fill="url(#neonFrog)"/>
+  <circle cx="322" cy="190" r="30" fill="#FFFFFF"/>
+  <circle cx="322" cy="190" r="18" fill="#0F172A"/>
+  <circle cx="317" cy="182" r="6" fill="#FFFFFF"/>
+  <!-- Happy Big Frog Smile -->
+  <path d="M190 270 Q256 315 322 270" stroke="#0F172A" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <!-- Blushing pink cheeks -->
+  <circle cx="170" cy="270" r="16" fill="#F472B6" opacity="0.8"/>
+  <circle cx="342" cy="270" r="16" fill="#F472B6" opacity="0.8"/>
+  <!-- Lotus Flower Blossom -->
+  <circle cx="370" cy="340" r="25" fill="#F472B6"/>
+  <circle cx="370" cy="340" r="14" fill="#FEF08A"/>
+</svg>

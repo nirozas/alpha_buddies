@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="badgerHead" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#475569"/><stop offset="100%" stop-color="#0F172A"/></linearGradient>
+    <linearGradient id="wingGlow" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FEF08A"/><stop offset="100%" stop-color="#67E8F9"/></linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="230" fill="#FEFCE8" opacity="0.7"/>
+  <!-- Honey bee wings -->
+  <ellipse cx="160" cy="180" rx="60" ry="90" transform="rotate(-30 160 180)" fill="url(#wingGlow)" opacity="0.8"/>
+  <ellipse cx="352" cy="180" rx="60" ry="90" transform="rotate(30 352 180)" fill="url(#wingGlow)" opacity="0.8"/>
+  <!-- Badger body -->
+  <ellipse cx="256" cy="300" rx="120" ry="110" fill="#FBBF24"/>
+  <!-- Bee stripes on body -->
+  <path d="M150 280 Q256 300 362 280 Q360 310 350 330 Q256 350 162 330 Z" fill="#1E293B"/>
+  <!-- Head -->
+  <circle cx="256" cy="200" r="85" fill="#FFFFFF"/>
+  <!-- Badger black mask stripes -->
+  <path d="M210 135 L200 240 L230 240 L235 135 Z" fill="url(#badgerHead)"/>
+  <path d="M302 135 L312 240 L282 240 L277 135 Z" fill="url(#badgerHead)"/>
+  <!-- Eyes inside mask -->
+  <circle cx="215" cy="195" r="9" fill="#FFFFFF"/>
+  <circle cx="215" cy="195" r="5" fill="#000000"/>
+  <circle cx="297" cy="195" r="9" fill="#FFFFFF"/>
+  <circle cx="297" cy="195" r="5" fill="#000000"/>
+  <!-- Cute black nose -->
+  <ellipse cx="256" cy="245" rx="14" ry="10" fill="#0F172A"/>
+  <!-- Cheeks -->
+  <circle cx="175" cy="225" r="12" fill="#F472B6" opacity="0.8"/>
+  <circle cx="337" cy="225" r="12" fill="#F472B6" opacity="0.8"/>
+  <!-- Little antennae -->
+  <path d="M240 120 Q220 85 210 95" stroke="#1E293B" stroke-width="5" fill="none"/>
+  <circle cx="210" cy="95" r="8" fill="#FBBF24"/>
+  <path d="M272 120 Q292 85 302 95" stroke="#1E293B" stroke-width="5" fill="none"/>
+  <circle cx="302" cy="95" r="8" fill="#FBBF24"/>
+</svg>

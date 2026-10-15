@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <defs>
+    <filter id="sticker-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.25"/>
+    </filter>
+    <filter id="soft-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <g id="sparkle">
+      <path d="M0 -8 Q0 0 8 0 Q0 0 0 8 Q0 0 -8 0 Q0 0 0 -8 Z" fill="#FFFBEB" filter="url(#soft-glow)"/>
+      <circle cx="0" cy="0" r="2.5" fill="#FEF08A"/>
+    </g>
+    <g id="gold-star">
+      <path d="M0 -7 L2 -2 L7 -2 L3 1 L5 6 L0 3 L-5 6 L-3 1 L-7 -2 L-2 -2 Z" fill="#FACC15"/>
+      <circle cx="0" cy="0" r="1.5" fill="#FFF"/>
+    </g>
+  </defs>
+  <!-- Die-cut white border -->
+  <path d="M120 25 C185 25 215 65 215 125 C215 185 185 215 120 215 C55 215 25 185 25 125 C25 65 55 25 120 25 Z" fill="#FFFFFF" filter="url(#sticker-shadow)"/>
+  
+    <!-- Cosmic Crescent Moon -->
+    <path d="M70 60 A60 60 0 1 0 170 170 A75 75 0 0 1 70 60 Z" fill="#FDE047"/>
+    <!-- Sloth Body Hanging -->
+    <ellipse cx="125" cy="130" rx="36" ry="26" fill="#818CF8"/>
+    <!-- Mask & Face -->
+    <circle cx="125" cy="125" r="20" fill="#C7D2FE"/>
+    <ellipse cx="116" cy="125" rx="7" ry="5" fill="#4338CA" transform="rotate(-15 116 125)"/>
+    <ellipse cx="134" cy="125" rx="7" ry="5" fill="#4338CA" transform="rotate(15 134 125)"/>
+    <!-- Sleeping Eyes -->
+    <path d="M112 125 Q116 128 120 125" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+    <path d="M130 125 Q134 128 138 125" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+    <use href="#sparkle" x="55" y="55"/>
+    <use href="#sparkle" x="185" y="55"/>
+  
+</svg>

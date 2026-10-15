@@ -79,10 +79,10 @@ export interface Sticker {
   title: string;
   description: string;
   icon: string;
-  category: 'starter' | 'stars' | 'letters' | 'numbers' | 'games' | 'mystic' | 'mastery' | 'streak';
+  category: 'starter' | 'stars' | 'letters' | 'numbers' | 'games' | 'mystic' | 'mastery' | 'streak' | 'playtime';
   imageUrl?: string;
   level?: number;
-  tier?: 'Novice' | 'Explorer' | 'Champion' | 'Master' | 'Mythic';
+  tier?: 'Starter' | 'Bronze' | 'Silver' | 'Gold' | 'Diamond' | 'Mythic' | 'Legendary' | 'Novice' | 'Explorer' | 'Champion' | 'Master';
 }
 
 export interface ChildProgress {
@@ -98,6 +98,7 @@ export interface ChildProgress {
   dailyStars?: Record<string, number>;
   badges?: string[];
   perfectScores?: number;
+  stickerAwardedGames?: Record<string, boolean>;
 }
 
 export type BuddyMood = 'happy' | 'excited' | 'thinking' | 'celebrating' | 'idle' | 'sad' | 'neutral';

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="cheetahSun" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FBBF24"/><stop offset="100%" stop-color="#D97706"/></linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="230" fill="#FFFBEB" opacity="0.7"/>
+  <!-- Blazing sun comet tail -->
+  <path d="M330 330 C450 360 480 200 370 170 C340 220 330 280 330 330 Z" fill="#F59E0B"/>
+  <circle cx="420" cy="180" r="20" fill="#EF4444"/>
+  <!-- Body -->
+  <ellipse cx="240" cy="300" rx="110" ry="90" fill="url(#cheetahSun)"/>
+  <!-- Spots -->
+  <circle cx="180" cy="300" r="10" fill="#78350F"/>
+  <circle cx="210" cy="330" r="8" fill="#78350F"/>
+  <circle cx="250" cy="310" r="11" fill="#78350F"/>
+  <circle cx="280" cy="335" r="9" fill="#78350F"/>
+  <!-- Head -->
+  <circle cx="240" cy="195" r="85" fill="url(#cheetahSun)"/>
+  <!-- Ears -->
+  <circle cx="170" cy="135" r="30" fill="url(#cheetahSun)"/>
+  <circle cx="170" cy="135" r="16" fill="#78350F"/>
+  <circle cx="310" cy="135" r="30" fill="url(#cheetahSun)"/>
+  <circle cx="310" cy="135" r="16" fill="#78350F"/>
+  <!-- Tear lines (Cheetah hallmark) -->
+  <path d="M205 195 L200 235" stroke="#78350F" stroke-width="5" stroke-linecap="round"/>
+  <path d="M275 195 L280 235" stroke="#78350F" stroke-width="5" stroke-linecap="round"/>
+  <!-- Eyes -->
+  <circle cx="205" cy="185" r="13" fill="#0F172A"/>
+  <circle cx="202" cy="180" r="5" fill="#FFFFFF"/>
+  <circle cx="275" cy="185" r="13" fill="#0F172A"/>
+  <circle cx="272" cy="180" r="5" fill="#FFFFFF"/>
+  <!-- Nose -->
+  <polygon points="234,225 246,225 240,235" fill="#78350F"/>
+</svg>

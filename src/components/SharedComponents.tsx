@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ReactConfetti from 'react-confetti';
 import { Illustration } from './Illustration';
 import { useStore } from '../store';
@@ -363,6 +363,7 @@ export function AudioButton({ onClick, color = '#6C3CE1', playing }: AudioButton
 export function StickerRewardModal() {
   const { newStickerUnlocked, clearNewSticker } = useStore();
   const navigate = useNavigate();
+  const location = useLocation();
 
   if (!newStickerUnlocked) return null;
 
@@ -414,7 +415,7 @@ export function StickerRewardModal() {
             <button
               onClick={() => {
                 clearNewSticker();
-                navigate('/progress');
+                navigate('/progress', { state: { returnTo: location.pathname } });
               }}
               className="w-full py-2 text-amber-900/80 hover:text-amber-950 font-bold text-sm cursor-pointer underline"
             >

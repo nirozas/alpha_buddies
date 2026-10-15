@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="koiGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FDE047"/><stop offset="100%" stop-color="#EA580C"/></linearGradient>
+    <linearGradient id="koiBlue" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#67E8F9"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="230" fill="#F8FAFC" opacity="0.7"/>
+  <!-- Yin Yang Circular Swimming Flow -->
+  <!-- Gold Koi -->
+  <path d="M256 100 C150 100 120 220 180 270 C240 320 310 240 270 170 C250 135 290 100 256 100 Z" fill="url(#koiGold)"/>
+  <!-- Blue Koi -->
+  <path d="M256 412 C362 412 392 292 332 242 C272 192 202 272 242 342 C262 377 222 412 256 412 Z" fill="url(#koiBlue)"/>
+  <!-- Whisker fins -->
+  <circle cx="200" cy="140" r="8" fill="#0F172A"/>
+  <circle cx="198" cy="138" r="3" fill="#FFFFFF"/>
+  <circle cx="312" cy="372" r="8" fill="#0F172A"/>
+  <circle cx="310" cy="370" r="3" fill="#FFFFFF"/>
+  <!-- Golden Stardust Orbit Ring -->
+  <circle cx="256" cy="256" r="160" stroke="#FDE047" stroke-width="4" stroke-dasharray="10 15" fill="none" opacity="0.8"/>
+</svg>

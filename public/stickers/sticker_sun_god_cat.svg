@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="sunDisk" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FEF08A"/><stop offset="80%" stop-color="#EA580C"/></radialGradient>
+  </defs>
+  <circle cx="256" cy="256" r="230" fill="#FFFBEB" opacity="0.7"/>
+  <!-- Sun Disk Crown between horns -->
+  <circle cx="256" cy="110" r="55" fill="url(#sunDisk)" filter="drop-shadow(0 0 12px #F59E0B)"/>
+  <!-- Sleek Midnight Cat Head -->
+  <circle cx="256" cy="230" r="85" fill="#0F172A"/>
+  <!-- Tall Pointed Ears -->
+  <polygon points="180,180 170,90 230,165" fill="#0F172A"/>
+  <polygon points="185,170 180,115 220,160" fill="#F59E0B"/>
+  <polygon points="332,180 342,90 282,165" fill="#0F172A"/>
+  <polygon points="327,170 332,115 292,160" fill="#F59E0B"/>
+  <!-- Egyptian Gold Collar -->
+  <path d="M190 310 Q256 350 322 310 Q310 370 256 370 Q202 370 190 310 Z" fill="#FACC15"/>
+  <!-- Almond Glowing Golden Eyes -->
+  <ellipse cx="215" cy="215" rx="18" ry="14" transform="rotate(-10 215 215)" fill="#FBBF24"/>
+  <ellipse cx="215" cy="215" rx="5" ry="12" fill="#000000"/>
+  <ellipse cx="297" cy="215" rx="18" ry="14" transform="rotate(10 297 215)" fill="#FBBF24"/>
+  <ellipse cx="297" cy="215" rx="5" ry="12" fill="#000000"/>
+  <!-- Gold scarab jewel on forehead -->
+  <circle cx="256" cy="180" r="10" fill="#38BDF8"/>
+</svg>

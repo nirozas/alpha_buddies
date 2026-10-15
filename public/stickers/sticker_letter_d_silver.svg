@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="grad_D_silver" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#BEF264"/>
+      <stop offset="50%" stop-color="#84CC16"/>
+      <stop offset="100%" stop-color="#4D7C0F"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#4D7C0F" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Circular Badge Backdrop -->
+  <circle cx="256" cy="256" r="235" fill="#F7FEE7"/>
+  <circle cx="256" cy="256" r="215" fill="#FFFFFF" opacity="0.85"/>
+
+  
+    <!-- Silver Explorer Star Badge -->
+    <g transform="translate(330, 70)">
+      <circle cx="45" cy="45" r="40" fill="#E2E8F0" stroke="#94A3B8" stroke-width="4"/>
+      <circle cx="45" cy="45" r="32" fill="#F1F5F9"/>
+      <polygon points="45,18 53,36 72,36 57,48 63,66 45,54 27,66 33,48 18,36 37,36" fill="#38BDF8"/>
+      <!-- Ribbons -->
+      <polygon points="25,75 15,115 35,105 45,115 35,75" fill="#60A5FA"/>
+      <polygon points="55,75 45,115 55,105 75,115 65,75" fill="#3B82F6"/>
+    </g>
+    <!-- Silver Starlight Ring -->
+    <circle cx="256" cy="256" r="215" stroke="#94A3B8" stroke-width="5" stroke-dasharray="12 12" fill="none" opacity="0.6"/>
+  
+
+  <!-- Main Character Glyph (Giant, Bubbly & Friendly) -->
+  <g filter="url(#shadow)">
+    <text
+      x="256"
+      y="335"
+      font-family="system-ui, -apple-system, 'Comic Sans MS', 'Nunito', 'Arial Rounded MT Bold', sans-serif"
+      font-size="240"
+      font-weight="900"
+      text-anchor="middle"
+      fill="url(#grad_D_silver)"
+      stroke="#FFFFFF"
+      stroke-width="14"
+      paint-order="stroke fill"
+    >D</text>
+  </g>
+
+  <!-- Big Kawaii Eyes on Glyph -->
+  <g transform="translate(0, 5)">
+    <!-- Left Eye -->
+    <ellipse cx="210" cy="240" rx="16" ry="22" fill="#0F172A"/>
+    <circle cx="204" cy="232" r="7" fill="#FFFFFF"/>
+    <circle cx="214" cy="248" r="3.5" fill="#FFFFFF"/>
+    <!-- Right Eye -->
+    <ellipse cx="302" cy="240" rx="16" ry="22" fill="#0F172A"/>
+    <circle cx="296" cy="232" r="7" fill="#FFFFFF"/>
+    <circle cx="306" cy="248" r="3.5" fill="#FFFFFF"/>
+
+    <!-- Happy Little Mouth -->
+    <path d="M242 265 Q256 280 270 265" stroke="#0F172A" stroke-width="5" stroke-linecap="round" fill="none"/>
+
+    <!-- Rosy Blushing Cheeks -->
+    <ellipse cx="180" cy="265" rx="16" ry="10" fill="#FB7185" opacity="0.8"/>
+    <ellipse cx="332" cy="265" rx="16" ry="10" fill="#FB7185" opacity="0.8"/>
+  </g>
+
+  <!-- Sparkles & Glitter Elements -->
+  <!-- Top Left Sparkle -->
+  <polygon points="90,110 97,125 112,132 97,139 90,154 83,139 68,132 83,125" fill="#FDE047"/>
+  <circle cx="120" cy="95" r="6" fill="#F472B6"/>
+
+  <!-- Top Right Sparkle -->
+  <polygon points="410,130 415,142 427,147 415,152 410,164 405,152 393,147 405,142" fill="#38BDF8"/>
+  <circle cx="380" cy="115" r="5" fill="#FDE047"/>
+
+  <!-- Bottom Left Sparkle -->
+  <polygon points="100,370 106,382 118,387 106,392 100,404 94,392 82,387 94,382" fill="#A855F7"/>
+  <circle cx="75" cy="355" r="7" fill="#FBBF24"/>
+
+  <!-- Bottom Right Sparkle -->
+  <polygon points="415,360 422,375 437,382 422,389 415,404 408,389 393,382 408,375" fill="#FDE047"/>
+  <circle cx="435" cy="335" r="6" fill="#FB7185"/>
+
+  <!-- Tier Badge Banner at Bottom -->
+  <g transform="translate(156, 420)">
+    <rect x="0" y="0" width="200" height="42" rx="21" fill="#E2E8F0" stroke="#94A3B8" stroke-width="3" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.15))"/>
+    <text x="100" y="27" font-family="system-ui, sans-serif" font-size="16" font-weight="900" text-anchor="middle" fill="#334155">
+      ★ 3+ GAMES ★
+    </text>
+  </g>
+</svg>

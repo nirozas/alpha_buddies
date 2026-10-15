@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="novaCore" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FEF08A"/><stop offset="40%" stop-color="#F43F5E"/><stop offset="100%" stop-color="#4C1D95"/></radialGradient>
+  </defs>
+  <circle cx="256" cy="256" r="230" fill="#FAF5FF" opacity="0.6"/>
+  <!-- Supernova Energy Halo -->
+  <circle cx="256" cy="256" r="190" fill="url(#novaCore)" opacity="0.8"/>
+  <!-- Dragon Wings -->
+  <path d="M256 250 C120 120 60 170 80 280 C150 260 220 280 256 310 Z" fill="#F472B6"/>
+  <path d="M256 250 C392 120 452 170 432 280 C362 260 292 280 256 310 Z" fill="#F472B6"/>
+  <!-- Baby Dragon Head & Body -->
+  <ellipse cx="256" cy="300" rx="90" ry="85" fill="#7C3AED"/>
+  <circle cx="256" cy="200" r="80" fill="#7C3AED"/>
+  <!-- Golden Horns -->
+  <path d="M210 135 Q180 80 150 90 Q180 120 200 145 Z" fill="#FACC15"/>
+  <path d="M302 135 Q332 80 362 90 Q332 120 312 145 Z" fill="#FACC15"/>
+  <!-- Eyes -->
+  <circle cx="220" cy="190" r="18" fill="#FDE047"/>
+  <circle cx="220" cy="190" r="10" fill="#0F172A"/>
+  <circle cx="216" cy="185" r="4" fill="#FFFFFF"/>
+  <circle cx="292" cy="190" r="18" fill="#FDE047"/>
+  <circle cx="292" cy="190" r="10" fill="#0F172A"/>
+  <circle cx="288" cy="185" r="4" fill="#FFFFFF"/>
+  <!-- Snout -->
+  <ellipse cx="256" cy="230" rx="30" ry="18" fill="#A78BFA"/>
+  <circle cx="246" cy="225" r="4" fill="#4C1D95"/>
+  <circle cx="266" cy="225" r="4" fill="#4C1D95"/>
+  <!-- Starlight Sparks Breath -->
+  <polygon points="256,255 262,270 277,276 262,282 256,297 250,282 235,276 250,270" fill="#FEF08A"/>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="grifGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FDE047"/><stop offset="100%" stop-color="#CA8A04"/></linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="230" fill="#FEFCE8" opacity="0.6"/>
+  <!-- Star halo -->
+  <circle cx="256" cy="200" r="110" stroke="#FDE047" stroke-width="4" stroke-dasharray="8 12" fill="none"/>
+  <!-- Golden Wings -->
+  <path d="M230 240 C100 120 70 200 90 280 C160 270 210 270 230 300 Z" fill="url(#grifGold)"/>
+  <path d="M282 240 C412 120 442 200 422 280 C352 270 302 270 282 300 Z" fill="url(#grifGold)"/>
+  <!-- Lion body -->
+  <ellipse cx="256" cy="320" rx="95" ry="85" fill="#EAB308"/>
+  <!-- Eagle Head -->
+  <circle cx="256" cy="200" r="70" fill="#FFFFFF"/>
+  <!-- Golden Beak -->
+  <path d="M256 195 Q295 210 270 240 Q250 220 256 195 Z" fill="#F59E0B"/>
+  <!-- Crown of Stars -->
+  <polygon points="230,140 240,115 256,135 272,115 282,140" fill="#FACC15"/>
+  <!-- Big noble eyes -->
+  <circle cx="230" cy="185" r="14" fill="#0F172A"/>
+  <circle cx="226" cy="180" r="5" fill="#FFFFFF"/>
+</svg>

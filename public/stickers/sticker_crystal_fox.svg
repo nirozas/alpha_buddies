@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <defs>
+    <filter id="sticker-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.25"/>
+    </filter>
+    <filter id="soft-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <g id="sparkle">
+      <path d="M0 -8 Q0 0 8 0 Q0 0 0 8 Q0 0 -8 0 Q0 0 0 -8 Z" fill="#FFFBEB" filter="url(#soft-glow)"/>
+      <circle cx="0" cy="0" r="2.5" fill="#FEF08A"/>
+    </g>
+    <g id="gold-star">
+      <path d="M0 -7 L2 -2 L7 -2 L3 1 L5 6 L0 3 L-5 6 L-3 1 L-7 -2 L-2 -2 Z" fill="#FACC15"/>
+      <circle cx="0" cy="0" r="1.5" fill="#FFF"/>
+    </g>
+  </defs>
+  <!-- Die-cut white border -->
+  <path d="M120 25 C185 25 215 65 215 125 C215 185 185 215 120 215 C55 215 25 185 25 125 C25 65 55 25 120 25 Z" fill="#FFFFFF" filter="url(#sticker-shadow)"/>
+  
+    <polygon points="75,95 60,50 100,80" fill="#67E8F9"/>
+    <polygon points="165,95 180,50 140,80" fill="#67E8F9"/>
+    <circle cx="120" cy="125" r="45" fill="#A5F3FC"/>
+    <circle cx="102" cy="118" r="7" fill="#0F172A"/>
+    <circle cx="138" cy="118" r="7" fill="#0F172A"/>
+    <circle cx="100" cy="115" r="2.5" fill="#FFF"/>
+    <circle cx="136" cy="115" r="2.5" fill="#FFF"/>
+    <polygon points="120,130 114,124 126,124" fill="#0891B2"/>
+    <use href="#sparkle" x="55" y="60"/>
+    <use href="#sparkle" x="185" y="60"/>
+    <use href="#gold-star" x="120" y="45"/>
+  
+</svg>

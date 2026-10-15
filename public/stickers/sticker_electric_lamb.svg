@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="stormWool" cx="30%" cy="30%" r="70%"><stop offset="0%" stop-color="#E9D5FF"/><stop offset="100%" stop-color="#C084FC"/></radialGradient>
+  </defs>
+  <circle cx="256" cy="256" r="230" fill="#FAF5FF" opacity="0.6"/>
+  <!-- Fluffy Cloud Puffs -->
+  <circle cx="190" cy="280" r="75" fill="url(#stormWool)"/>
+  <circle cx="322" cy="280" r="75" fill="url(#stormWool)"/>
+  <circle cx="256" cy="330" r="80" fill="url(#stormWool)"/>
+  <circle cx="256" cy="230" r="85" fill="url(#stormWool)"/>
+  <circle cx="200" cy="180" r="65" fill="url(#stormWool)"/>
+  <circle cx="312" cy="180" r="65" fill="url(#stormWool)"/>
+  <!-- Lamb Face -->
+  <ellipse cx="256" cy="250" rx="55" ry="60" fill="#FFFFFF"/>
+  <!-- Floppy ears -->
+  <ellipse cx="180" cy="240" rx="35" ry="16" transform="rotate(25 180 240)" fill="#E9D5FF"/>
+  <ellipse cx="332" cy="240" rx="35" ry="16" transform="rotate(-25 332 240)" fill="#E9D5FF"/>
+  <!-- Cute sleepy eyes -->
+  <path d="M225 245 Q235 255 245 245" stroke="#1E293B" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M267 245 Q277 255 287 245" stroke="#1E293B" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <!-- Pink nose -->
+  <ellipse cx="256" cy="270" rx="8" ry="6" fill="#F472B6"/>
+  <!-- Golden Lightning Bolt Sparks around -->
+  <polygon points="120,130 145,130 135,155 155,155 125,195 133,165 115,165" fill="#FACC15" filter="drop-shadow(0 0 6px #FBBF24)"/>
+  <polygon points="360,110 380,110 372,130 388,130 365,160 371,138 358,138" fill="#FACC15" filter="drop-shadow(0 0 6px #FBBF24)"/>
+</svg>

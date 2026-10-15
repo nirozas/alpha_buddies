@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { HomePage } from './pages/HomePage';
@@ -21,6 +22,16 @@ import { StickerRewardModal } from './components/SharedComponents';
 
 function AnimatedRoutes() {
   const location = useLocation();
+
+  useEffect(() => {
+    if (
+      location.pathname.startsWith('/letters/activity') ||
+      location.pathname.startsWith('/numbers/activity')
+    ) {
+      sessionStorage.setItem('lastGamePath', location.pathname + location.search);
+    }
+  }, [location]);
+
   return (
     <AnimatePresence mode="wait" initial={false}>
       <Routes location={location} key={location.pathname}>

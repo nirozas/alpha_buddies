@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { LETTERS_DATA } from '../constants/letters';
 import { NUMBERS_DATA } from '../constants/numbers';
 import { LETTER_ACTIVITIES, NUMBER_ACTIVITIES } from '../constants/activities';
@@ -28,6 +28,25 @@ interface ItemDetail {
 
 export function ProgressPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleBack = () => {
+    if (location.state?.returnTo && location.state.returnTo !== '/progress') {
+      navigate(location.state.returnTo);
+      return;
+    }
+    const lastGame = sessionStorage.getItem('lastGamePath');
+    if (lastGame && lastGame !== '/progress') {
+      navigate(lastGame);
+      return;
+    }
+    if (window.history.length > 1) {
+      navigate(-1);
+      return;
+    }
+    navigate('/');
+  };
+
   const { progress, resetProgress, settings, updateSettings, setAvatar } = useStore();
   const { playPop, playCheer } = useAudio();
 
@@ -36,6 +55,8 @@ export function ProgressPage() {
   const [selectedNumberDetail, setSelectedNumberDetail] = useState<number | null>(null);
   const [showAvatarPicker, setShowAvatarPicker] = useState(false);
   const [stickerFilter, setStickerFilter] = useState<'stickers' | 'badges'>('stickers');
+  const [activeStickerSection, setActiveStickerSection] = useState<'all' | 'levels' | 'letters' | 'numbers'>('all');
+  const [selectedLevelFilter, setSelectedLevelFilter] = useState<number | 'all'>('all');
   const [selectedItemDetail, setSelectedItemDetail] = useState<ItemDetail | null>(null);
 
   // Parent PIN state
@@ -152,6 +173,138 @@ export function ProgressPage() {
     return { tier: 'none', label: 'Not Started', badge: '⚪', bg: 'bg-gray-100 text-gray-400 border-gray-200' };
   };
 
+  const getStickerTierStyle = (tier?: string) => {
+    switch (tier?.toLowerCase()) {
+      case 'bronze':
+        return 'bg-amber-100 text-amber-900 border-amber-300';
+      case 'silver':
+        return 'bg-slate-200 text-slate-800 border-slate-300';
+      case 'gold':
+        return 'bg-yellow-100 text-yellow-900 border-yellow-400';
+      case 'diamond':
+        return 'bg-cyan-100 text-cyan-900 border-cyan-300';
+      case 'mythic':
+        return 'bg-purple-100 text-purple-900 border-purple-300';
+      default:
+        return 'bg-purple-100 text-purple-700 border-purple-200';
+    }
+  };
+
+  const LEVEL_METAS: Record<number, { title: string; tier: string; badge: string; bg: string; border: string }> = {
+    1: { title: 'Starter Discoveries', tier: 'Bronze', badge: '🥉', bg: 'from-amber-100 to-orange-50 text-amber-900', border: 'border-amber-300' },
+    2: { title: 'Novice Explorations', tier: 'Bronze', badge: '🥉', bg: 'from-amber-100 to-orange-50 text-amber-900', border: 'border-amber-300' },
+    3: { title: 'Early Explorers', tier: 'Silver', badge: '🥈', bg: 'from-slate-200 to-gray-100 text-slate-800', border: 'border-slate-300' },
+    4: { title: 'Midway Heroes', tier: 'Silver', badge: '🥈', bg: 'from-slate-200 to-gray-100 text-slate-800', border: 'border-slate-300' },
+    5: { title: 'Champion Achievers', tier: 'Gold', badge: '🥇', bg: 'from-yellow-100 to-amber-50 text-yellow-900', border: 'border-yellow-400' },
+    6: { title: 'Swift Proficiency', tier: 'Gold', badge: '🥇', bg: 'from-yellow-100 to-amber-50 text-yellow-900', border: 'border-yellow-400' },
+    7: { title: 'Scholastic Masters', tier: 'Diamond', badge: '💎', bg: 'from-cyan-100 to-sky-50 text-cyan-900', border: 'border-cyan-300' },
+    8: { title: 'Grand Guardians', tier: 'Diamond', badge: '💎', bg: 'from-cyan-100 to-sky-50 text-cyan-900', border: 'border-cyan-300' },
+    9: { title: 'Astral Heroes', tier: 'Mythic', badge: '🔮', bg: 'from-purple-100 to-fuchsia-50 text-purple-900', border: 'border-purple-300' },
+    10: { title: 'Supreme Legendaries', tier: 'Mythic', badge: '👑', bg: 'from-purple-200 via-pink-100 to-amber-100 text-purple-950', border: 'border-purple-400' },
+  };
+
+  const renderStickerCard = (st: typeof STICKERS_CATALOG[0]) => {
+    const isUnlocked = unlockedStickers.includes(st.id);
+    return (
+      <motion.button
+        key={st.id}
+        whileHover={{ scale: 1.05, y: -4 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => {
+          if (isUnlocked) playCheer();
+          else playPop();
+          setSelectedItemDetail({
+            id: st.id,
+            title: st.title,
+            description: st.description,
+            icon: st.icon,
+            imageUrl: st.imageUrl,
+            isUnlocked,
+            type: 'sticker',
+            category: st.category,
+            level: st.level,
+            tier: st.tier,
+          });
+        }}
+        className={`w-full rounded-3xl p-4 flex flex-col items-center text-center transition-all cursor-pointer relative overflow-hidden group ${
+          isUnlocked
+            ? 'bg-white border-4 border-amber-300 shadow-xl shadow-amber-100/50 hover:border-amber-400 hover:shadow-2xl'
+            : 'bg-slate-100/80 border-2 border-dashed border-slate-300 hover:border-slate-400 opacity-75'
+        }`}
+      >
+        {/* Glitter Sparkle Accent */}
+        {isUnlocked && (
+          <span className="absolute top-2 right-2 text-xs sm:text-sm animate-pulse select-none">
+            ✨
+          </span>
+        )}
+
+        {/* Tier & Level Badge */}
+        {st.tier && (
+          <span
+            className={`text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full border mb-1.5 shadow-xs ${getStickerTierStyle(
+              st.tier
+            )}`}
+          >
+            {st.tier} · Lv {st.level || 1}
+          </span>
+        )}
+
+        <div
+          className={`w-24 h-24 rounded-full flex items-center justify-center p-1.5 mb-2 relative overflow-hidden transition-all ${
+            isUnlocked
+              ? 'bg-gradient-to-tr from-amber-200 via-pink-100 to-yellow-100 shadow-lg ring-4 ring-amber-300 group-hover:scale-105 duration-300'
+              : 'bg-slate-200 border-2 border-slate-300'
+          }`}
+        >
+          {st.imageUrl ? (
+            <img
+              src={st.imageUrl}
+              alt={st.title}
+              className={`w-full h-full object-contain rounded-full transition-all ${
+                isUnlocked
+                  ? 'drop-shadow-md group-hover:rotate-3 duration-300'
+                  : 'brightness-0 opacity-20'
+              }`}
+            />
+          ) : (
+            <span
+              className={`text-4xl ${
+                isUnlocked ? 'group-hover:scale-110 transition-transform' : 'grayscale opacity-30'
+              }`}
+            >
+              {st.icon}
+            </span>
+          )}
+          {!isUnlocked && (
+            <div className="absolute inset-0 flex items-center justify-center text-xl font-black drop-shadow">
+              🔒
+            </div>
+          )}
+        </div>
+
+        <h4 className="font-black text-sm text-slate-800 mb-0.5 truncate w-full group-hover:text-amber-700 transition-colors">
+          {st.title}
+        </h4>
+        <p className="text-[11px] font-bold text-slate-500 leading-tight line-clamp-2">
+          {st.description}
+        </p>
+
+        <div className="mt-2.5 flex items-center gap-1">
+          {isUnlocked ? (
+            <span className="text-[10px] font-extrabold text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
+              <span>✓</span> Collected
+            </span>
+          ) : (
+            <span className="text-[10px] font-bold text-slate-500 bg-slate-200/80 px-2 py-0.5 rounded-full">
+              Tap to inspect
+            </span>
+          )}
+        </div>
+      </motion.button>
+    );
+  };
+
   const handlePin = () => {
     if (pin === settings.parentPin) {
       setParentUnlocked(true);
@@ -174,7 +327,7 @@ export function ProgressPage() {
       {/* Top Header */}
       <div className="bg-gradient-to-r from-purple-700 via-indigo-600 to-purple-800 text-white px-4 pt-4 pb-6 shadow-xl relative z-20">
         <div className="max-w-5xl mx-auto flex items-center justify-between gap-3">
-          <BackButton onClick={() => navigate('/')} color="white" />
+          <BackButton onClick={handleBack} color="white" />
 
           <div className="text-center flex-1 min-w-0">
             <h1 className="text-2xl sm:text-3xl font-black drop-shadow-md tracking-tight truncate">
@@ -736,104 +889,267 @@ export function ProgressPage() {
 
             {/* STICKERS VIEW */}
             {stickerFilter === 'stickers' && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {STICKERS_CATALOG.map((st) => {
-                  const isUnlocked = unlockedStickers.includes(st.id);
-                  return (
-                    <motion.button
-                      key={st.id}
-                      whileHover={{ scale: 1.05, y: -4 }}
-                      whileTap={{ scale: 0.95 }}
+              <div className="space-y-8">
+                {/* ── TOP SECTION TITLE BUTTONS BAR ── */}
+                <div className="bg-white rounded-3xl p-5 shadow-xl border-4 border-purple-200 space-y-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div>
+                      <h4 className="text-base sm:text-lg font-black text-purple-900 flex items-center gap-2">
+                        <span>📚</span> Sticker Book Sections
+                      </h4>
+                      <p className="text-xs font-bold text-slate-500">
+                        Explore stickers by progression levels, alphabet letters, or counting numbers
+                      </p>
+                    </div>
+                    <div className="text-xs font-black text-purple-700 bg-purple-50 px-3 py-1.5 rounded-full border border-purple-200 self-start sm:self-auto">
+                      Collected: {unlockedStickers.length} / {STICKERS_CATALOG.length}
+                    </div>
+                  </div>
+
+                  {/* Top Section Buttons */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                    <button
                       onClick={() => {
-                        if (isUnlocked) playCheer();
-                        else playPop();
-                        setSelectedItemDetail({
-                          id: st.id,
-                          title: st.title,
-                          description: st.description,
-                          icon: st.icon,
-                          imageUrl: st.imageUrl,
-                          isUnlocked,
-                          type: 'sticker',
-                          category: st.category,
-                          level: st.level,
-                          tier: st.tier,
-                        });
+                        playPop();
+                        setActiveStickerSection('all');
+                        setSelectedLevelFilter('all');
                       }}
-                      className={`w-full rounded-3xl p-4 flex flex-col items-center text-center transition-all cursor-pointer relative overflow-hidden group ${
-                        isUnlocked
-                          ? 'bg-white border-4 border-amber-300 shadow-xl shadow-amber-100/50 hover:border-amber-400 hover:shadow-2xl'
-                          : 'bg-slate-100/80 border-2 border-dashed border-slate-300 hover:border-slate-400 opacity-75'
+                      className={`p-3 rounded-2xl font-black text-xs sm:text-sm flex flex-col items-center gap-1 transition-all cursor-pointer border-2 ${
+                        activeStickerSection === 'all'
+                          ? 'bg-gradient-to-tr from-purple-600 to-indigo-600 text-white border-purple-400 shadow-md scale-[1.02]'
+                          : 'bg-slate-50 hover:bg-purple-50 text-slate-700 border-slate-200'
                       }`}
                     >
-                      {/* Glitter Sparkle Accent */}
-                      {isUnlocked && (
-                        <span className="absolute top-2 right-2 text-xs sm:text-sm animate-pulse select-none">
-                          ✨
-                        </span>
-                      )}
+                      <span className="text-2xl">🌟</span>
+                      <span>All Sections</span>
+                      <span className="text-[10px] opacity-80 font-bold">174 Stickers</span>
+                    </button>
 
-                      {/* Tier & Level Badge */}
-                      {st.tier && (
-                        <span className="text-[9px] font-black uppercase tracking-wider text-purple-700 bg-purple-100/90 px-2 py-0.5 rounded-full border border-purple-200 mb-1.5 shadow-xs">
-                          {st.tier} · Lv {st.level || 1}
-                        </span>
-                      )}
+                    <button
+                      onClick={() => {
+                        playPop();
+                        setActiveStickerSection('levels');
+                      }}
+                      className={`p-3 rounded-2xl font-black text-xs sm:text-sm flex flex-col items-center gap-1 transition-all cursor-pointer border-2 ${
+                        activeStickerSection === 'levels'
+                          ? 'bg-gradient-to-tr from-amber-500 to-orange-500 text-white border-amber-300 shadow-md scale-[1.02]'
+                          : 'bg-slate-50 hover:bg-amber-50 text-slate-700 border-slate-200'
+                      }`}
+                    >
+                      <span className="text-2xl">🏆</span>
+                      <span>Levels 1–10</span>
+                      <span className="text-[10px] opacity-80 font-bold">100 Stickers</span>
+                    </button>
 
-                      <div
-                        className={`w-24 h-24 rounded-full flex items-center justify-center p-1.5 mb-2 relative overflow-hidden transition-all ${
-                          isUnlocked
-                            ? 'bg-gradient-to-tr from-amber-200 via-pink-100 to-yellow-100 shadow-lg ring-4 ring-amber-300 group-hover:scale-105 duration-300'
-                            : 'bg-slate-200 border-2 border-slate-300'
+                    <button
+                      onClick={() => {
+                        playPop();
+                        setActiveStickerSection('letters');
+                      }}
+                      className={`p-3 rounded-2xl font-black text-xs sm:text-sm flex flex-col items-center gap-1 transition-all cursor-pointer border-2 ${
+                        activeStickerSection === 'letters'
+                          ? 'bg-gradient-to-tr from-emerald-500 to-teal-600 text-white border-emerald-400 shadow-md scale-[1.02]'
+                          : 'bg-slate-50 hover:bg-emerald-50 text-slate-700 border-slate-200'
+                      }`}
+                    >
+                      <span className="text-2xl">🔤</span>
+                      <span>Letters (A–Z)</span>
+                      <span className="text-[10px] opacity-80 font-bold">52 Stickers</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        playPop();
+                        setActiveStickerSection('numbers');
+                      }}
+                      className={`p-3 rounded-2xl font-black text-xs sm:text-sm flex flex-col items-center gap-1 transition-all cursor-pointer border-2 ${
+                        activeStickerSection === 'numbers'
+                          ? 'bg-gradient-to-tr from-blue-500 to-indigo-600 text-white border-blue-400 shadow-md scale-[1.02]'
+                          : 'bg-slate-50 hover:bg-blue-50 text-slate-700 border-slate-200'
+                      }`}
+                    >
+                      <span className="text-2xl">🔢</span>
+                      <span>Numbers (0–10)</span>
+                      <span className="text-[10px] opacity-80 font-bold">22 Stickers</span>
+                    </button>
+                  </div>
+
+                  {/* Level Quick-Jump Sub-pills */}
+                  {(activeStickerSection === 'all' || activeStickerSection === 'levels') && (
+                    <div className="pt-3 border-t border-slate-200 flex items-center gap-1.5 flex-wrap">
+                      <span className="text-[11px] font-black text-slate-500 uppercase tracking-wider mr-1">
+                        Filter Level:
+                      </span>
+                      <button
+                        onClick={() => {
+                          playPop();
+                          setSelectedLevelFilter('all');
+                        }}
+                        className={`px-3 py-1 rounded-xl text-xs font-black transition-all cursor-pointer ${
+                          selectedLevelFilter === 'all'
+                            ? 'bg-amber-500 text-white shadow-xs'
+                            : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                         }`}
                       >
-                        {st.imageUrl ? (
-                          <img
-                            src={st.imageUrl}
-                            alt={st.title}
-                            className={`w-full h-full object-contain rounded-full transition-all ${
-                              isUnlocked
-                                ? 'drop-shadow-md group-hover:rotate-3 duration-300'
-                                : 'brightness-0 opacity-20'
-                            }`}
-                          />
-                        ) : (
-                          <span
-                            className={`text-4xl ${
-                              isUnlocked ? 'group-hover:scale-110 transition-transform' : 'grayscale opacity-30'
+                        All Levels
+                      </button>
+                      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((lv) => {
+                        const meta = LEVEL_METAS[lv];
+                        return (
+                          <button
+                            key={lv}
+                            onClick={() => {
+                              playPop();
+                              setSelectedLevelFilter(lv);
+                            }}
+                            className={`px-2.5 py-1 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center gap-1 ${
+                              selectedLevelFilter === lv
+                                ? 'bg-amber-500 text-white shadow-xs'
+                                : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                             }`}
                           >
-                            {st.icon}
-                          </span>
-                        )}
-                        {!isUnlocked && (
-                          <div className="absolute inset-0 flex items-center justify-center text-xl font-black drop-shadow">
-                            🔒
+                            <span>{meta?.badge}</span>
+                            <span>Lv {lv}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+
+                {/* ── SECTION 1: PROGRESSION LEVELS (1-10) ── */}
+                {(activeStickerSection === 'all' || activeStickerSection === 'levels') && (
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-2">
+                      <span className="text-2xl">🏆</span>
+                      <h3 className="text-xl font-black text-slate-800">
+                        Progression Levels &amp; Mystic Characters
+                      </h3>
+                    </div>
+
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                      .filter((lv) => selectedLevelFilter === 'all' || selectedLevelFilter === lv)
+                      .map((lv) => {
+                        const meta = LEVEL_METAS[lv];
+                        const levelStickersList = STICKERS_CATALOG.filter(
+                          (st) =>
+                            st.level === lv &&
+                            !st.id.endsWith('-3games') &&
+                            !st.id.endsWith('-all')
+                        );
+                        if (levelStickersList.length === 0) return null;
+
+                        const unlockedInLevel = levelStickersList.filter((st) =>
+                          unlockedStickers.includes(st.id)
+                        ).length;
+
+                        return (
+                          <div
+                            key={lv}
+                            id={`level-section-${lv}`}
+                            className="bg-white rounded-3xl p-5 shadow-lg border-2 border-slate-200 space-y-4"
+                          >
+                            {/* Level Header Banner */}
+                            <div
+                              className={`p-4 rounded-2xl bg-gradient-to-r ${meta.bg} border ${meta.border} flex flex-col sm:flex-row sm:items-center justify-between gap-2`}
+                            >
+                              <div className="flex items-center gap-3">
+                                <span className="text-3xl drop-shadow">{meta.badge}</span>
+                                <div>
+                                  <h4 className="font-black text-base sm:text-lg">
+                                    Level {lv}: {meta.title}
+                                  </h4>
+                                  <p className="text-xs font-bold opacity-80">
+                                    {meta.tier} Tier Milestones &amp; Mystic Characters
+                                  </p>
+                                </div>
+                              </div>
+                              <span className="text-xs font-black bg-white/70 px-3 py-1 rounded-full border border-black/10 self-start sm:self-auto">
+                                {unlockedInLevel} / {levelStickersList.length} Collected
+                              </span>
+                            </div>
+
+                            {/* Level Stickers Grid */}
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                              {levelStickersList.map((st) => renderStickerCard(st))}
+                            </div>
                           </div>
-                        )}
-                      </div>
+                        );
+                      })}
+                  </div>
+                )}
 
-                      <h4 className="font-black text-sm text-slate-800 mb-0.5 truncate w-full group-hover:text-amber-700 transition-colors">
-                        {st.title}
-                      </h4>
-                      <p className="text-[11px] font-bold text-slate-500 leading-tight line-clamp-2">
-                        {st.description}
-                      </p>
-
-                      <div className="mt-2.5 flex items-center gap-1">
-                        {isUnlocked ? (
-                          <span className="text-[10px] font-extrabold text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
-                            <span>✓</span> Collected
-                          </span>
-                        ) : (
-                          <span className="text-[10px] font-bold text-slate-500 bg-slate-200/80 px-2 py-0.5 rounded-full">
-                            Tap to inspect
-                          </span>
-                        )}
+                {/* ── SECTION 2: LETTERS MASTERY (A-Z) ── */}
+                {(activeStickerSection === 'all' || activeStickerSection === 'letters') && (
+                  <div className="space-y-4">
+                    <div className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-3xl p-5 shadow-lg flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <div className="flex items-center gap-3">
+                        <span className="text-4xl bg-white/20 p-2 rounded-2xl">🔤</span>
+                        <div>
+                          <h3 className="text-xl font-black">Alphabet Mastery Stickers (A–Z)</h3>
+                          <p className="text-xs text-emerald-100 font-bold">
+                            Earn 2 unique stickers for every letter: Silver Explorer (3+ games) &amp; Gold Crown Master (all games)!
+                          </p>
+                        </div>
                       </div>
-                    </motion.button>
-                  );
-                })}
+                      <span className="text-xs font-black bg-white/20 text-white px-3.5 py-1.5 rounded-full border border-white/30 self-start sm:self-auto">
+                        {
+                          STICKERS_CATALOG.filter(
+                            (st) =>
+                              st.id.startsWith('letter-') &&
+                              (st.id.endsWith('-3games') || st.id.endsWith('-all')) &&
+                              unlockedStickers.includes(st.id)
+                          ).length
+                        }{' '}
+                        / 52 Collected
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                      {STICKERS_CATALOG.filter(
+                        (st) =>
+                          st.id.startsWith('letter-') &&
+                          (st.id.endsWith('-3games') || st.id.endsWith('-all'))
+                      ).map((st) => renderStickerCard(st))}
+                    </div>
+                  </div>
+                )}
+
+                {/* ── SECTION 3: NUMBERS MASTERY (0-10) ── */}
+                {(activeStickerSection === 'all' || activeStickerSection === 'numbers') && (
+                  <div className="space-y-4">
+                    <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-3xl p-5 shadow-lg flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <div className="flex items-center gap-3">
+                        <span className="text-4xl bg-white/20 p-2 rounded-2xl">🔢</span>
+                        <div>
+                          <h3 className="text-xl font-black">Numbers Mastery Stickers (0–10)</h3>
+                          <p className="text-xs text-blue-100 font-bold">
+                            Earn 2 unique stickers for every number: Silver Explorer (3+ games) &amp; Gold Crown Master (all games)!
+                          </p>
+                        </div>
+                      </div>
+                      <span className="text-xs font-black bg-white/20 text-white px-3.5 py-1.5 rounded-full border border-white/30 self-start sm:self-auto">
+                        {
+                          STICKERS_CATALOG.filter(
+                            (st) =>
+                              st.id.startsWith('number-') &&
+                              (st.id.endsWith('-3games') || st.id.endsWith('-all')) &&
+                              unlockedStickers.includes(st.id)
+                          ).length
+                        }{' '}
+                        / 22 Collected
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                      {STICKERS_CATALOG.filter(
+                        (st) =>
+                          st.id.startsWith('number-') &&
+                          (st.id.endsWith('-3games') || st.id.endsWith('-all'))
+                      ).map((st) => renderStickerCard(st))}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 
@@ -1443,7 +1759,11 @@ export function ProgressPage() {
               {/* Category & Tier Tag */}
               <div className="flex items-center justify-center gap-2 flex-wrap mb-3">
                 {selectedItemDetail.tier && (
-                  <span className="text-xs font-black uppercase tracking-wider text-purple-700 bg-purple-100 px-3 py-1 rounded-full border border-purple-300 shadow-xs">
+                  <span
+                    className={`text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full border shadow-xs ${getStickerTierStyle(
+                      selectedItemDetail.tier
+                    )}`}
+                  >
                     ⭐ {selectedItemDetail.tier} Tier · Level {selectedItemDetail.level || 1}
                   </span>
                 )}

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="pandaRed" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FB923C"/><stop offset="100%" stop-color="#C2410C"/></linearGradient>
+    <radialGradient id="sunBall" cx="40%" cy="40%" r="60%"><stop offset="0%" stop-color="#FEF08A"/><stop offset="100%" stop-color="#F59E0B"/></radialGradient>
+  </defs>
+  <circle cx="256" cy="256" r="230" fill="#FFF7ED" opacity="0.7"/>
+  <!-- Big Striped Tail -->
+  <path d="M330 330 C430 330 440 240 370 200 C340 220 330 280 330 330 Z" fill="url(#pandaRed)"/>
+  <path d="M375 220 Q390 240 365 260" stroke="#FFFFFF" stroke-width="12" fill="none"/>
+  <path d="M380 270 Q400 290 350 310" stroke="#FFFFFF" stroke-width="12" fill="none"/>
+  <!-- Body -->
+  <ellipse cx="240" cy="310" rx="100" ry="90" fill="url(#pandaRed)"/>
+  <!-- Head -->
+  <circle cx="240" cy="200" r="85" fill="url(#pandaRed)"/>
+  <!-- White face markings -->
+  <ellipse cx="195" cy="215" rx="28" ry="35" fill="#FFFFFF"/>
+  <ellipse cx="285" cy="215" rx="28" ry="35" fill="#FFFFFF"/>
+  <ellipse cx="240" cy="225" rx="30" ry="22" fill="#FFFFFF"/>
+  <!-- Ears -->
+  <polygon points="170,140 190,90 230,135" fill="#FFFFFF"/>
+  <polygon points="180,135 195,100 220,130" fill="url(#pandaRed)"/>
+  <polygon points="310,140 290,90 250,135" fill="#FFFFFF"/>
+  <polygon points="300,135 285,100 260,130" fill="url(#pandaRed)"/>
+  <!-- Nose & Mouth -->
+  <circle cx="240" cy="225" r="9" fill="#1E293B"/>
+  <!-- Eyes -->
+  <circle cx="205" cy="195" r="11" fill="#1E293B"/>
+  <circle cx="202" cy="192" r="4" fill="#FFFFFF"/>
+  <circle cx="275" cy="195" r="11" fill="#1E293B"/>
+  <circle cx="272" cy="192" r="4" fill="#FFFFFF"/>
+  <!-- Glowing Sun Orb Held -->
+  <circle cx="170" cy="320" r="38" fill="url(#sunBall)" filter="drop-shadow(0 0 10px #FBBF24)"/>
+  <ellipse cx="155" cy="330" rx="16" ry="12" fill="url(#pandaRed)"/>
+</svg>

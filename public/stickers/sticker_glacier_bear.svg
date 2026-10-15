@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="iceFur" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#E0F2FE"/><stop offset="50%" stop-color="#BAE6FD"/><stop offset="100%" stop-color="#7DD3FC"/></linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="230" fill="#F0FDFA" opacity="0.6"/>
+  <!-- Round Bear Ears -->
+  <circle cx="160" cy="140" r="45" fill="url(#iceFur)"/>
+  <circle cx="160" cy="140" r="25" fill="#FFFFFF"/>
+  <circle cx="352" cy="140" r="45" fill="url(#iceFur)"/>
+  <circle cx="352" cy="140" r="25" fill="#FFFFFF"/>
+  <!-- Big Crystalline Bear Body -->
+  <ellipse cx="256" cy="310" rx="140" ry="120" fill="url(#iceFur)"/>
+  <!-- Head -->
+  <circle cx="256" cy="210" r="105" fill="url(#iceFur)"/>
+  <!-- Crystalline Facet Overlays -->
+  <polygon points="256,150 290,190 256,210 222,190" fill="#FFFFFF" opacity="0.5"/>
+  <polygon points="256,280 300,320 256,360 212,320" fill="#FFFFFF" opacity="0.4"/>
+  <!-- Muzzle -->
+  <ellipse cx="256" cy="240" rx="38" ry="28" fill="#FFFFFF"/>
+  <ellipse cx="256" cy="230" rx="16" ry="12" fill="#0369A1"/>
+  <!-- Eyes -->
+  <circle cx="210" cy="195" r="13" fill="#0C4A6E"/>
+  <circle cx="206" cy="190" r="5" fill="#FFFFFF"/>
+  <circle cx="302" cy="195" r="13" fill="#0C4A6E"/>
+  <circle cx="298" cy="190" r="5" fill="#FFFFFF"/>
+  <!-- Snowflakes around -->
+  <circle cx="120" cy="250" r="8" fill="#E0F2FE"/>
+  <circle cx="390" cy="240" r="10" fill="#E0F2FE"/>
+</svg>
